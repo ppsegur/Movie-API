@@ -1,0 +1,16 @@
+#navbar{
+    align-items: center;
+   }
+    .nav-link {
+        transition: color 0.3s ease, font-size 0.3s ease;
+    }
+
+    .nav-link:hover {
+        color: #f8d7da; /* Color cuando se pasa el ratón */
+        font-size: 1.2rem; /* Cambio de tamaño */
+    }
+
+    .navbar-brand img {
+        height: 100px;
+        margin-left: 10px; /* Espacio entre el texto y la imagen */
+    }
