@@ -1,0 +1,8 @@
+<div class="actors-list">
+    <div *ngFor="let actor of actors" class="actor-card">
+      <img *ngIf="actor.profile_path" [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path" alt="{{ actor.name }}">
+      <h3>{{ actor.name }}</h3>
+      <p>Popularidad: {{ actor.popularity }}</p>
+    </div>
+  </div>
+  
