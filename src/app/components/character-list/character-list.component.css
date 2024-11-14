@@ -1,0 +1,49 @@
+body{
+    background-color: black;
+}
+.actors-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .actor-card {
+    background-color: #000fb09e;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .actor-card:hover {
+    transform: scale(1.05);
+    background-color: #0061ea9e;
+  }
+  
+  .actor-card img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    height: auto;
+  }
+  
+  .actor-card h3 {
+    font-size: 1.2em;
+    color: whitesmoke;
+    margin: 10px 0 5px;
+  }
+  
+  .actor-card p {
+    font-size: 1em;
+    color: whitesmoke
+  }
+  #visualisaciones{
+    border-color: #333;
+    border-collapse: collapse;
+
+  }
