@@ -1,12 +1,14 @@
+
 body {
-  background-color: #000fb09e;
+  background: linear-gradient(to bottom, #0D2185, #03081F);
+  margin: -8px;
+
 }
 
 .main-container {
   display: flex;
-  align-items: flex-start; /* Alinea el sidebar y la lista de actores al mismo nivel vertical */
-  gap: 20px; /* Espacio entre el sidebar y la lista de actores */
-  padding: 20px;
+  
+
 }
 
 .sidebar {
@@ -64,6 +66,7 @@ body {
 .actor-card:hover {
   transform: scale(1.05);
   background-color:rgb(253, 246, 246);
+  
 }
 
 .actor-card img {
@@ -77,11 +80,26 @@ body {
   color: whitesmoke;
   margin: 10px 0 5px;
 }
-
+.actor-card:hover h3{
+  color: black;
+}
+.actor-card:hover p{
+  color: black;
+}
+.actor-card:hover svg{
+  color: black;
+}
 .visualizaciones {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   color: whitesmoke;
+}
+h1 {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
