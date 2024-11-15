@@ -11,11 +11,26 @@ body {
 .navbar {
     background-color: #000;
     color: white;
+    justify-content: center;
+    display: flex;
+    font-size:xx-large
+}
+
+.nav-item{
+    margin-inline: 50px;
+    color: white;
+    font-size:xx-large
+}
+
+.nav-link:hover{
+    color: yellow;
+    transform: scale(1.05);
 }
 
 /* Hero Section */
 .hero-section {
     background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/infobae/5OCGDEDB6VCW7KUJGESRNOCCLM.jpg');
+    background-color: rgba(0, 0, 0, 0.5);
     background-size: auto;
     background-position: center;
     padding: 100px;
@@ -24,7 +39,7 @@ body {
 }
 
 .hero-section h1, .hero-section p {
-    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
 }
 
 .search-bar input {
@@ -48,6 +63,8 @@ body {
     background-color: #1a1d31;
     border-radius: 10px;
     transition: transform 0.3s ease;
+    width: auto;
+    
 }
 
 .movie-card:hover, .actor-card:hover {
@@ -70,3 +87,19 @@ body {
 .container {
     padding-top: 35px;
 }
+
+.custom-btn {
+    border-radius: 50px;
+    padding: 8px 12px; 
+    font-size: 14px; 
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    border: none; 
+    transition: background-color 0.2s ease;
+  }
+  
+  .custom-btn:hover {
+    background-color: #000000; 
+    transform: scale(1.05);
+  }
