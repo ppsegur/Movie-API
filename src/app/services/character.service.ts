@@ -8,7 +8,7 @@ import { ActorResponse } from '../models/actor.models';
 })
 export class CharacterService {
   private apiUrl = 'https://api.themoviedb.org/3/person/popular';
-  private apiKey = 'cbddcd7cde91c036d74e7c1643f71c5b'; 
+  private apiKey = '05e17ea68b0a29c92de23f76cc1cff22'; 
 
   constructor(private http: HttpClient) { }
 
