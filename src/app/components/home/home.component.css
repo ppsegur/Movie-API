@@ -1,0 +1,72 @@
+/* Global styles */
+body {
+    /*background-color: #0b0f1f;*/
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    height: max-content;
+    color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #000;
+    color: white;
+}
+
+/* Hero Section */
+.hero-section {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/infobae/5OCGDEDB6VCW7KUJGESRNOCCLM.jpg');
+    background-size: auto;
+    background-position: center;
+    padding: 100px;
+    justify-content: center;
+    height: 600px;
+}
+
+.hero-section h1, .hero-section p {
+    text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+}
+
+.search-bar input {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    margin-left: 5%;
+    padding: auto;
+    justify-content: center;
+    width: 90%;
+    border-radius: 10%;
+}
+
+/* Content Section */
+.section-title h2 {
+    color: #f8f9fa;
+}
+
+.movie-card, .actor-card {
+    background-color: #1a1d31;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.movie-card:hover, .actor-card:hover {
+    transform: scale(1.05);
+}
+
+.img-fluid {
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.actor-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.container {
+    padding-top: 35px;
+}
