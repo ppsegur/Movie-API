@@ -1,17 +1,4 @@
-<p>series-list works!</p>
-<!--<div class="card" style="width: 18rem;">
-    @for (item of listadoSeries; track item.id) {
-    <div class="card-body">
-        <h5 class="card-title">{{item.name}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{item.original_name}}</h6>
-        <p class="card-text">{{item.overview}}</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-    </div>
-    }
-</div>-->
-
-<div class="container-fluid">
+<!--<div class="container-fluid">
     <div class="row mt-2 mb-2">
         <div class="card" style="width: 18rem;">
             @for (item of listadoSeries; track item.id) {
@@ -26,4 +13,59 @@
         
     </div>
     </div>
-</div>
+</div>-->
+
+<!-- Sidebar Filtros -->
+<nav class="navbar navbar-expand-lg navbar-light bg-black">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link" href="#">Features</a>
+          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+<body>
+    <main>
+        <aside class="sidebar">
+            <h2>Filtros</h2>
+            <div class="filtros">
+                <h3>Géneros</h3>
+                <div class="genres">
+                    <button>Acción</button>
+                    <button>Comedia</button>
+                    <button>Horror</button>
+                    <button>Fantasía</button>
+                    <button>Aventura</button>
+                    <button>Crimen</button>
+                    <button>Anime</button>
+                    <button>Romance</button>
+                    <button>SI-FI</button>
+                </div>
+                <h3>Puntuación</h3>
+                <div class="rating">
+                    <span>⭐️⭐️⭐️⭐️⭐️</span>
+                </div>
+                <h3>Fecha Estreno</h3>
+                <input type="date">
+            </div>
+        </aside>
+
+        <div class="actors-list">
+            <div *ngFor="let series of listadoSeries" class="actor-card">
+                <h3>{{ series.name }}</h3>
+                <h6 class="card-subtitle mb-2 text-muted">{{series.original_name}}</h6>
+                <p class="card-text">{{series.overview}}</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </main>
+</body>
