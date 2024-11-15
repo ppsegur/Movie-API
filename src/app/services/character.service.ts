@@ -15,5 +15,9 @@ export class CharacterService {
   getActors(): Observable<ActorResponse> {
     return this.http.get<ActorResponse>(`${this.apiUrl}?api_key=${this.apiKey}`);
   }
- 
+  // Para el detalle del actor
+  getOneActor(id: number): Observable<ActorResponse> {
+    return this.http.get<ActorResponse>(`https://api.themoviedb.org/3/person/${id}´?api_key=${this.apiKey}`);
+  }
+
 }

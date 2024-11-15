@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
+import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 
 @NgModule({
   declarations: [
     CharacterListComponent,
     NavComponent,
-    AppComponent
+    AppComponent,
+    CharacterDetailComponent
   ],
   imports: [
     BrowserModule,
