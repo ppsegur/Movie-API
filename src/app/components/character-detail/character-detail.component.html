@@ -1,1 +1,35 @@
-<p>character-detail works!</p>
+
+
+
+
+
+
+
+
+<!--Detalle del personaje-->
+
+<!--
+
+<div class="d-flex justify-content-center align-items-center" style="height: 100vh; text-align: center;">
+    
+        <div class="card-body" style="text-align: center;">
+           
+            <img [src]="'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
+                  + pokemonId + '.png'"> 
+            </div>
+            <div class="card-body">
+               
+            <h4 class="card-title " style="font-size: 24px;"><strong>{{ pokemon?.name}}</strong></h4>
+            <p class="card-text">Altura : {{ pokemon?.height}}</p>
+            <p class="card-text"> Peso: {{ pokemon?.weight}} kg</p>
+            @for (pokemon of pokemon?.abilities; track $index) {
+            <p class="card-text">Habilidad: {{ pokemon!.ability!.name}}</p>
+           
+            }
+            <p class="card-tittle">Tipos</p>
+            @for (pokemon of pokemon?.types; track $index) {
+            <p class="card-text">{{pokemon!.type!.name}}</p>
+            }
+        </div>
+      </div>
+    </div>-->
