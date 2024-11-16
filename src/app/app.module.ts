@@ -7,13 +7,15 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { CharacterItemComponent } from './components/character-item/character-item.component';
 
 @NgModule({
   declarations: [
     CharacterListComponent,
     NavComponent,
     AppComponent,
-    CharacterDetailComponent
+    CharacterDetailComponent,
+    CharacterItemComponent
   ],
   imports: [
     BrowserModule,
