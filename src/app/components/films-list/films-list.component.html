@@ -1,1 +1,49 @@
-<p>films-list works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FilmPeak</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <img src="logo.png" alt="Logo" width="40" class="me-2">
+        </a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item me-3"><a class="nav-link" href="#"><b>Películas</b></a></li>
+                <li class="nav-item me-3"><a class="nav-link" href="#"><b>Series</b></a></li>
+                <li class="nav-item "><a class="nav-link" href="#"><b>Actores</b></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="section-title mb-4 text-white">
+        <h2>Películas</h2>
+        <hr style="height: 2px;">
+    </div>
+
+    <div class="row">
+        @for(film of filmList; track film.id){
+            <div class="movie-card">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + film.poster_path" class="img-fluid" alt="{{ film.title }}">
+                <div class="mt-2 text-center">
+                    <h5 class="text-truncate text-white">{{ film.title }}</h5>
+                    <p class="text-muted">{{ film.release_date }}</p>
+                    <div>
+                        <i class="bi bi-star-fill text-warning"></i> {{ film.vote_average }}
+                        <span class="ms-2"><i class="bi bi-eye"></i> {{ film.popularity }}</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+</body>
+</html>
