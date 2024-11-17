@@ -5,7 +5,7 @@ export interface ActorResponse {
     total_results: number
   }
   
-  export interface Actor {
+export interface Actor {
     adult: boolean
     gender: number
     id: number
@@ -15,9 +15,10 @@ export interface ActorResponse {
     popularity: number
     profile_path: string
     known_for: KnownFor[]
-  }
+    byography: string 
+}
   
-  export interface KnownFor {
+export interface KnownFor {
     backdrop_path?: string
     id: number
     title?: string

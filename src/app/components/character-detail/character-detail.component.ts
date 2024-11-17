@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Actor } from '../../models/actor.models';
+import { Actor, KnownFor } from '../../models/actor.models';
 import { ActivatedRoute } from '@angular/router';
 import { CharacterService } from '../../services/character.service';
 
@@ -12,6 +12,7 @@ import { CharacterService } from '../../services/character.service';
 export class CharacterDetailComponent implements OnInit {
   //Atributos de la clase
    @Input() actorId: number | undefined;
+   @Input() KnownForMovies: any[] = [];
   actor: Actor | undefined;
   //COnstructor de la clase
   constructor(private route:ActivatedRoute,
@@ -20,12 +21,19 @@ export class CharacterDetailComponent implements OnInit {
   //Metodo de la clase
   ngOnInit(): void {
     this.actorId = Number(this.route.snapshot.paramMap.get('id'));
-    this.actorSvc.getOneActor(this.actorId!).subscribe((response) => {
-      this.actor = response;
-    });
-  }
-  
 
-    
-}
+    if (this.actorId) {
+      // Get actor details
+      this.actorSvc.getOneActor(this.actorId).subscribe((response) => {
+        this.actor = response;
+      });
+
+      // Get actor movies/shows separately
+      this.actorSvc.getActorMovies(this.actorId).subscribe((response) => {
+        this.KnownForMovies = response.cast || [];
+      });
+    }
+    }
+  }
+
 
