@@ -5,7 +5,7 @@ import { CharacterDetailComponent } from './components/character-detail/characte
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 
 const routes: Routes = [
-  {path: 'character-detail/:id', component: CharacterDetailComponent},
+  {path: 'characters/character-detail/:id', component: CharacterDetailComponent},
   {path: 'character-item/:id', component: CharacterItemComponent},
   {path: 'characters', component: CharacterListComponent},
   {path: '', redirectTo: '/characters', pathMatch: 'full'},

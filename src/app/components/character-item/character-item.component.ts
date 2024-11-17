@@ -8,6 +8,7 @@ import { Actor } from '../../models/actor.models';
   styleUrl: './character-item.component.css'
 })
 export class CharacterItemComponent implements OnInit {
+  
   @Input() characterId: number | undefined;
   actor: Actor | undefined;
 
@@ -16,7 +17,7 @@ export class CharacterItemComponent implements OnInit {
   ngOnInit(): void {
     if (this.characterId) {
       this.actorSvc.getOneActor(this.characterId).subscribe((response) => {
-        this.characterId ;
+        this.characterId = this.getCharacterId(this.characterId!);
       });
     } else {
       console.warn('El characterId no está definido.');

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ActorResponse } from '../models/actor.models';
+import { Actor, ActorResponse } from '../models/actor.models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class CharacterService {
     return this.http.get<ActorResponse>(`${this.apiUrl}?api_key=${this.apiKey}`);
   }
   // Para el detalle del actor
-  getOneActor(id: number): Observable<ActorResponse> {
-    return this.http.get<ActorResponse>(`https://api.themoviedb.org/3/person/${id}´?api_key=${this.apiKey}`);
+  getOneActor(id: number): Observable<Actor> {
+    return this.http.get<Actor>(`https://api.themoviedb.org/3/person/${id}´?api_key=${this.apiKey}`);
   }
 
 }
