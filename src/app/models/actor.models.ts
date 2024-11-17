@@ -14,8 +14,9 @@ export interface Actor {
     original_name: string
     popularity: number
     profile_path: string
+    biography: string 
     known_for: KnownFor[]
-    byography: string 
+
 }
   
 export interface KnownFor {

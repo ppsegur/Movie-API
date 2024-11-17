@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Actor, KnownFor } from '../../models/actor.models';
-import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CharacterService } from '../../services/character.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class CharacterDetailComponent implements OnInit {
   actor: Actor | undefined;
   //COnstructor de la clase
   constructor(private route:ActivatedRoute,
-    private actorSvc: CharacterService)  {}
+    private actorSvc: CharacterService,
+    private location: Location, 
+    private router: Router )  {}
 
   //Metodo de la clase
   ngOnInit(): void {
@@ -34,6 +37,10 @@ export class CharacterDetailComponent implements OnInit {
       });
     }
     }
+    goBack(): void {
+      this.location.back();
+    }
+  
   }
 
 
