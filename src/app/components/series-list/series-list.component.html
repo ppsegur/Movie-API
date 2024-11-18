@@ -60,6 +60,7 @@
 
         <div class="actors-list">
             <div *ngFor="let series of listadoSeries" class="actor-card">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" [alt]="series.name">
                 <h3>{{ series.name }}</h3>
                 <h6 class="card-subtitle mb-2 text-muted">{{series.original_name}}</h6>
                 <p class="card-text">{{series.overview}}</p>
