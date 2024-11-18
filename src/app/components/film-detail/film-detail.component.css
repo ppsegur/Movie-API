@@ -1,0 +1,15 @@
+.container {
+    color: rgb(255, 255, 255);
+    padding: 20px;
+  }
+  
+body {
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    font-family: Arial, sans-serif;
+    margin: 0;
+ }
+
+  img {
+    border-radius: 8px;
+  }
+  
