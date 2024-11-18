@@ -15,7 +15,7 @@ export class FilmsService {
 
   getPopular(): Observable<FilmsListResponse> {
     return this.http.get<FilmsListResponse>(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+      `${API_URL}/movie/popular?api_key=${API_KEY}`
     );
   }
 
@@ -26,7 +26,6 @@ export class FilmsService {
   }
 
   getFilmVideos(id: number): Observable<any> {
-    return this.http.get<any>(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${API_KEY}`);
+    return this.http.get<any>(`${API_URL}/movie/${id}/videos?api_key=${API_KEY}`);
   }
-  
 }

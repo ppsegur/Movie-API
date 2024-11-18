@@ -23,6 +23,7 @@ export class FilmDetailComponent implements OnInit {
     if (filmId) {
       this.filmsService.getFilmById(+filmId).subscribe((data: Films) => {
         this.film = data;
+        this.getFilmVideo(+filmId); 
       });
     }
   }

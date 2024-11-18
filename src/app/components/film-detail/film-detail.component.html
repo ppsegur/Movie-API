@@ -1,37 +1,33 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <body>
+    <app-nav></app-nav>
+
     <div class="container">
         <div class="row">
           <div class="col-md-4">
             <img [src]="'https://image.tmdb.org/t/p/w500' + film.poster_path" class="img-fluid" alt="{{ film.title }}">
           </div>
           <div class="col-md-8">
-            <h2>{{ film.title }}</h2>
+            <div class="d-flex align-items-center">
+                <h2 class="me-3">{{ film.title }}</h2>
+                <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
+            </div>
             <p><strong>Release Date:</strong> {{ film.release_date }}</p>
             <p><strong>Rating:</strong> <i class="bi bi-star-fill text-warning"></i> {{ film.vote_average }}</p>
             <p><strong>Overview:</strong> {{ film.overview }}</p>
-            <p><strong>Popularity:</strong> {{ film.popularity | numberFormatPipe }}</p>
-            <p><strong>Vote Count:</strong> {{ film.vote_count }}</p>
-            <p><strong>Original Title:</strong> {{ film.original_title }}</p>
-            <p><strong>Original Language:</strong> {{ film.original_language }}</p>
             <div *ngIf="videoUrl">
-                <h3>Trailer</h3>
-                <iframe
-                  width="560"
-                  height="315"
-                  [src]="videoUrl | safeUrl"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen>
-                </iframe>
-              </div>
-              <div *ngIf="!videoUrl">
-                <p>No trailer available.</p>
-              </div>
-            <button class="btn btn-primary" [routerLink]="['/']">Back to List</button>
+              <h3>Trailer</h3>
+              <iframe
+                width="500"
+                height="290"
+                [src]="videoUrl | safeUrl"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
           </div>
         </div>
       </div>
-      
 </body>
