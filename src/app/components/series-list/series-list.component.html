@@ -33,8 +33,10 @@
             <div class="actor-card">
                 <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
                 <h3>{{ item.name }}</h3>
-                <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
-                <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity}}</p>
+                <div class="d-flex">
+                    <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
+                    <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
+                </div>
             </div>
             }
         </div>

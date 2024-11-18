@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { SeriesListComponent } from './components/series-list/series-list.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SeriesListComponent
+    SeriesListComponent,
+    NumberFormatPipePipe
   ],
   imports: [
     BrowserModule,

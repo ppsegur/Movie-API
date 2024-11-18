@@ -69,6 +69,10 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
+.actor-card:hover h3 {
+    color: black;
+}
+
 .actor-card img {
     padding: 0px;
     width: 100%;
@@ -82,22 +86,20 @@ body {
     margin: 10px 0 5px;
 }
 
-.actor-card p {
-    padding: 10px;
-}
-
-.actor-card p:hover, h3:hover {
-    color: black;
-}
-
-.visualizaciones {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    color: whitesmoke;
-}
-
 main {
     display: flex;
+}
+
+.actor-card div {
+    justify-content: center;
+}
+
+.card-text {
+    text-align: center;
+    color: white;
+    background-color: #0D2185;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px;
+    font-size: 12px;
 }
