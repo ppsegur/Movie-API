@@ -15,13 +15,14 @@ export class CharacterDetailComponent implements OnInit {
    @Input() actorId: number | undefined;
    @Input() KnownForMovies: any[] = [];
   actor: Actor | undefined;
-  //COnstructor de la clase
+  
+  //Constructor de la clase
   constructor(private route:ActivatedRoute,
     private actorSvc: CharacterService,
     private location: Location, 
     private router: Router )  {}
 
-  //Metodo de la clase
+  //Método de la clase
   ngOnInit(): void {
     this.actorId = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -37,6 +38,8 @@ export class CharacterDetailComponent implements OnInit {
       });
     }
     }
+
+    //Botón de regreso
     goBack(): void {
       this.location.back();
     }
