@@ -56,11 +56,9 @@ body {
 }
 
 .actor-card {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(0, 0, 0);
     border-radius: 8px;
-    overflow: hidden;
     text-align: center;
-    padding: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
@@ -68,10 +66,11 @@ body {
 
 .actor-card:hover {
     transform: scale(1.05);
-    background-color: rgb(110, 110, 110);
+    background-color: rgb(255, 255, 255);
 }
 
 .actor-card img {
+    padding: 0px;
     width: 100%;
     border-radius: 8px 8px 0 0;
     height: auto;
@@ -79,15 +78,15 @@ body {
 
 .actor-card h3 {
     font-size: 1.2em;
-    color: whitesmoke;
+    color: rgb(255, 255, 255);
     margin: 10px 0 5px;
 }
 
-.actor-card h3:hover {
-    color: black;
+.actor-card p {
+    padding: 10px;
 }
 
-.actor-card p:hover {
+.actor-card p:hover, h3:hover {
     color: black;
 }
 
