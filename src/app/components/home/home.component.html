@@ -29,6 +29,15 @@
                     <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="movie.poster_path">
                     <div class="card-body text-center">
                         <p> {{movie.title}} </p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+                            <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
+                            <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
+                                [attr.stroke-dasharray]="440" 
+                                [attr.stroke-dashoffset]="getStrokeDashoffset(movie.vote_average)"
+                                [attr.stroke]="getCircleColor(movie.vote_average)">
+                            </circle>
+                            <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5">{{movie.vote_average.toFixed(1)}}</text>
+                        </svg>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
@@ -56,6 +65,15 @@
                     <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + series.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="series.poster_path">
                     <div class="card-body text-center">
                         <p>{{series.name}}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+                            <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
+                            <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
+                                [attr.stroke-dasharray]="440" 
+                                [attr.stroke-dashoffset]="getStrokeDashoffset(series.vote_average)"
+                                [attr.stroke]="getCircleColor(series.vote_average)">
+                            </circle>
+                            <text x="60" y="70" fill="#fff" text-anchor="middle" font-size="14" dy="5">{{series.vote_average.toFixed(1)}}</text>
+                        </svg>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
