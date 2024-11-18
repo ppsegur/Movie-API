@@ -19,10 +19,9 @@ export class CharacterItemComponent implements OnInit {
       this.actorSvc.getOneActor(this.characterId).subscribe((response) => {
         this.characterId = this.getCharacterId(this.characterId!);
       });
-    } else {
-      console.warn('El characterId no está definido.');
-    }
+    } 
   }
+  
   getCharacterId(id: number): number {
     return  id;
   }
