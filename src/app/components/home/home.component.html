@@ -45,7 +45,7 @@
                               </button>
                               <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
-                                {{movie.popularity}}
+                                {{movie.popularity | numberFormatPipe}}
                               </button>
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                               </button>
                               <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
-                                {{series.popularity}}
+                                {{series.popularity | numberFormatPipe}}
                               </button>
                         </div>
                     </div>

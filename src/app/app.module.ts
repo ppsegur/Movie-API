@@ -8,13 +8,15 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HomeComponent } from './components/home/home.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
+import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 
 @NgModule({
   declarations: [
 
     AppComponent,
     HomeComponent,
-    NavComponent
+    NavComponent,
+    NumberFormatPipePipe
   ],
   imports: [
     BrowserModule,

@@ -45,7 +45,4 @@ getCircleColor(voteAverage: number): string {
   }
 }
 
-
-
-
 }
