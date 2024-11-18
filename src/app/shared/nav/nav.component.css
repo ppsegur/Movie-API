@@ -1,31 +1,27 @@
 .nav {
     display: flex;
-    gap: 1.5rem; /* Aumenta el espacio entre los enlaces */
-    /*margin-left: auto; /* Mueve los enlaces a la derecha */
+    gap: 1.5rem; 
+
     margin-top: auto;
 }
   
   .nav-link {
     color: #fff;
-    font-size: 1.5rem; /* Aumenta el tamaño de los enlaces */
+    font-size: 1.5rem; 
     text-decoration: none;
     transition: color 0.3s ease, font-size 0.3s ease;
   }
   
   .nav-link:hover {
-    color: #ffd700; /* Cambia el color al pasar el ratón a amarillo */
-    font-size: 1.7rem; /* Aumenta ligeramente el tamaño en el hover */
+    color: #ffd700; 
+    font-size: 1.7rem; 
   }
   
   .navbar-brand img {
-    height: 200px; /* Aumenta el tamaño de la imagen */
+    height: 200px;
     margin-left: 10px;
   }
 
   .container {
     display: flex;
   }
-
-  /*.nav-item {
-    margin: 20px, 0px, 20px, 20px;
-  }*/
