@@ -1,6 +1,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
 <body>
+    <!-- Navbar -->
+    <app-nav></app-nav>
+
     <!-- Sidebar Filtros -->
     <main>
         <aside class="sidebar">
@@ -30,6 +33,7 @@
         <!-- Listado de series -->
         <div class="actors-list">
             @for (item of listadoSeries; track item.id) {
+            <a href="google.com"> <!-- Poner redirect al detalle de la serie -->
             <div class="actor-card">
                 <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
                 <h3>{{ item.name }}</h3>
@@ -37,7 +41,9 @@
                     <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
                     <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
                 </div>
+                <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>                
             </div>
+            </a>
             }
         </div>
     </main>

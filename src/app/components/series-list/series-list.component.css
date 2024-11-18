@@ -62,6 +62,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
+    padding-bottom: 15px;
 }
 
 .actor-card:hover {
@@ -102,4 +103,8 @@ main {
     padding: 10px;
     margin: 10px;
     font-size: 12px;
+}
+
+a {
+    text-decoration: none;
 }

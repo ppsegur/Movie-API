@@ -7,12 +7,14 @@ import { SeriesListComponent } from './components/series-list/series-list.compon
 import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
+import { NavComponent } from './shared/nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SeriesListComponent,
-    NumberFormatPipePipe
+    NumberFormatPipePipe,
+    NavComponent
   ],
   imports: [
     BrowserModule,
