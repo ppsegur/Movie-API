@@ -17,10 +17,11 @@
   }
   
   .actor-card {
-    height: 500px;
+    height: 450px;
 }
 
 .actor-img {
     height: 350px; 
     object-fit: cover; 
 }
+

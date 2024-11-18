@@ -19,4 +19,24 @@ export class FilmsListComponent implements OnInit {
     });
   }
 
+  getStrokeDashoffset(voteAverage: number): number {
+    const maxDashArray = 440; 
+    const normalizedVote = Math.min(Math.max(voteAverage, 0), 10); 
+    return maxDashArray - (normalizedVote / 10) * maxDashArray;
+  }
+
+
+  getCircleColor(voteAverage: number): string {
+    console.log('Vote Average:', voteAverage); 
+    if (voteAverage > 8) {
+        return 'green';
+    } else if (voteAverage >= 5 && voteAverage < 7) {
+        return 'orange'; 
+    } else if (voteAverage >= 7 && voteAverage < 8) {
+        return 'yellow'; 
+    } else {
+        return 'red';
+    }
+  }
+
 }
