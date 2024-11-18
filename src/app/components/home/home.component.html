@@ -7,22 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="logo.png" alt="Logo" width="40" class="me-2">
-            </a>
-            <div class="collapse navbar-collapse justify-content-center">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#"><b>Películas</b></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"> <b>Series</b> </a></li>
-                    <li class="nav-item"><a class="nav-link" href="#"> <b>Actores</b> </a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+   <app-nav></app-nav>
 
-    <section class="hero-section text-center text-white d-flex flex-column align-items-center justify-content-center">
+    <section class="banner-section text-center text-white d-flex flex-column align-items-center justify-content-center">
         <h1 class="display-4 fw-bold">¡Te damos la bienvenida!</h1>
         <p class="lead mb-4">Millones de películas, series y gente por descubrir. Explora ya.</p>
         <div class="search-bar w-75 w-md-50 w-lg-25">
@@ -41,6 +28,7 @@
                 <div class="card movie-card p-3">
                     <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="movie.poster_path">
                     <div class="card-body text-center">
+                        <p> {{movie.title}} </p>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
@@ -64,9 +52,10 @@
         <div class="row">
             @for (series of seriestvnewList; track series.id) {
             <div class="col-md-3 mb-4" >
-                <div class="card movie-card p-3">
+                <div class="card serie-card p-3">
                     <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + series.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="series.poster_path">
                     <div class="card-body text-center">
+                        <p>{{series.name}}</p>
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
                                 <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
