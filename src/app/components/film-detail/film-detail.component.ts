@@ -6,12 +6,13 @@ import { FilmsService } from '../../services/films.service';
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
-  styleUrl: './film-detail.component.css'
+  styleUrls: ['./film-detail.component.css']
 })
 export class FilmDetailComponent implements OnInit {
 
   film!: Films;
   videoUrl: string | null = null;
+  cast: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,8 @@ export class FilmDetailComponent implements OnInit {
     if (filmId) {
       this.filmsService.getFilmById(+filmId).subscribe((data: Films) => {
         this.film = data;
-        this.getFilmVideo(+filmId); 
+        this.getFilmVideo(+filmId);
+        this.getFilmCredits(+filmId);
       });
     }
   }
@@ -34,6 +36,12 @@ export class FilmDetailComponent implements OnInit {
       if (trailer) {
         this.videoUrl = `https://www.youtube.com/embed/${trailer.key}`;
       }
+    });
+  }
+
+  getFilmCredits(id: number): void {
+    this.filmsService.getFilmCredits(id).subscribe((data) => {
+      this.cast = data.cast.slice(0, 8);
     });
   }
 }

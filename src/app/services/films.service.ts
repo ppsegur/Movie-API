@@ -28,4 +28,8 @@ export class FilmsService {
   getFilmVideos(id: number): Observable<any> {
     return this.http.get<any>(`${API_URL}/movie/${id}/videos?api_key=${API_KEY}`);
   }
+
+  getFilmCredits(id: number): Observable<any> {
+    return this.http.get<any>(`${API_URL}/movie/${id}/credits?api_key=${API_KEY}`);
+  }
 }
