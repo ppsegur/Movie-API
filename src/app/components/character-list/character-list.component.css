@@ -4,6 +4,14 @@ body {
   margin: -8px;
 
 }
+.actors-section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-left: 300px;
+}
 
 .main-container {
   display: flex;

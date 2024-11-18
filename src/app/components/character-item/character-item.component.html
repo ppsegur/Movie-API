@@ -1,0 +1,14 @@
+<div class="card" style="width: 13rem">
+  
+    <div class="card-body">
+        <h5 class="card-title" >{{  actor?.id}}</h5>
+        <h5 class="card-title" >{{  actor?.known_for_department}}</h5>
+        <p class="card-text">{{  actor?.popularity}}</p>
+        <p class="card-text">{{  actor?.profile_path}}</p>
+        <p class="card-text">{{  actor?.gender}}</p>
+    
+
+      <a [routerLink]="['/character-detail', actor?.id]">Detalles</a>
+
+    </div>
+  </div>
