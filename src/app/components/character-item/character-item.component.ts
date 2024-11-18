@@ -21,6 +21,7 @@ export class CharacterItemComponent implements OnInit {
       });
     } 
   }
+  
   getCharacterId(id: number): number {
     return  id;
   }
