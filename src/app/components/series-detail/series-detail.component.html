@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
 <body>
     <app-nav></app-nav>
 
@@ -14,8 +15,11 @@
                     <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
                 </div>
                 <p><strong>Release Date:</strong> {{ series.first_air_date }}</p>
-                <p><strong>Rating: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average | numberFormatPipe }}</p>
-                <p><strong>Overview:</strong> {{ series.overview }}</p>
+                <p><strong>Rating: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average |
+                    numberFormatPipe }}</p>
+                <p *ngIf="series.overview"><strong>Overview:</strong> {{ series.overview }}</p>
+                <p *ngIf="series.overview == ''" style="color: red;"><strong style="color: white;">Overview:</strong>
+                    Descripción no disponible</p>
                 <!--<div *ngIf="videoUrl">
             <h3>Trailer</h3>
             <iframe
@@ -27,9 +31,20 @@
               allowfullscreen>
             </iframe>
           </div>-->
+                @for (item of getSeasons(); track $index) {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Season {{ item.season_number }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Release Date:</strong> {{ item.air_date }}</p>
+                        <p class="card-text"><strong>Episodes:</strong> {{ item.episode_count }} episodios</p>
+                    </div>
+
+                </div>
+                }
             </div>
-        </div>
-        <!--<div *ngIf="cast.length">
+            <!--<div *ngIf="cast.length">
         <h3>Cast</h3>
         <div class="row">
           @for(actor of cast; track actor.id){
@@ -50,5 +65,6 @@
           }
         </div>
       </div>-->
+        </div>
     </div>
 </body>

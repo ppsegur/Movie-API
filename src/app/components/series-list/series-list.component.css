@@ -1,15 +1,13 @@
 body {
     background: linear-gradient(to bottom, #0D2185, #03081F);
     width: 100%;
-    height: max-content; /* Alto del contenedor */
+    height: max-content;
 }
 
 .main-container {
     display: flex;
     align-items: flex-start;
-    /* Alinea el sidebar y la lista de actores al mismo nivel vertical */
     gap: 20px;
-    /* Espacio entre el sidebar y la lista de actores */
     padding: 20px;
 }
 
@@ -98,7 +96,7 @@ main {
 .card-text {
     text-align: center;
     color: white;
-    background-color: #0D2185;
+    background: linear-gradient(to bottom, #0D2185, #03081F);
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
