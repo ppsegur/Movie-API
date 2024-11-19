@@ -6,6 +6,13 @@ body {
     margin: 0;
 }
 
+.main-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px;
+}
+
 .movie-card {
     background-color: #1a1d31;
     border-radius: 10px;
@@ -123,7 +130,7 @@ body {
 }
 
 .sidebar {
-    width: 300px;
+    width: 400px;
     padding: 1rem;
     background-color: #0d1b2a;
     color: #fff;
@@ -132,16 +139,16 @@ body {
     height: 100vh;
     overflow-y: auto;
 }
-  
+
 .sidebar h2 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
-  
+
 .sidebar .filtros h3 {
     margin-top: 1rem;
 }
-  
+
 .sidebar .genres button,
 .sidebar .rating span {
     display: inline-block;
@@ -152,7 +159,7 @@ body {
     border: none;
     border-radius: 5px;
 }
-  
+
 .sidebar input[type="date"] {
     width: 100%;
     padding: 0.5rem;

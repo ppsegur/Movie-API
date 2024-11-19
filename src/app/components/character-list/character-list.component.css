@@ -2,7 +2,7 @@
 body {
   background: linear-gradient(to bottom, #0D2185, #03081F);
   margin: -8px;
-
+  height: auto;
 }
 .actors-section{
   display: flex;
