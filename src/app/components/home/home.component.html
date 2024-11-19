@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmPeak</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+   <app-nav></app-nav>
+
+    <section class="banner-section text-center text-white d-flex flex-column align-items-center justify-content-center">
+        <h1 class="display-4 fw-bold">¡Te damos la bienvenida!</h1>
+        <p class="lead mb-4">Millones de películas, series y gente por descubrir. Explora ya.</p>
+        <div class="search-bar w-75 w-md-50 w-lg-25">
+            <input type="text" class="form-control rounded-pill" placeholder="Buscar series, películas, etc...">
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="section-title mb-4 text-white">
+            <h2>Películas</h2>
+            <hr style="height: 2px;">
+        </div>
+        <div class="row">
+            @for(movie of moviesnewsList; track movie.id ){
+            <div class="col-md-3 mb-4">
+                <div class="card movie-card p-3">
+                    <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + movie.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="movie.poster_path">
+                    <div class="card-body text-center">
+                        <p> {{movie.title}} </p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+                            <circle cx="60" cy="60" r="60" fill="black" />
+                            <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
+                            <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
+                                [attr.stroke-dasharray]="440" 
+                                [attr.stroke-dashoffset]="getStrokeDashoffset(movie.vote_average)"
+                                [attr.stroke]="getCircleColor(movie.vote_average)">
+                            </circle>
+                            <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5">{{movie.vote_average.toFixed(1)}}</text>
+                        </svg>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                                <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
+                                {{movie.release_date}}
+                              </button>
+                              <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                                <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
+                                {{movie.popularity | numberFormatPipe}}
+                              </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>}
+        </div>
+
+        <div class="section-title mb-4 mt-5 text-white">
+            <h2>Series</h2>
+            <hr style="height: 2px;">
+        </div>
+        <div class="row">
+            @for (series of seriestvnewList; track series.id) {
+            <div class="col-md-3 mb-4" >
+                <div class="card serie-card p-3">
+                    <img [src]="'https://image.tmdb.org/t/p/w220_and_h330_face/' + series.poster_path" class="card-img-top img-fluid rounded mb-2" *ngIf="series.poster_path">
+                    <div class="card-body text-center">
+                        <p>{{series.name}}</p>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+                            <circle cx="60" cy="60" r="60" fill="black" />
+                            <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
+                            <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
+                                [attr.stroke-dasharray]="440" 
+                                [attr.stroke-dashoffset]="getStrokeDashoffset(series.vote_average)"
+                                [attr.stroke]="getCircleColor(series.vote_average)">
+                            </circle>
+                            <text x="60" y="70" fill="#fff" text-anchor="middle" font-size="14" dy="5">{{series.vote_average.toFixed(1)}}</text>
+                        </svg>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                                <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
+                                {{series.first_air_date}}
+                              </button>
+                              <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                                <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
+                                {{series.popularity | numberFormatPipe}}
+                              </button>
+                        </div>
+                    </div>
+                </div>
+            </div>}
+        </div>
+    </div>
+
+</body>
+
+</html>

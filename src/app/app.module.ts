@@ -2,15 +2,17 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HomeComponent } from './components/home/home.component';
+import { provideHttpClient } from '@angular/common/http';
+import { NavComponent } from './shared/nav/nav.component';
+import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { AppComponent } from './app.component';
 import { SeriesListComponent } from './components/series-list/series-list.component';
-import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
-import { NavComponent } from './shared/nav/nav.component';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { FilmDetailComponent } from './components/film-detail/film-detail.component';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { CharacterListComponent } from './components/character-list/character-list.component';
@@ -19,12 +21,14 @@ import { CharacterItemComponent } from './components/character-item/character-it
 
 @NgModule({
   declarations: [
+
     AppComponent,
+    HomeComponent,
+    NavComponent,
+    NumberFormatPipePipe
     SeriesListComponent,
     SeriesDetailComponent,
     FilmsListComponent,
-    NumberFormatPipePipe,
-    NavComponent,
     FilmDetailComponent,
     SafeUrlPipe,
     CharacterListComponent,
@@ -41,7 +45,7 @@ import { CharacterItemComponent } from './components/character-item/character-it
     provideAnimationsAsync(),
     provideHttpClient()
   ],
-
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

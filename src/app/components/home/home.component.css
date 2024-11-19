@@ -1,0 +1,129 @@
+body {
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    height: max-content;
+    color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+
+/* El banner Section y barra busqueda */
+.banner-section {
+    background-image: url('https://cloudfront-us-east-1.images.arcpublishing.com/infobae/5OCGDEDB6VCW7KUJGESRNOCCLM.jpg');
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: auto;
+    background-position: center;
+    padding: 100px;
+    justify-content: center;
+    height: 600px;
+}
+
+.hero-section h1, .hero-section p {
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+}
+
+.search-bar input {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    margin-left: 5%;
+    padding: auto;
+    justify-content: center;
+    width: 90%;
+    border-radius: 10%;
+}
+
+/*  Section */
+.section-title h2 {
+    color: #f8f9fa;
+}
+
+/*estilos de las Cards tanto pelis como series*/
+.movie-card, .serie-card {
+    position: relative; 
+    background-color: #1a1d31;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    width: 100%;
+    color: white;
+    height: 100%;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+}
+
+.movie-card img, .serie-card img {
+    width: 100%; 
+    height: auto; 
+    object-fit: cover; 
+    border-radius: 10px;
+}
+
+
+.movie-card:hover, .serie-card:hover {
+    transform: scale(1.05);
+}
+
+.img-fluid {
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.container {
+    padding-top: 35px;
+}
+
+.row > .col-md-3 {
+    display: flex;
+}
+    .row > .col-md-3 .movie-card, .row > .col-md-3 .serie-card {
+        flex: 1; 
+    }
+    .movie-card .card-body,  .serie-card .card-body {
+        padding: 15px;
+        text-align: center;
+    }
+    
+
+/*estilo para los Botones*/
+.custom-btn {
+    border-radius: 50px;
+    padding: 8px 12px; 
+    font-size: 14px; 
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    border: none; 
+    transition: background-color 0.2s ease;
+  }
+
+
+  .custom-btn:hover {
+    background-color: #000000; 
+    transform: scale(1.05);
+  }
+
+/*estilos del Circle-progress*/
+
+.card-body svg {
+    position: absolute;
+    top: -20px; 
+    right: -20px;
+    width: 60px; 
+    height: 60px;
+    z-index: 2; 
+}
+
+.card-body text{
+    font-size: 40px;
+}
+
+.card-body .track {
+    stroke-width: 8;
+}
+
+.card-body .filled {
+    stroke-width: 8;
+    transition: stroke-dashoffset 0.5s ease;
+}
