@@ -14,10 +14,10 @@
                     <h2 class="me-3">{{ series.name }}</h2>
                     <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
                 </div>
-                <p><strong>Release Date:</strong> {{ series.first_air_date }}</p>
-                <p><strong>Rating: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average |
+                <p><strong>Fecha de estreno:</strong> {{ series.first_air_date }}</p>
+                <p><strong>Valoración: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average |
                     numberFormatPipe }}</p>
-                <p *ngIf="series.overview"><strong>Overview:</strong> {{ series.overview }}</p>
+                <p *ngIf="series.overview"><strong>Descripción:</strong> {{ series.overview }}</p>
                 <p *ngIf="series.overview == ''" style="color: red;"><strong style="color: white;">Overview:</strong>
                     Descripción no disponible</p>
                 <!--<div *ngIf="videoUrl">
@@ -37,8 +37,8 @@
                         <h5 class="card-title">Season {{ item.season_number }}</h5>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"><strong>Release Date:</strong> {{ item.air_date }}</p>
-                        <p class="card-text"><strong>Episodes:</strong> {{ item.episode_count }} episodios</p>
+                        <p class="card-text"><strong>Fecha de estreno:</strong> {{ item.air_date }}</p>
+                        <p class="card-text"><strong>Nº episodios:</strong> {{ item.episode_count }} episodios</p>
                     </div>
 
                 </div>
