@@ -6,7 +6,6 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HomeComponent } from './components/home/home.component';
 import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
-import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { AppComponent } from './app.component';
 import { SeriesListComponent } from './components/series-list/series-list.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,7 +24,7 @@ import { CharacterItemComponent } from './components/character-item/character-it
     AppComponent,
     HomeComponent,
     NavComponent,
-    NumberFormatPipePipe
+    NumberFormatPipePipe,
     SeriesListComponent,
     SeriesDetailComponent,
     FilmsListComponent,
