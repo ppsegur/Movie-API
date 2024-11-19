@@ -16,6 +16,7 @@ body {
     padding: 1rem;
     background-color: #0d1b2a;
     color: #fff;
+    position: sticky;
 }
 
 .sidebar h2 {
