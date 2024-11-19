@@ -13,6 +13,7 @@ export class FilmDetailComponent implements OnInit {
   film!: Films;
   videoUrl: string | null = null;
   cast: any[] = [];
+  showAllCast: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -41,7 +42,12 @@ export class FilmDetailComponent implements OnInit {
 
   getFilmCredits(id: number): void {
     this.filmsService.getFilmCredits(id).subscribe((data) => {
-      this.cast = data.cast.slice(0, 8);
+      this.cast = this.showAllCast ? data.cast : data.cast.slice(0, 8);
     });
+  }
+
+  toggleShowAllCast(): void {
+    this.showAllCast = !this.showAllCast;
+    this.getFilmCredits(+this.route.snapshot.paramMap.get('id')!);
   }
 }

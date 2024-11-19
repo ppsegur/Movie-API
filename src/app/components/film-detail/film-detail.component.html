@@ -35,12 +35,16 @@
         @for(actor of cast; track actor.id){
         <div class="col-md-3">
           <div class="card mb-3 actor-card">
-            <img
-              *ngIf="actor.profile_path"
-              [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path"
-              class="card-img-top actor-img"
-              alt="{{ actor.name }}"
-            />
+            <div class="image-container">
+              <img
+                [src]="actor.profile_path ? 'https://image.tmdb.org/t/p/w200' + actor.profile_path : 'assets/rafa.JPG'"
+                class="card-img-top actor-img"
+                alt="{{ actor.name }}"
+              />
+              <div *ngIf="!actor.profile_path" class="image-overlay">
+                Imagen no encontrada
+              </div>
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{ actor.name }}</h5>
               <p class="card-text">as {{ actor.character }}</p>
@@ -48,6 +52,11 @@
           </div>
         </div>
         }
+      </div>
+      <div class="text-end mt-3"> 
+        <button class="show-all-cast-btn" (click)="toggleShowAllCast()">
+          {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
+        </button>
       </div>
     </div>
   </div>
