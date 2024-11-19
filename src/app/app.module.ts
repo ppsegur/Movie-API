@@ -11,6 +11,9 @@ import { NavComponent } from './shared/nav/nav.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FilmDetailComponent } from './components/film-detail/film-detail.component';
 import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { CharacterListComponent } from './components/character-list/character-list.component';
+import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { CharacterItemComponent } from './components/character-item/character-item.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,11 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     NumberFormatPipePipe,
     NavComponent,
     FilmDetailComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    CharacterListComponent,
+    CharacterDetailComponent,
+    CharacterItemComponent
+
   ],
   imports: [
     BrowserModule,
@@ -30,6 +37,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
     provideAnimationsAsync(),
     provideHttpClient()
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
