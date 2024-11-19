@@ -1,0 +1,130 @@
+body {
+    background-color: #1a1a3e;
+    color: white;
+    font-family: Arial, sans-serif;
+    margin: -8px;
+  }
+  
+  main {
+    margin-top: 10px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Estilos de la sección del actor */
+  .actor-info {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .actor-image-container {
+    flex: 0 0 300px;
+  }
+  
+  .actor-image {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .actor-details {
+    flex: 1;
+    padding-left: 20px;
+  }
+  
+  /* Estilos de títulos */
+  h1, h2, h3 {
+    color: #91ff91;
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilos de la sección de películas */
+  .movies-section {
+    width: 100%;
+  }
+  
+  .movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .movie-card {
+    width: 100%;
+  }
+  
+  .card {
+    border-radius: 10px;
+    transition: transform 0.2s;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-body {
+    padding: 1rem;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #91ff91;
+  }
+  
+  .card-text.date {
+    font-size: 0.8rem;
+    color: #ddd;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-text.overview {
+    font-size: 0.9rem;
+    color: #ddd;
+    line-height: 1.4;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .actor-info {
+      flex-direction: column;
+    }
+  
+    .actor-image-container {
+      max-width: 250px;
+      margin: 0 auto;
+    }
+  
+    .actor-details {
+      padding-left: 0;
+      text-align: center;
+    }
+  
+    .movies-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+  
+    .card img {
+      height: 225px;
+    }
+  }

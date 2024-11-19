@@ -9,21 +9,39 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { NavComponent } from './shared/nav/nav.component';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
+import { FilmsListComponent } from './components/films-list/films-list.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FilmDetailComponent } from './components/film-detail/film-detail.component';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { CharacterListComponent } from './components/character-list/character-list.component';
+import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
+import { CharacterItemComponent } from './components/character-item/character-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SeriesListComponent,
+    SeriesDetailComponent,
+    FilmsListComponent,
     NumberFormatPipePipe,
     NavComponent,
-    SeriesDetailComponent
+    FilmDetailComponent,
+    SafeUrlPipe,
+    CharacterListComponent,
+    CharacterDetailComponent,
+    CharacterItemComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
   ],
-  providers: [provideHttpClient()],
+  providers: [
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
