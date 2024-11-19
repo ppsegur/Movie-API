@@ -1,3 +1,4 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <body>
     <app-nav></app-nav>
 
@@ -13,7 +14,7 @@
                     <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
                 </div>
                 <p><strong>Release Date:</strong> {{ series.first_air_date }}</p>
-                <p><strong>Rating:</strong> <i class="bi bi-star-fill text-warning"></i> {{ series.vote_average }}</p>
+                <p><strong>Rating: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average | numberFormatPipe }}</p>
                 <p><strong>Overview:</strong> {{ series.overview }}</p>
                 <!--<div *ngIf="videoUrl">
             <h3>Trailer</h3>
