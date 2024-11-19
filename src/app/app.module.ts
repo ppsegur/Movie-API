@@ -3,25 +3,41 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CharacterListComponent } from './components/character-list/character-list.component';
+import { FilmsListComponent } from './components/films-list/films-list.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
+import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { NavComponent } from './shared/nav/nav.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilmDetailComponent } from './components/film-detail/film-detail.component';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
+import { CharacterListComponent } from './components/character-list/character-list.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 
 @NgModule({
   declarations: [
-    CharacterListComponent,
-    NavComponent,
     AppComponent,
+    FilmsListComponent,
+    NumberFormatPipePipe,
+    NavComponent,
+    FilmDetailComponent,
+    SafeUrlPipe,
+    CharacterListComponent,
     CharacterDetailComponent,
     CharacterItemComponent
+
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
   ],
-  providers: [provideHttpClient()],
+  providers: [
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

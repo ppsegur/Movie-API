@@ -1,27 +1,19 @@
-.nav {
-    display: flex;
-    gap: 1.5rem; 
 
-    margin-top: auto;
+.navbar {
+    background-color: #000;
+    color: white;
+    justify-content: center;
+    display: flex;
+    font-size:xx-large
 }
-  
-  .nav-link {
-    color: #fff;
-    font-size: 1.5rem; 
-    text-decoration: none;
-    transition: color 0.3s ease, font-size 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: #ffd700; 
-    font-size: 1.7rem; 
-  }
-  
-  .navbar-brand img {
-    height: 200px;
-    margin-left: 10px;
-  }
 
-  .container {
-    display: flex;
-  }
+.nav-item{
+    margin-inline: 50px;
+    color: white;
+    font-size:xx-large
+}
+
+.nav-link:hover{
+    color: yellow;
+    transform: scale(1.05);
+}
