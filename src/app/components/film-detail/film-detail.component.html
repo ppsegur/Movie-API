@@ -16,48 +16,54 @@
         <p><strong>Release Date:</strong> {{ film.release_date }}</p>
         <p><strong>Rating:</strong> <i class="bi bi-star-fill text-warning"></i> {{ film.vote_average }}</p>
         <p><strong>Overview:</strong> {{ film.overview }}</p>
-        <div *ngIf="videoUrl">
-          <h3>Trailer</h3>
-          <iframe
-            width="100%"
-            height="290"
-            [src]="videoUrl | safeUrl"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="cast.length">
-      <h3>Cast</h3>
-      <div class="row">
-        @for(actor of cast; track actor.id){
-        <div class="col-md-3">
-          <div class="card mb-3 actor-card">
-            <div class="image-container">
-              <img
-                [src]="actor.profile_path ? 'https://image.tmdb.org/t/p/w200' + actor.profile_path : 'assets/rafa.JPG'"
-                class="card-img-top actor-img"
-                alt="{{ actor.name }}"
-              />
-              <div *ngIf="!actor.profile_path" class="image-overlay">
-                Imagen no encontrada
-              </div>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">{{ actor.name }}</h5>
-              <p class="card-text">as {{ actor.character }}</p>
-            </div>
+        @if (videoUrl) {
+          <div>
+            <h3>Trailer</h3>
+            <iframe
+              width="100%"
+              height="290"
+              [src]="videoUrl | safeUrl"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
-        </div>
         }
       </div>
-      <div class="text-end mt-3"> 
-        <button class="show-all-cast-btn" (click)="toggleShowAllCast()">
-          {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
-        </button>
-      </div>
     </div>
+    @if (cast.length) {
+      <div>
+        <h3>Cast</h3>
+        <div class="row">
+          @for(actor of cast; track actor.id){
+          <div class="col-md-3">
+            <div class="card mb-3 actor-card">
+              <div class="image-container">
+                <img
+                  [src]="actor.profile_path ? 'https://image.tmdb.org/t/p/w200' + actor.profile_path : 'assets/rafa.JPG'"
+                  class="card-img-top actor-img"
+                  alt="{{ actor.name }}"
+                />
+                @if (!actor.profile_path) {
+                  <div class="image-overlay">
+                    IMAGEN NO ENCONTRADA
+                  </div>
+                }
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ actor.name }}</h5>
+                <p class="card-text">as {{ actor.character }}</p>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+        <div class="text-end mt-3"> 
+          <button class="show-all-cast-btn" (click)="toggleShowAllCast()">
+            {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
+          </button>
+        </div>
+      </div>
+    }
   </div>
 </body>
