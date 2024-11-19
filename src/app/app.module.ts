@@ -8,13 +8,15 @@ import { provideHttpClient } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { NavComponent } from './shared/nav/nav.component';
+import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SeriesListComponent,
     NumberFormatPipePipe,
-    NavComponent
+    NavComponent,
+    SeriesDetailComponent
   ],
   imports: [
     BrowserModule,

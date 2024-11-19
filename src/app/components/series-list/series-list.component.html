@@ -33,7 +33,7 @@
         <!-- Listado de series -->
         <div class="actors-list">
             @for (item of listadoSeries; track item.id) {
-            <a href="google.com"> <!-- Poner redirect al detalle de la serie -->
+            <a [routerLink]="['/seriesDetail', item.id]"> <!-- Poner redirect al detalle de la serie -->
             <div class="actor-card">
                 <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
                 <h3>{{ item.name }}</h3>
