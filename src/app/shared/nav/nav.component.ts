@@ -5,7 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './nav.component.html',
   styleUrl: './nav.component.css',
   standalone:false
-
 })
 export class NavComponent {
 

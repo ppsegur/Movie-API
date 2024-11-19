@@ -1,0 +1,70 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+<body>
+    <app-nav></app-nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img [src]="'https://image.tmdb.org/t/p/w500' + series.poster_path" class="img-fluid"
+                    alt="{{ series.name }}">
+            </div>
+            <div class="col-md-8">
+                <div class="d-flex align-items-center">
+                    <h2 class="me-3">{{ series.name }}</h2>
+                    <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <p><strong>Fecha de estreno:</strong> {{ series.first_air_date }}</p>
+                <p><strong>Valoración: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average |
+                    numberFormatPipe }}</p>
+                <p *ngIf="series.overview"><strong>Descripción:</strong> {{ series.overview }}</p>
+                <p *ngIf="series.overview == ''" style="color: red;"><strong style="color: white;">Overview:</strong>
+                    Descripción no disponible</p>
+                <!--<div *ngIf="videoUrl">
+            <h3>Trailer</h3>
+            <iframe
+              width="100%"
+              height="290"
+              [src]="videoUrl | safeUrl"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>-->
+                @for (item of getSeasons(); track $index) {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">Season {{ item.season_number }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Fecha de estreno:</strong> {{ item.air_date }}</p>
+                        <p class="card-text"><strong>Nº episodios:</strong> {{ item.episode_count }} episodios</p>
+                    </div>
+
+                </div>
+                }
+            </div>
+            <!--<div *ngIf="cast.length">
+        <h3>Cast</h3>
+        <div class="row">
+          @for(actor of cast; track actor.id){
+          <div class="col-md-3">
+            <div class="card mb-3 actor-card">
+              <img
+                *ngIf="actor.profile_path"
+                [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path"
+                class="card-img-top actor-img"
+                alt="{{ actor.name }}"
+              />
+              <div class="card-body">
+                <h5 class="card-title">{{ actor.name }}</h5>
+                <p class="card-text">as {{ actor.character }}</p>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>-->
+        </div>
+    </div>
+</body>
