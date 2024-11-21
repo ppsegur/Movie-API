@@ -17,3 +17,34 @@
     color: yellow;
     transform: scale(1.05);
 }
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.avatar:hover{
+    transform: scale(1.25);
+}
+
+.username {
+    font-size: 14px;
+    margin-top: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-danger:hover{
+    transform: scale(1.25);
+}
+.bi-person-circle{
+    color: grey;
+    margin-top: 30%;
+}
+
+.bi-person-circle:hover{
+    transform: scale(1.25);
+}

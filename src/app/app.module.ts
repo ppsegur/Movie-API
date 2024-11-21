@@ -17,6 +17,7 @@ import { SafeUrlPipe } from './pipes/safe-url.pipe';
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
+import { ApprovedComponent } from './components/approved/approved.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CharacterItemComponent } from './components/character-item/character-it
     SafeUrlPipe,
     CharacterListComponent,
     CharacterDetailComponent,
-    CharacterItemComponent
+    CharacterItemComponent,
+    ApprovedComponent
 
   ],
   imports: [

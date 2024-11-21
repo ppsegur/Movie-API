@@ -1,0 +1,17 @@
+body {
+  background: linear-gradient(to bottom, #0D2185, #03081F);
+  height: max-content;
+  color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.container-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.img{
+  width: 80%; 
+}
