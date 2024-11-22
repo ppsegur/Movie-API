@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
+import { MovieNew, Serietvnew } from '../../models/home.model';
 
 @Component({
   selector: 'app-films-list',
@@ -38,5 +39,14 @@ export class FilmsListComponent implements OnInit {
         return 'red';
     }
   }
+
+  addToWatchlist(item: MovieNew | Serietvnew): void {
+    this.filmService.addToWatchlist(item);
+  }
+
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
+
 
 }

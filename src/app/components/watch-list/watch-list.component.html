@@ -1,0 +1,14 @@
+<body>  
+    <app-nav></app-nav>
+    <div class="watchlist-container">
+        <h2>WATCHLIST</h2>
+        @for(item of watchlist; track item.id){
+            <div class="movie-card">
+                <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'">
+                <div class="movie-card-content">
+                    <button class="remove-button" (click)="removeFromWatchlist(item)">Remove</button>
+                </div>
+            </div>
+        }
+    </div>
+</body>  

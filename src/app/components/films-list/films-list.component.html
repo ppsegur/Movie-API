@@ -73,8 +73,11 @@
                           [attr.stroke]="getCircleColor(film.vote_average)">
                       </circle>
                       <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5" class="rating-text">{{film.vote_average.toFixed(1)}}</text>
-                    </svg>
+                    </svg>        
                   </div>
+                  @if (isLoggedIn()) {
+                    <button (click)="addToWatchlist(film)">Add to Watchlist</button>
+                  }  
                 </div>
               </div>
             }
