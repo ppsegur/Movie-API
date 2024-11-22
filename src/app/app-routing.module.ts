@@ -9,6 +9,7 @@ import { FilmDetailComponent } from './components/film-detail/film-detail.compon
 import { CharacterListComponent } from './components/character-list/character-list.component';
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
+import { ApprovedComponent } from './components/approved/approved.component';
 
 const routes: Routes = [
   { path: 'filmList', component: FilmsListComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'characters', component: CharacterListComponent},
   { path: 'seriesList', component: SeriesListComponent},
   { path: 'seriesDetail/:id', component: SeriesDetailComponent},
+  { path: 'approved', component: ApprovedComponent },
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },   
   { path: '**', redirectTo: '/home' }            
