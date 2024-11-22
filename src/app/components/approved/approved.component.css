@@ -1,0 +1,12 @@
+.approved-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+  }
+  
+  .approved-gif {
+    max-width: 80%;
+    height: auto;
+  }
