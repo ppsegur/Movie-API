@@ -1,0 +1,42 @@
+<header>
+    <app-nav></app-nav>
+</header>
+<main>
+    <div class="create-list-container">
+        <div class="box">
+            <h2>Crear un nueva lista</h2>
+        
+            <form [formGroup]="listForm" (ngSubmit)="onSubmit()">
+                <div class="input-container">
+                  <label for="listName">Nombre de la lista</label>
+                  <input 
+                    id="listName" 
+                    formControlName="name" 
+                    placeholder="Poner el nombre de la lista aquí"
+                    required
+                  />
+                </div>
+              
+                <div class="input-container">
+                  <label for="listDescription">Descripción de la lista</label>
+                  <textarea 
+                    id="listDescription" 
+                    formControlName="description" 
+                    placeholder="Descripción"
+                  ></textarea>
+                </div>
+              
+                <button 
+                  type="submit" 
+                  [disabled]="listForm.invalid" 
+                  class="submit-btn"
+                >
+                  LISTO
+                </button>
+              </form>
+              
+        </div>
+        
+      </div>
+      
+</main>

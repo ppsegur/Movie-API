@@ -18,6 +18,9 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateListComponent } from './components/create-list/create-list.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +37,16 @@ import { ApprovedComponent } from './components/approved/approved.component';
     CharacterListComponent,
     CharacterDetailComponent,
     CharacterItemComponent,
-    ApprovedComponent
+    ApprovedComponent,
+    ListUserlistsComponent,
+    CreateListComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync(),
