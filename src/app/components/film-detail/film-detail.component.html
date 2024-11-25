@@ -16,6 +16,27 @@
         <p><strong>Release Date:</strong> {{ film.release_date }}</p>
         <p><strong>Rating:</strong> <i class="bi bi-star-fill text-warning"></i> {{ film.vote_average }}</p>
         <p><strong>Overview:</strong> {{ film.overview }}</p>
+        <div>
+          <h6>Añadir a una lista</h6>
+          <div class="dropdown">
+            <button
+              class="btn btn-primary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Añadir a una lista
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li *ngFor="let list of userLists">
+                <span>{{ list.name }} ({{ list.item_count }} items)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <br>
+        
         @if (videoUrl) {
           <div>
             <h3>Trailer</h3>

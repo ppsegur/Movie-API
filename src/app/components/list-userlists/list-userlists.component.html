@@ -5,13 +5,8 @@
     <button class="btn-sucsses" [routerLink]="['/createList']">
       <b>+ Crear lista</b>
     </button>
-
-    <!-- Mostrar listas del usuario -->
     <ul>
       <li *ngFor="let list of userLists">
-        <ng-template #noImage>
-          <p>No image available</p>
-        </ng-template>
         <span>{{ list.name }} ({{ list.item_count }} items)</span>
         <button (click)="deleteList(list.id)">Eliminar</button>
       </li>

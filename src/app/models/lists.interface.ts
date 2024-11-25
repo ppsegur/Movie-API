@@ -13,7 +13,7 @@ export interface Movie {
   
   
   export interface List {
-poster_path: any;
+  poster_path: any;
     id: number;
     name: string;
     description: string;

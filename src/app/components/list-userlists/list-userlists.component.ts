@@ -9,8 +9,8 @@ import { ListService } from '../../services/list.service';
 })
 export class ListUserlistsComponent implements OnInit {
   userLists: any[] = [];
-  accountId: number = 0;
-  sessionId: string | null = localStorage.getItem('session_id');
+  accountId: number = 21623249;
+  sessionId: string | null = '511bab00d81359719d0cdc043166fcc2c268aad8';
   listForm: FormGroup;
 
   constructor(
