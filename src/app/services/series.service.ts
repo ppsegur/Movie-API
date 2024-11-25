@@ -24,13 +24,6 @@ export class SeriesService {
     return this.http.get<Series>(`${this.API_URL_ID}${id}?api_key=${this.API_KEY}`);
     
   }
-
-  addToWatchlist(series: Series): void {
-    const watchlistItem: Serietvnew = {
-      ...series,
-      genre_ids: series.genres.map(genre => genre.id)
-    };
-    this.watchlistService.addToWatchlist(watchlistItem);
-  }
+  
 
 }

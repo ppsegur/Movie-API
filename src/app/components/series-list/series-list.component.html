@@ -32,7 +32,7 @@
 
         <!-- Listado de series -->
         <div class="actors-list">
-            @for (item of listadoSeries; track item.id) {
+            @for (item of listadoSeries; track trackById) {
             
                 <div class="actor-card">
                     <a [routerLink]="['/seriesDetail', item.id]">

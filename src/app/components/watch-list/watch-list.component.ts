@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieNew, Serietvnew } from '../../models/home.model';
 import { WatchlistService } from '../../services/watch-list.service';
 import { WatchListMoviesListResponse } from '../../models/watchList.interface';
+import { Films } from '../../models/films.interface';
+import { Series } from '../../../models/series.model';
 
 @Component({
   selector: 'app-watch-list',
   templateUrl: './watch-list.component.html',
-  styleUrl: './watch-list.component.css'
+  styleUrls: ['./watch-list.component.css']
 })
 export class WatchListComponent implements OnInit {
   watchlist: WatchListMoviesListResponse = {
@@ -16,19 +17,23 @@ export class WatchListComponent implements OnInit {
     total_results: 0
   };
 
-  constructor(private watchlistService: WatchlistService) { }
+  constructor(private watchlistService: WatchlistService) {}
 
   ngOnInit(): void {
-    this.loadWatchlist();
+    this.loadLocalWatchlist();
   }
 
-  loadWatchlist(): void {
-    this.watchlist = this.watchlistService.getWatchlist();
+  loadLocalWatchlist(): void {
+    this.watchlist = this.watchlistService.getLocalWatchlist();
   }
 
-  removeFromWatchlist(item: MovieNew | Serietvnew): void {
-    this.watchlist.results = this.watchlist.results.filter(watchlistItem => watchlistItem.id !== item.id);
-    localStorage.setItem('watchlist', JSON.stringify(this.watchlist));
+  removeFromWatchlist(item: Films | Series): void {
+    this.watchlistService.removeFromLocalWatchlist(item.id);
+    this.loadLocalWatchlist();
   }
 
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
+  }
+    
 }
