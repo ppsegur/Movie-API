@@ -33,17 +33,19 @@
         <!-- Listado de series -->
         <div class="actors-list">
             @for (item of listadoSeries; track item.id) {
-            <a [routerLink]="['/seriesDetail', item.id]"> <!-- Poner redirect al detalle de la serie -->
-            <div class="actor-card">
-                <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
-                <h3>{{ item.name }}</h3>
-                <div class="d-flex">
-                    <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
-                    <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
+            
+                <div class="actor-card">
+                    <a [routerLink]="['/seriesDetail', item.id]">
+                        <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
+                    </a>
+                    <h3>{{ item.name }}</h3>
+                    <div class="d-flex">
+                        <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
+                        <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
+                    </div>
+                    <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>
+                    <button (click)="addToWatchlist(item)">Add to Watchlist</button>
                 </div>
-                <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>                
-            </div>
-            </a>
             }
         </div>
     </main>

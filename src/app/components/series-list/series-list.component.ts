@@ -5,23 +5,24 @@ import { Series } from '../../../models/series.model';
 @Component({
   selector: 'app-series-list',
   templateUrl: './series-list.component.html',
-  styleUrl: './series-list.component.css'
+  styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
+  listadoSeries: Series[] = [];
 
   constructor(private seriesService: SeriesService) { }
-  listadoSeries: Series[] = [];
 
   ngOnInit(): void {
     this.loadSeriesList();
   }
 
-  loadSeriesList() {
+  loadSeriesList(): void {
     this.seriesService.getSeries().subscribe(respuesta => {
       this.listadoSeries = respuesta.results;
     });
   }
 
-
-
+  addToWatchlist(item: Series): void {
+    this.seriesService.addToWatchlist(item);
+  }
 }

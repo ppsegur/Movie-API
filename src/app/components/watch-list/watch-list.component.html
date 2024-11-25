@@ -1,11 +1,15 @@
 <body>  
     <app-nav></app-nav>
+
     <div class="watchlist-container">
-        <h2>WATCHLIST</h2>
-        @for(item of watchlist; track item.id){
+    
+        <h2>Watchlist</h2>
+        @for(item of watchlist.results; track item.id){
             <div class="movie-card">
-                <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'">
+                <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" alt="{{ item.title || item.name }}">
                 <div class="movie-card-content">
+                    <h3>{{ item.title || item.name }}</h3>
+                    <p>{{ item.release_date || item.first_air_date }}</p>
                     <button class="remove-button" (click)="removeFromWatchlist(item)">Remove</button>
                 </div>
             </div>

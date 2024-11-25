@@ -1,8 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Films, FilmsListResponse } from '../models/films.interface';
 import { MovieNew, Serietvnew } from '../models/home.model';
+import { WatchListMoviesListResponse } from '../models/watchList.interface';
 
 const API_KEY = '05e17ea68b0a29c92de23f76cc1cff22';
 const API_URL = 'https://api.themoviedb.org/3';
@@ -12,8 +13,12 @@ const API_URL = 'https://api.themoviedb.org/3';
 })
 export class FilmsService {
 
-  private watchlist: (MovieNew | Serietvnew)[] = [];
-
+  private watchlist: WatchListMoviesListResponse = {
+    page: 1,
+    results: [],
+    total_pages: 1,
+    total_results: 0
+  };
 
   constructor(private http: HttpClient) {}
 
@@ -38,7 +43,13 @@ export class FilmsService {
   }
 
   addToWatchlist(item: MovieNew | Serietvnew): void {
-    this.watchlist.push(item);
+    this.watchlist.results.push(item);
+    this.watchlist.total_results = this.watchlist.results.length;
     localStorage.setItem('watchlist', JSON.stringify(this.watchlist));
+  }
+
+  getWatchlist(): WatchListMoviesListResponse {
+    const storedWatchlist = localStorage.getItem('watchlist');
+    return storedWatchlist ? JSON.parse(storedWatchlist) : this.watchlist;
   }
 }

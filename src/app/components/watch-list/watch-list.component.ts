@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieNew, Serietvnew } from '../../models/home.model';
 import { WatchlistService } from '../../services/watch-list.service';
+import { WatchListMoviesListResponse } from '../../models/watchList.interface';
 
 @Component({
   selector: 'app-watch-list',
@@ -8,13 +9,17 @@ import { WatchlistService } from '../../services/watch-list.service';
   styleUrl: './watch-list.component.css'
 })
 export class WatchListComponent implements OnInit {
-  watchlist: (MovieNew | Serietvnew)[] = []; 
+  watchlist: WatchListMoviesListResponse = {
+    page: 1,
+    results: [],
+    total_pages: 1,
+    total_results: 0
+  };
 
-  constructor(private watchlistService: WatchlistService) {}
-
+  constructor(private watchlistService: WatchlistService) { }
 
   ngOnInit(): void {
-    this.watchlist = this.watchlistService.getWatchlist();
+    this.loadWatchlist();
   }
 
   loadWatchlist(): void {
@@ -22,7 +27,7 @@ export class WatchListComponent implements OnInit {
   }
 
   removeFromWatchlist(item: MovieNew | Serietvnew): void {
-    this.watchlist = this.watchlist.filter(watchlistItem => watchlistItem.id !== item.id);
+    this.watchlist.results = this.watchlist.results.filter(watchlistItem => watchlistItem.id !== item.id);
     localStorage.setItem('watchlist', JSON.stringify(this.watchlist));
   }
 
