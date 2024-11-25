@@ -15,8 +15,9 @@ export class FilmDetailComponent implements OnInit {
   cast: any[] = [];
   showAllCast: boolean = false;
   userLists: any[] = [];
-  accountId: number = 21623249;
-  sessionId: string | null = '511bab00d81359719d0cdc043166fcc2c268aad8';
+  selectedListId!: number; // ID de la lista seleccionada
+  accountId: number = 21623249; // Valor fijo del servicio
+  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; // Valor fijo del servicio
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,7 @@ export class FilmDetailComponent implements OnInit {
     if (filmId) {
       this.loadFilmDetails(+filmId);
     }
+
     this.loadUserLists();
   }
 
@@ -40,6 +42,16 @@ export class FilmDetailComponent implements OnInit {
         this.getFilmCredits(filmId);
       },
       error: (err) => console.error('Error cargando película:', err),
+    });
+  }
+
+  loadUserLists(): void {
+    this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
+      next: (response) => {
+        this.userLists = response.results;
+        console.log('Listas del usuario:', this.userLists); // Para depuración
+      },
+      error: (err) => console.error('Error obteniendo listas:', err),
     });
   }
 
@@ -65,24 +77,23 @@ export class FilmDetailComponent implements OnInit {
     if (this.film) this.getFilmCredits(this.film.id);
   }
 
-  loadUserLists() {
-    if (this.sessionId) {
-      this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
-        next: (response) => {
-          this.userLists = response.results;
-        },
-        error: (err) => console.error(err),
-      });
-    }
-  }
-  addMovieToList(listId: number): void {
-    if (this.sessionId && this.film) {
+  // Método para añadir una película a una lista
+  addToSelectedList(): void {
+    if (this.selectedListId && this.film.id) {
       this.listService
-        .addMovieToList(listId, this.sessionId, this.film.id)
+        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
         .subscribe({
-          next: () => alert('Película añadida a la lista con éxito'),
-          error: (err) => console.error('Error al añadir película:', err),
+          next: () => {
+            console.log(`Película añadida a la lista con ID ${this.selectedListId}`);
+            alert('Película añadida exitosamente a la lista.');
+          },
+          error: (err) => {
+            console.error('Error añadiendo película a la lista:', err);
+            alert('Hubo un error al añadir la película a la lista.');
+          },
         });
+    } else {
+      alert('Por favor, selecciona una lista.');
     }
   }
 }

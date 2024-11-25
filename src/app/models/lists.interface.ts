@@ -6,17 +6,20 @@ export interface Movie {
   }
 
   export interface ListResponse {
-    results: List[];
-    total_results: number;
-    total_pages: number;
+    page: number
+    results: List[]
+    total_pages: number
+    total_results: number
   }
   
-  
   export interface List {
-  poster_path: any;
-    id: number;
-    name: string;
-    description: string;
-    item_count: number;
+    description: string
+    favorite_count: number
+    id: number
+    item_count: number
+    iso_639_1: string
+    list_type: string
+    name: string
+    poster_path: any
   }
   

@@ -46,6 +46,7 @@ import { CreateListComponent } from './components/create-list/create-list.compon
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     ReactiveFormsModule
   ],
   providers: [

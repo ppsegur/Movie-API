@@ -5,7 +5,8 @@ import {List, ListResponse } from '../models/lists.interface';
 
 const API_KEY = '81819d9750b41c41923effa77112f27a';
 const API_BASE_URL = 'https://api.themoviedb.org/3';
-const sessionId = '511bab00d81359719d0cdc043166fcc2c268aad8';
+const session_id= 'b65a3cfcfa444c674e7b0a6bd82d54197a435693';
+const account_id = '21623249';
 
 @Injectable({
   providedIn: 'root',
