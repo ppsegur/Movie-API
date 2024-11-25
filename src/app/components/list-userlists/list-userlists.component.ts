@@ -17,7 +17,6 @@ export class ListUserlistsComponent implements OnInit {
     private listService: ListService,
     private fb: FormBuilder
   ) {
-    // Crear formulario reactivo
     this.listForm = this.fb.group({
       name: ['', [Validators.required]],
       description: ['']

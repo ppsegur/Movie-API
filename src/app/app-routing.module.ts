@@ -12,6 +12,7 @@ import { CharacterItemComponent } from './components/character-item/character-it
 import { ApprovedComponent } from './components/approved/approved.component';
 import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
+import { UserListMoviesComponent } from './components/userlist-movies/userlist-movies.component';
 
 const routes: Routes = [
   { path: 'filmList', component: FilmsListComponent },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'seriesDetail/:id', component: SeriesDetailComponent},
   {path: 'userList', component: ListUserlistsComponent},
   {path: 'createList', component: CreateListComponent},
+  { path: 'moviesoflist/:id', component: UserListMoviesComponent },
   { path: 'approved', component: ApprovedComponent },
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },   

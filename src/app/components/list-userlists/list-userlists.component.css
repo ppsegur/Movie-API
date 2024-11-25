@@ -17,7 +17,7 @@ body {
 div {
   padding: 20px;
   font-family: Arial, sans-serif;
-  max-width: 1200px; /* Añadir un ancho máximo para el contenido */
+  max-width: 1200px; 
   width: 100%;
 }
 
@@ -115,7 +115,7 @@ p {
   font-size: 0.9rem;
 }
 
-/* Responsividad: asegurarse de que el diseño se vea bien en pantallas más pequeñas */
+/* Responsive */
 @media (max-width: 600px) {
   .btn-sucsses {
     width: 100%;

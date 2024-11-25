@@ -21,6 +21,7 @@ import { ApprovedComponent } from './components/approved/approved.component';
 import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateListComponent } from './components/create-list/create-list.component';
+import { UserListMoviesComponent } from './components/userlist-movies/userlist-movies.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { CreateListComponent } from './components/create-list/create-list.compon
     CharacterItemComponent,
     ApprovedComponent,
     ListUserlistsComponent,
-    CreateListComponent
+    UserListMoviesComponent,
+    CreateListComponent,
 
   ],
   imports: [

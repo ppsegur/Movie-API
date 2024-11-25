@@ -58,4 +58,12 @@ export class ListService {
       { media_id: movieId }
     );
   }
+
+  // Obtener películas de una lista específica
+  getMoviesFromList(listId: number, sessionId: string): Observable<any> {
+    return this.http.get(
+      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}`
+    );
+  }
+
 }
