@@ -10,7 +10,14 @@ import { Series } from '../../../models/series.model';
   styleUrls: ['./watch-list.component.css']
 })
 export class WatchListComponent implements OnInit {
-  watchlist: WatchListMoviesListResponse = {
+  movieWatchlist: WatchListMoviesListResponse = {
+    page: 1,
+    results: [],
+    total_pages: 1,
+    total_results: 0
+  };
+
+  seriesWatchlist: WatchListMoviesListResponse = {
     page: 1,
     results: [],
     total_pages: 1,
@@ -20,20 +27,31 @@ export class WatchListComponent implements OnInit {
   constructor(private watchlistService: WatchlistService) {}
 
   ngOnInit(): void {
-    this.loadLocalWatchlist();
+    this.loadWatchlists();
   }
 
-  loadLocalWatchlist(): void {
-    this.watchlist = this.watchlistService.getLocalWatchlist();
+  loadWatchlists(): void {
+    this.watchlistService.getLocalMovieWatchlist().subscribe((data: WatchListMoviesListResponse) => {
+      this.movieWatchlist = data;
+    });
+    this.watchlistService.getLocalSeriesWatchlist().subscribe((data: WatchListMoviesListResponse) => {
+      this.seriesWatchlist = data;
+    });
   }
 
-  removeFromWatchlist(item: Films | Series): void {
-    this.watchlistService.removeFromLocalWatchlist(item.id);
-    this.loadLocalWatchlist();
+  removeFromMovieWatchlist(item: Films): void {
+    this.watchlistService.removeFromLocalMovieWatchlist(item.id).subscribe(() => {
+      this.loadWatchlists();
+    });
+  }
+
+  removeFromSeriesWatchlist(item: Series): void {
+    this.watchlistService.removeFromLocalSeriesWatchlist(item.id).subscribe(() => {
+      this.loadWatchlists();
+    });
   }
 
   trackById(index: number, item: { id: number | string }): number | string {
     return item.id;
   }
-    
 }

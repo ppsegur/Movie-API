@@ -10,16 +10,38 @@
   <app-nav></app-nav>
 
   <div class="container watchlist-container">
-    <h2>Mi Watchlist</h2>
-    <div *ngFor="let item of watchlist.results; trackBy: trackById" class="movie-card">
-      <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'"
-        [alt]="item.title || item.name">
-      <div class="movie-card-content">
-        <h3>{{ item.title || item.name }}</h3>
-        <p>{{ item.release_date || item.first_air_date }}</p>
-        <button class="remove-button btn btn-danger btn-sm" (click)="removeFromWatchlist(item)">
-          <i class="bi bi-trash"></i> Eliminar
-        </button>
+
+    <h3>Películas</h3>
+    <hr style="height: 2px;">
+
+    <div class="row movie-grid">
+      <div *ngFor="let item of movieWatchlist.results; trackBy: trackById" class="movie-card col">
+        <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" 
+            [alt]="item.title || item.name">
+        <div class="movie-card-content">
+          <h3>{{ item.title || item.name }}</h3>
+          <p>{{ item.release_date }}</p>
+          <button class="remove-button btn btn-danger btn-sm" (click)="removeFromMovieWatchlist(item)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <h3>Series</h3>
+    <hr style="height: 2px;">
+
+    <div class="row movie-grid">
+      <div *ngFor="let item of seriesWatchlist.results; trackBy: trackById" class="movie-card col">
+        <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" 
+            [alt]="item.name">
+        <div class="movie-card-content">
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.first_air_date }}</p>
+          <button class="remove-button btn btn-danger btn-sm" (click)="removeFromSeriesWatchlist(item)">
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -29,8 +29,8 @@ export class SeriesListComponent implements OnInit {
     });
   }
 
-  addToWatchlist(series: Series): void {
-    this.watchlistService.addToLocalWatchlist(series);
+  addSeriesToWatchlist(series: Series): void {
+    this.watchlistService.addSeriesToWatchlistTMDB(series);
   }
 
   trackById(index: number, item: { id: number | string }): number | string {

@@ -27,7 +27,7 @@ export class FilmsListComponent implements OnInit {
   }
 
   addToWatchlist(film: Films): void {
-    this.watchlistService.addToLocalWatchlist(film);
+    this.watchlistService.addToWatchlistTMDB(film);
     console.log(`Película "${film.title}" añadida a la watchlist.`);
   }
 
