@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
+import { FavService } from '../../services/fav.service';
 
 @Component({
   selector: 'app-films-list',
@@ -11,13 +12,24 @@ export class FilmsListComponent implements OnInit {
 
   filmList: Films[] = [];
 
-  constructor(private filmService: FilmsService) {}
+  constructor(private filmService: FilmsService,
+    private favService: FavService
+  ) {}
 
   ngOnInit(): void {
     this.filmService.getPopular().subscribe((resp) => {
       this.filmList = resp.results;
     });
   }
+  addToFavorites(film: Films): void {
+    this.favService.addToFavorites(film);
+    console.log(`Película "${film.title}" añadida a la watchlist.`);
+  }
+
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
+  }
+
 
   getStrokeDashoffset(voteAverage: number): number {
     const maxDashArray = 440; 

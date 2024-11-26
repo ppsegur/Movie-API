@@ -12,6 +12,7 @@ const API_BASE_URL = 'https://api.themoviedb.org/3';
   providedIn: 'root'
 })
 export class FavService {
+
   /* Definición de la lista de favoritos */
   private favoritos: favoritosResponse = {
     page: 1,
@@ -23,13 +24,13 @@ export class FavService {
   constructor(private http: HttpClient) {}
 
   /* Método para añadir una pélicula o serie a la lista de favoritos  */
-  addToWatchlist(item: MovieNew | Serietvnew): void {
+  addToFavorites(item: MovieNew | Serietvnew): void {
     this.favoritos.results.push(item);
     localStorage.setItem('watchlist', JSON.stringify(this.favoritos));
   }
   
   /*Método para obtener la lista de favoritos */
-  getWatchlist(): favoritosResponse {
+  getFavorites(): favoritosResponse {
     const storedWatchlist = localStorage.getItem('watchlist');
     return storedWatchlist ? JSON.parse(storedWatchlist) : this.favoritos;
   }
