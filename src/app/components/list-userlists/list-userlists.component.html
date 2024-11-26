@@ -9,7 +9,7 @@
       <li *ngFor="let list of userLists">
         <span>{{ list.name }} ({{ list.item_count }} items)</span>
         <button (click)="deleteList(list.id)">Eliminar</button>
-        <button [routerLink]="['/moviesoflist', list.id]" style="background-color: blue;">Ver películas </button>
+        <button [routerLink]="['/mediaoflist', list.id]" style="background-color: blue;">Ver películas </button>
       </li>
     </ul>
   </div>

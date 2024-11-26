@@ -1,0 +1,35 @@
+<app-nav></app-nav>
+<body>
+  <h2>Nombre de la lista: <b>{{ listName }}</b></h2>
+  <button [routerLink]="['/userList']">Volver</button>
+
+  <!-- Sección de Películas -->
+  <h3>Películas</h3>
+  <div class="row">
+    <div *ngFor="let movie of movieDetails; track: movie.id" class="movie-card col-md-3 mb-4 position-relative">
+      <img 
+        [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" 
+        class="img-fluid" 
+        alt="{{ movie.title }}"
+      />
+      <div class="mt-2 text-center">
+        <p class="text-truncate" style="color: aliceblue;">{{ movie.title }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sección de Series -->
+  <h3>Series</h3>
+  <div class="row">
+    <div *ngFor="let serie of seriesDetails; track: serie.id" class="series-card col-md-3 mb-4 position-relative">
+      <img 
+        [src]="'https://image.tmdb.org/t/p/w500' + serie.poster_path" 
+        class="img-fluid" 
+        alt="{{ serie.name }}"
+      />
+      <div class="mt-2 text-center">
+        <p class="text-truncate" style="color: aliceblue;">{{ serie.name }}</p>
+      </div>
+    </div>
+  </div>
+</body>

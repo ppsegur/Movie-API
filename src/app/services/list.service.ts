@@ -43,11 +43,16 @@ export class ListService {
     );
   }
 
-  // Añadir una película a una lista
-  addMovieToList(listId: number, sessionId: string, movieId: number): Observable<any> {
+  // Añadir una película o serie a una lista
+  addItemToList(
+    listId: number,
+    sessionId: string,
+    mediaId: number,
+    mediaType: 'movie' | 'tv'
+  ): Observable<any> {
     return this.http.post(
       `${API_BASE_URL}/list/${listId}/add_item?api_key=${API_KEY}&session_id=${sessionId}`,
-      { media_id: movieId }
+      { media_id: mediaId, media_type: mediaType }
     );
   }
 
