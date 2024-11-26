@@ -32,20 +32,12 @@
             </iframe>
           </div>-->
           <br>
-            <div>
-              <h3>Añadir a una lista</h3>
-              <div *ngFor="let list of userLists" class="mb-2">
-                <span class="fw-bold">{{ list.name }}</span>
-                <div class="btn-group" role="group">
-                  <button
-                  class="btn btn-secondary"
-                  (click)="selectedListId = list.id; addToSelectedList('tv')"
-                >
-                  Añadir Serie
+          <div>
+            <h3>Añadir a una lista</h3>
+                <button *ngFor="let list of userLists" (click)="selectedListId = list.id; addToSelectedList()">
+                  <span>{{ list.name }} </span>
                 </button>
-                </div>
-              </div>
-            </div>
+          </div>
           <br>
                 @for (item of getSeasons(); track $index) {
                 <div class="card mb-3">

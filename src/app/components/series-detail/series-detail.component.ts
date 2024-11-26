@@ -49,24 +49,21 @@ export class SeriesDetailComponent implements OnInit{
     return this.temporadas;
   }
 
-   // Método para añadir un ítem (película o serie) a una lista seleccionada
-addToSelectedList(mediaType: 'movie' | 'tv'): void {
-  if (this.selectedListId && this.film.id) {
-    this.listService
-      .addItemToList(this.selectedListId, this.sessionId, this.film.id, mediaType)
-      .subscribe({
+  addToSelectedList(): void {
+    if (this.selectedListId && this.seriesId) {
+      this.listService.addSeriesToList(this.selectedListId, this.sessionId, this.seriesId).subscribe({
         next: () => {
-          console.log(`${mediaType === 'movie' ? 'Película' : 'Serie'} añadida a la lista con ID ${this.selectedListId}`);
-          alert(`${mediaType === 'movie' ? 'Película' : 'Serie'} añadida exitosamente a la lista.`);
+          console.log(`Serie añadida a la lista`);
+          alert('Serie añadida exitosamente a la lista.');
         },
         error: (err) => {
-          console.error(`Error añadiendo ${mediaType === 'movie' ? 'película' : 'serie'} a la lista:`, err);
-          alert(`Hubo un error al añadir la ${mediaType === 'movie' ? 'película' : 'serie'} a la lista.`);
+          console.error('Error añadiendo serie a la lista:', err);
+          alert('Hubo un error al añadir la serie a la lista.');
         },
       });
-  } else {
-    alert('Por favor, selecciona una lista.');
+    } else {
+      alert('Por favor, selecciona una lista.');
+    }
   }
-}
-
+  
 }

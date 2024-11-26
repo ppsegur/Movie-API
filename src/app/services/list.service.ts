@@ -43,18 +43,29 @@ export class ListService {
     );
   }
 
-  // Añadir una película o serie a una lista
-  addItemToList(
+  addMovieToList(
     listId: number,
     sessionId: string,
-    mediaId: number,
-    mediaType: 'movie' | 'tv'
+    movieId: number
   ): Observable<any> {
     return this.http.post(
       `${API_BASE_URL}/list/${listId}/add_item?api_key=${API_KEY}&session_id=${sessionId}`,
-      { media_id: mediaId, media_type: mediaType }
+      { media_id: movieId, media_type: 'movie' }
     );
   }
+  
+  addSeriesToList(
+    listId: number,
+    sessionId: string,
+    series_id: number
+  ): Observable<any> {
+    return this.http.post(
+      `${API_BASE_URL}/list/${listId}/add_item?api_key=${API_KEY}&session_id=${sessionId}`,
+      { media_id: series_id }
+    );
+  }
+  
+  
 
   // Eliminar una película de una lista
   removeMovieFromList(listId: number, sessionId: string, movieId: number): Observable<any> {
@@ -66,6 +77,13 @@ export class ListService {
 
   // Obtener películas de una lista específica
   getMoviesFromList(listId: number, sessionId: string): Observable<any> {
+    return this.http.get(
+      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}`
+    );
+  }
+
+  // Obtener películas de una lista específica
+  getSeriesFromList(listId: number, sessionId: string): Observable<any> {
     return this.http.get(
       `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}`
     );

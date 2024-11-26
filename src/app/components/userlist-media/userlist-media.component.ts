@@ -12,7 +12,7 @@ import { SeriesService } from '../../services/series.service';
 export class UserListMediaComponent implements OnInit {
   movies: any[] = []; // Lista de películas
   series: any[] = []; // Lista de series
-  listName: string = '';
+  listName: string = ''; // Nombre de la lista
   sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693';
   movieDetails: any[] = []; // Detalles de películas
   seriesDetails: any[] = []; // Detalles de series
@@ -32,18 +32,26 @@ export class UserListMediaComponent implements OnInit {
   }
 
   loadMediaFromList(listId: number): void {
+    // Cargar películas de la lista
     this.listService.getMoviesFromList(listId, this.sessionId).subscribe({
       next: (data) => {
-        this.movies = data.items.filter((item: any) => item.media_type === 'movie');
-        this.series = data.items.filter((item: any) => item.media_type === 'tv');
+        this.movies = data.items;
         this.listName = data.name;
-
-        this.getMovieDetails(this.movies);
-        this.getSeriesDetails(this.series);
+        this.getMovieDetails(this.movies); // Cargar detalles de las películas
       },
-      error: (err) => console.error('Error cargando medios de la lista:', err),
+      error: (err) => console.error('Error cargando películas de la lista:', err),
+    });
+  
+    // Cargar series de la lista
+    this.listService.getSeriesFromList(listId, this.sessionId).subscribe({
+      next: (data) => {
+        this.series = data.items;
+        this.getSeriesDetails(this.series); // Cargar detalles de las series
+      },
+      error: (err) => console.error('Error al cargar series de la lista:', err),
     });
   }
+  
 
   getMovieDetails(movies: any[]): void {
     const movieRequests = movies.map(movie => {
@@ -68,4 +76,13 @@ export class UserListMediaComponent implements OnInit {
       console.error('Error obteniendo detalles de las series:', err);
     });
   }
+
+  trackByMovieId(index: number, movie: any): number {
+    return movie.id; // Único ID para cada película
+  }
+  
+  trackBySerieId(index: number, serie: any): number {
+    return serie.id; // Único ID para cada serie
+  }
+  
 }
