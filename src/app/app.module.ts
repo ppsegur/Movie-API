@@ -18,6 +18,8 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { RatingModule } from 'primeng/rating';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,13 +36,15 @@ import { ApprovedComponent } from './components/approved/approved.component';
     CharacterListComponent,
     CharacterDetailComponent,
     CharacterItemComponent,
-    ApprovedComponent
+    ApprovedComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    RatingModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync(),
