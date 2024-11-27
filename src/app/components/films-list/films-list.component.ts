@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
 import { FavService } from '../../services/fav.service';
+import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
 
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
-  styleUrl: './films-list.component.css'
+  styleUrl: './films-list.component.css',
+  imports: [NumberFormatPipePipe]
 })
 export class FilmsListComponent implements OnInit {
 
@@ -21,8 +23,13 @@ export class FilmsListComponent implements OnInit {
       this.filmList = resp.results;
     });
   }
+  loadPopularFilms(): void {
+    this.filmService.getPopular().subscribe((resp) => {
+      this.filmList = resp.results;
+    });
+  }
   addToFavorites(film: Films): void {
-    this.favService.addToFavorites(film);
+    this.favService.addToFav(film);
     console.log(`Película "${film.title}" añadida a la watchlist.`);
   }
 
@@ -50,5 +57,9 @@ export class FilmsListComponent implements OnInit {
         return 'red';
     }
   }
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
 
 }
+

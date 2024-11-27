@@ -29,7 +29,7 @@ export class SeriesListComponent implements OnInit {
       ...series,
       genre_ids: series.genres.map(genre => genre.id)
     };
-    this.favService.addToFavorites(serietvnew);
+    this.favService.addSeriesToFavorite(serietvnew);
   }
 
   trackById(index: number, item: { id: number | string }): number | string {
