@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FilmsService } from '../../services/films.service';
+import { Component, OnInit } from '@angular/core';
 import { Films } from '../../models/films.interface';
 import { ActivatedRoute } from '@angular/router';
+import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
-import { Film } from '../../models/lists.interface';
 
 @Component({
-  selector: 'app-movie-detail',
+  selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
   styleUrls: ['./film-detail.component.css'],
 })
@@ -15,48 +14,34 @@ export class FilmDetailComponent implements OnInit {
   videoUrl: string | null = null;
   cast: any[] = [];
   showAllCast: boolean = false;
-  @Input() movieId: number | undefined; // Permite recibir el ID como entrada
-  userLists: any[] = []; // Listas del usuario
-  selectedListId!: number; // ID de la lista seleccionada
-  accountId: number = 21623249; // Valor fijo del servicio
-  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; // Valor fijo del servicio
-  account_object_id = '6731be6bf0cd1a6bfc0ed946';
+  userLists: any[] = [];
+  selectedListId!: number; 
+  accountId: number = 21623249; 
+  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; 
 
   constructor(
-    private filmsService: FilmsService, // Servicio de películas
     private route: ActivatedRoute,
-    private listService: ListService // Servicio de listas
+    private filmsService: FilmsService,
+    private listService: ListService
   ) {}
 
   ngOnInit(): void {
-    // Obtener el ID de la película desde los parámetros de la ruta
-    this.movieId = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.movieId) {
-      this.loadMovieDetail(this.movieId);
-    }
-
-    // Cargar las listas del usuario
-    this.loadUserLists();
-
     const filmId = this.route.snapshot.paramMap.get('id');
     if (filmId) {
-      this.filmsService.getFilmById(+filmId).subscribe((data: Films) => {
-        this.film = data;
-        this.getFilmVideo(+filmId);
-        this.getFilmCredits(+filmId);
-      });
+      this.loadFilmDetails(+filmId);
     }
+
+    this.loadUserLists();
   }
 
-  // Cargar los detalles de la película
-  loadMovieDetail(movieId: number): void {
-    this.filmsService.getFilmById(movieId).subscribe({
-      next: (response) => {
-        this.film = response;
-        console.log('Detalles de la película:', this.film);
+  loadFilmDetails(filmId: number): void {
+    this.filmsService.getFilmById(filmId).subscribe({
+      next: (data: Films) => {
+        this.film = data;
+        this.getFilmVideo(filmId);
+        this.getFilmCredits(filmId);
       },
-      error: (err) =>
-        console.error('Error al cargar los detalles de la película:', err),
+      error: (err) => console.error('Error cargando película:', err),
     });
   }
 
@@ -64,7 +49,7 @@ export class FilmDetailComponent implements OnInit {
     this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
       next: (response) => {
         this.userLists = response.results;
-        console.log('Listas del usuario:', this.userLists); // Para depuración
+        console.log('Listas del usuario:', this.userLists); 
       },
       error: (err) => console.error('Error obteniendo listas:', err),
     });
@@ -72,7 +57,9 @@ export class FilmDetailComponent implements OnInit {
 
   getFilmVideo(id: number): void {
     this.filmsService.getFilmVideos(id).subscribe((data) => {
-      const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
+      const trailer = data.results.find(
+        (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+      );
       if (trailer) {
         this.videoUrl = `https://www.youtube.com/embed/${trailer.key}`;
       }
@@ -90,26 +77,23 @@ export class FilmDetailComponent implements OnInit {
     if (this.film) this.getFilmCredits(this.film.id);
   }
 
-  // Método para agregar la película a una lista seleccionada
+  // Método para añadir una película a una lista
   addToSelectedList(): void {
-    if (!this.selectedListId) {
-      console.error('No se ha seleccionado ninguna lista.');
-      return;
+    if (this.selectedListId && this.film.id) {
+      this.listService
+        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
+        .subscribe({
+          next: () => {
+            console.log(`Película añadida a la lista con ID ${this.selectedListId}`);
+            alert('Película añadida exitosamente a la lista.');
+          },
+          error: (err) => {
+            console.error('Error añadiendo película a la lista:', err);
+            alert('Hubo un error al añadir la película a la lista.');
+          },
+        });
+    } else {
+      alert('Por favor, selecciona una lista.');
     }
-
-    const movieToAdd: Film = {
-      id: this.film.id,
-      media_type: 'movie', // Tipo de media
-      title: this.film.title, // Título de la película
-      poster_path: this.film.poster_path
-    };
-
-    this.listService.addItemToList(movieToAdd, this.selectedListId).subscribe({
-      next: () => {
-        console.log(`Película "${this.film.title}" añadida a la lista ID ${this.selectedListId}`);
-        alert('Película añadida correctamente a la lista.');
-      },
-      error: (err) => console.error('Error al agregar la película a la lista:', err),
-    });
   }
 }
