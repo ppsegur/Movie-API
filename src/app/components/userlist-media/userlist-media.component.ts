@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ListService } from '../../services/list.service';
 import { FilmsService } from '../../services/films.service';
 import { SeriesService } from '../../services/series.service';
+import { Film, TvShow, List } from '../../models/lists.interface';
 
 @Component({
   selector: 'app-userlist-media',
@@ -10,10 +11,9 @@ import { SeriesService } from '../../services/series.service';
   styleUrls: ['./userlist-media.component.css']
 })
 export class UserListMediaComponent implements OnInit {
-  movies: any[] = []; // Lista de películas
-  series: any[] = []; // Lista de series
+  movies: Film[] = []; // Lista de películas
+  series: TvShow[] = []; // Lista de series
   listName: string = ''; // Nombre de la lista
-  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693';
   movieDetails: any[] = []; // Detalles de películas
   seriesDetails: any[] = []; // Detalles de series
 
@@ -27,62 +27,71 @@ export class UserListMediaComponent implements OnInit {
   ngOnInit(): void {
     const listId = this.route.snapshot.paramMap.get('id');
     if (listId) {
-      this.loadMediaFromList(+listId);
+      this.loadListItems(Number(listId));
     }
   }
 
-  loadMediaFromList(listId: number): void {
-    // Cargar películas de la lista
-    this.listService.getMoviesFromList(listId, this.sessionId).subscribe({
-      next: (data) => {
-        this.movies = data.items;
-        this.listName = data.name;
-        this.getMovieDetails(this.movies); // Cargar detalles de las películas
+  // Cargar los elementos de la lista
+  loadListItems(listId: number): void {
+    this.listService.getItemsFromList(listId).subscribe({
+      next: (response) => {
+        this.processListItems(response.results);
       },
-      error: (err) => console.error('Error cargando películas de la lista:', err),
+      error: (err) => console.error('Error al cargar los elementos de la lista:', err),
     });
-  
-    // Cargar series de la lista
-    this.listService.getSeriesFromList(listId, this.sessionId).subscribe({
-      next: (data) => {
-        this.series = data.items;
-        this.getSeriesDetails(this.series); // Cargar detalles de las series
-      },
-      error: (err) => console.error('Error al cargar series de la lista:', err),
+  }
+
+  // Procesar los elementos de la lista
+  processListItems(items: List[]): void {
+    // Mapear los elementos de la lista para agregar la propiedad 'media_type'
+    const mappedItems = items.map(item => {
+      if (item.name) {
+        return { ...item, media_type: 'tv' } as TvShow;
+      } else {
+        return { ...item, media_type: 'movie', title: item.name || item.description } as Film;      }
     });
+
+    // Separar películas y series por su tipo
+    this.movies = mappedItems.filter(item => item.media_type === 'movie') as Film[];
+    this.series = mappedItems.filter(item => item.media_type === 'tv') as TvShow[];
+
+    // Cargar detalles de las películas y series
+    this.loadMovieDetails();
+    this.loadSeriesDetails();
+  }
+
+  // Cargar detalles de películas
+  loadMovieDetails(): void {
+    this.movies.forEach(movie => {
+      this.filmsService.getFilmById(movie.id).subscribe({
+        next: (details) => {
+          this.movieDetails.push(details);
+          console.log('Detalles de película cargados:', details);
+        },
+        error: (err) => console.error('Error al cargar detalles de película:', err),
+      });
+    });
+  }
+
+  // Cargar detalles de series
+  loadSeriesDetails(): void {
+    this.series.forEach(tvShow => {
+      this.seriesService.getSeriesById(tvShow.id).subscribe({
+        next: (details) => {
+          this.seriesDetails.push(details);
+          console.log('Detalles de serie cargados:', details);
+        },
+        error: (err) => console.error('Error al cargar detalles de serie:', err),
+      });
+    });
+  }
+
+  trackByMovieId(index: number, movie: Film): number {
+    return movie.id;
   }
   
-
-  getMovieDetails(movies: any[]): void {
-    const movieRequests = movies.map(movie => {
-      return this.filmsService.getFilmById(movie.id).toPromise();
-    });
-
-    Promise.all(movieRequests).then(results => {
-      this.movieDetails = results.filter(item => item !== null);
-    }).catch(err => {
-      console.error('Error obteniendo detalles de las películas:', err);
-    });
-  }
-
-  getSeriesDetails(series: any[]): void {
-    const seriesRequests = series.map(serie => {
-      return this.seriesService.getSeriesById(serie.id).toPromise();
-    });
-
-    Promise.all(seriesRequests).then(results => {
-      this.seriesDetails = results.filter(item => item !== null);
-    }).catch(err => {
-      console.error('Error obteniendo detalles de las series:', err);
-    });
-  }
-
-  trackByMovieId(index: number, movie: any): number {
-    return movie.id; // Único ID para cada película
-  }
-  
-  trackBySerieId(index: number, serie: any): number {
-    return serie.id; // Único ID para cada serie
+  trackBySerieId(index: number, serie: TvShow): number {
+    return serie.id;
   }
   
 }

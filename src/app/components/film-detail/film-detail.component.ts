@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
 import { ActivatedRoute } from '@angular/router';
-import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
-import { Series } from '../../../models/series.model';
-import { Movie } from '../../models/lists.interface';
+import { Film } from '../../models/lists.interface';
 
 @Component({
-  selector: 'app-film-detail',
+  selector: 'app-movie-detail',
   templateUrl: './film-detail.component.html',
   styleUrls: ['./film-detail.component.css'],
 })
@@ -16,36 +15,48 @@ export class FilmDetailComponent implements OnInit {
   videoUrl: string | null = null;
   cast: any[] = [];
   showAllCast: boolean = false;
-  userLists: any[] = [];
+  @Input() movieId: number | undefined; // Permite recibir el ID como entrada
+  userLists: any[] = []; // Listas del usuario
   selectedListId!: number; // ID de la lista seleccionada
   accountId: number = 21623249; // Valor fijo del servicio
   sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; // Valor fijo del servicio
-  Serie: Series | undefined;
-  Movie: Movie | undefined;
+  account_object_id = '6731be6bf0cd1a6bfc0ed946';
 
   constructor(
+    private filmsService: FilmsService, // Servicio de películas
     private route: ActivatedRoute,
-    private filmsService: FilmsService,
-    private listService: ListService
+    private listService: ListService // Servicio de listas
   ) {}
 
   ngOnInit(): void {
-    const filmId = this.route.snapshot.paramMap.get('id');
-    if (filmId) {
-      this.loadFilmDetails(+filmId);
+    // Obtener el ID de la película desde los parámetros de la ruta
+    this.movieId = Number(this.route.snapshot.paramMap.get('id'));
+    if (this.movieId) {
+      this.loadMovieDetail(this.movieId);
     }
 
+    // Cargar las listas del usuario
     this.loadUserLists();
+
+    const filmId = this.route.snapshot.paramMap.get('id');
+    if (filmId) {
+      this.filmsService.getFilmById(+filmId).subscribe((data: Films) => {
+        this.film = data;
+        this.getFilmVideo(+filmId);
+        this.getFilmCredits(+filmId);
+      });
+    }
   }
 
-  loadFilmDetails(filmId: number): void {
-    this.filmsService.getFilmById(filmId).subscribe({
-      next: (data: Films) => {
-        this.film = data;
-        this.getFilmVideo(filmId);
-        this.getFilmCredits(filmId);
+  // Cargar los detalles de la película
+  loadMovieDetail(movieId: number): void {
+    this.filmsService.getFilmById(movieId).subscribe({
+      next: (response) => {
+        this.film = response;
+        console.log('Detalles de la película:', this.film);
       },
-      error: (err) => console.error('Error cargando película:', err),
+      error: (err) =>
+        console.error('Error al cargar los detalles de la película:', err),
     });
   }
 
@@ -61,9 +72,7 @@ export class FilmDetailComponent implements OnInit {
 
   getFilmVideo(id: number): void {
     this.filmsService.getFilmVideos(id).subscribe((data) => {
-      const trailer = data.results.find(
-        (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-      );
+      const trailer = data.results.find((video: any) => video.type === 'Trailer' && video.site === 'YouTube');
       if (trailer) {
         this.videoUrl = `https://www.youtube.com/embed/${trailer.key}`;
       }
@@ -81,25 +90,26 @@ export class FilmDetailComponent implements OnInit {
     if (this.film) this.getFilmCredits(this.film.id);
   }
 
-   // Método para añadir una película a una lista
-   addToSelectedList(): void {
-    if (this.selectedListId && this.film.id) {
-      this.listService
-        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
-        .subscribe({
-          next: () => {
-            console.log(`Película añadida a la lista con ID ${this.selectedListId}`);
-            alert('Película añadida exitosamente a la lista.');
-          },
-          error: (err) => {
-            console.error('Error añadiendo película a la lista:', err);
-            alert('Hubo un error al añadir la película a la lista.');
-          },
-        });
-    } else {
-      alert('Por favor, selecciona una lista.');
+  // Método para agregar la película a una lista seleccionada
+  addToSelectedList(): void {
+    if (!this.selectedListId) {
+      console.error('No se ha seleccionado ninguna lista.');
+      return;
     }
-  }
-  
 
+    const movieToAdd: Film = {
+      id: this.film.id,
+      media_type: 'movie', // Tipo de media
+      title: this.film.title, // Título de la película
+      poster_path: this.film.poster_path
+    };
+
+    this.listService.addItemToList(movieToAdd, this.selectedListId).subscribe({
+      next: () => {
+        console.log(`Película "${this.film.title}" añadida a la lista ID ${this.selectedListId}`);
+        alert('Película añadida correctamente a la lista.');
+      },
+      error: (err) => console.error('Error al agregar la película a la lista:', err),
+    });
+  }
 }
