@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Films } from '../../models/films.interface';
 import { ActivatedRoute } from '@angular/router';
 import { FilmsService } from '../../services/films.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-film-detail',
@@ -17,7 +18,9 @@ export class FilmDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private filmsService: FilmsService 
+    private filmsService: FilmsService,
+    private location: Location
+
   ) {}
 
   ngOnInit(): void {
@@ -49,5 +52,9 @@ export class FilmDetailComponent implements OnInit {
   toggleShowAllCast(): void {
     this.showAllCast = !this.showAllCast;
     this.getFilmCredits(+this.route.snapshot.paramMap.get('id')!);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
