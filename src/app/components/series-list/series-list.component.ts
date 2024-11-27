@@ -1,27 +1,44 @@
 import { Component, OnInit } from '@angular/core';
 import { SeriesService } from '../../services/series.service';
 import { Series } from '../../../models/series.model';
+import { WatchlistService } from '../../services/watch-list.service';
 
 @Component({
   selector: 'app-series-list',
   templateUrl: './series-list.component.html',
-  styleUrl: './series-list.component.css'
+  styleUrls: ['./series-list.component.css']
 })
 export class SeriesListComponent implements OnInit {
-
-  constructor(private seriesService: SeriesService) { }
   listadoSeries: Series[] = [];
 
+  constructor(private seriesService: SeriesService,
+    private watchlistService: WatchlistService
+
+  ) { }
+
   ngOnInit(): void {
-    this.loadSeriesList();
+    this.seriesService.getSeries().subscribe((data: any) => {
+      this.listadoSeries = data;
+    });
+    this.loadPopularSeries();
   }
 
-  loadSeriesList() {
-    this.seriesService.getSeries().subscribe(respuesta => {
-      this.listadoSeries = respuesta.results;
+  loadPopularSeries(): void {
+    this.seriesService.getSeries().subscribe((resp) => {
+      this.listadoSeries = resp.results;
     });
   }
 
+  addSeriesToWatchlist(series: Series): void {
+    this.watchlistService.addSeriesToWatchlistTMDB(series);
+  }
 
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
+  }
 
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
+  
 }

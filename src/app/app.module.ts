@@ -18,6 +18,7 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ApprovedComponent } from './components/approved/approved.component';
     CharacterListComponent,
     CharacterDetailComponent,
     CharacterItemComponent,
-    ApprovedComponent
+    ApprovedComponent,
+    WatchListComponent
 
   ],
   imports: [
