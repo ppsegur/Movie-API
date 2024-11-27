@@ -1,6 +1,6 @@
 body {
   height: auto;
-  background-color: #001529; 
+  background: linear-gradient(to bottom, #0D2185, #03081F);
 }
 
 .watchlist-container {

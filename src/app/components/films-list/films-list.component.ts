@@ -52,4 +52,8 @@ export class FilmsListComponent implements OnInit {
       return 'red';
     }
   }
+
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
 }
