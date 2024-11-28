@@ -33,6 +33,7 @@ export class FilmsListComponent implements OnInit {
     console.log(`Película "${film.title}" añadida a la watchlist.`);
   }
 
+
   trackById(index: number, item: { id: number | string }): number | string {
     return item.id;
   }
@@ -60,7 +61,9 @@ export class FilmsListComponent implements OnInit {
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true';
   }
-  
+
+
+    
 
 }
 

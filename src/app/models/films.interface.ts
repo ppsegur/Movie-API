@@ -6,7 +6,6 @@ export interface FilmsListResponse {
   }
   
   export interface Films {
-    isFavorite: boolean
     adult: boolean
     backdrop_path: string
     genre_ids: number[]

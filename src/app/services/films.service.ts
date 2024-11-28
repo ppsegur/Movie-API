@@ -13,6 +13,9 @@ export class FilmsService {
 
   constructor(private http: HttpClient) {}
 
+  private favorites: Films[] = []; // Aquí almacenaremos las películas favoritas
+
+
   getPopular(): Observable<FilmsListResponse> {
     return this.http.get<FilmsListResponse>(
       `${API_URL}/movie/popular?api_key=${API_KEY}`
@@ -32,4 +35,22 @@ export class FilmsService {
   getFilmCredits(id: number): Observable<any> {
     return this.http.get<any>(`${API_URL}/movie/${id}/credits?api_key=${API_KEY}`);
   }
+    // Métodos para favoritos
+    addToFavorites(film: Films): void {
+      if (!this.isFavorite(film.id)) {
+        this.favorites.push(film);
+      }
+    }
+  
+    removeFromFavorites(film: Films): void {
+      this.favorites = this.favorites.filter(fav => fav.id !== film.id);
+    }
+  
+    isFavorite(filmId: number): boolean {
+      return this.favorites.some(fav => fav.id === filmId);
+    }
+  
+    getFavorites(): Films[] {
+      return this.favorites;
+    }
 }

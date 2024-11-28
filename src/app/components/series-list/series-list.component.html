@@ -41,8 +41,15 @@
                     <p class="card-text"><i class="bi bi-calendar"></i> {{item.first_air_date}}</p>
                     <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
                 </div>
-            <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>                
-            <button (click)="addToFavorites(item)"><i class="bi bi-heart"></i></button>
+            <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>        
+         <!-- Contenedor del botón de favoritos -->
+    <div class="d-flex">
+        <button 
+            class="bi bi-heart btn custom-btn btn-sm d-flex align-items-center" 
+           
+            (click)="addToFavorites(item)">
+        </button>
+    </div>
         </div>
     </a>
     }
