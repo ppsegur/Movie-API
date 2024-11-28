@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
-import { Films } from '../../models/films.interface';
 import { WatchlistService } from '../../services/watch-list.service';
-import { Genre } from '../../models/genres.interface';
 import { GenresService } from '../../services/genres.service';
+import { Films } from '../../models/films.interface';
+import { Options } from '@angular-slider/ngx-slider';
+import { Genre } from '../../models/genres.interface';
 
 @Component({
   selector: 'app-films-list',
@@ -21,6 +22,14 @@ export class FilmsListComponent implements OnInit {
 
   generos: Genre[] = [];
 
+  ratingOptions: Options = {
+    floor: 0,
+    ceil: 10,
+    step: 0.1
+  };
+
+  successMessage: string = '';
+
   constructor(
     private filmService: FilmsService,
     private watchlistService: WatchlistService,
@@ -33,9 +42,9 @@ export class FilmsListComponent implements OnInit {
   }
 
   cargarGeneros() {
-      this.genresService.getGenres().subscribe(response => {
-        this.generos = response.genres;
-      });
+    this.genresService.getGenres().subscribe(response => {
+      this.generos = response.genres;
+    });
   }
 
   loadPopularFilms(): void {
@@ -45,13 +54,56 @@ export class FilmsListComponent implements OnInit {
     });
   }
 
-  addToWatchlist(film: Films): void {
-    this.watchlistService.addToWatchlistTMDB(film);
-    console.log(`Película "${film.title}" añadida a la watchlist.`);
+  applyFilters(): void {
+    this.filteredFilmList = this.filmList.filter(film => {
+      const matchesGenres = this.selectedGenres.length ? this.selectedGenres.some(genre => film.genre_ids.includes(genre)) : true;
+      const matchesReleaseDate = this.releaseDate ? film.release_date === this.releaseDate : true;
+      const matchesRating = film.vote_average >= this.minRating && film.vote_average <= this.maxRating;
+      return matchesGenres && matchesReleaseDate && matchesRating;
+    });
+  }
+
+  toggleGenre(genreId: number): void {
+    const index = this.selectedGenres.indexOf(genreId);
+    if (index === -1) {
+      this.selectedGenres.push(genreId);
+    } else {
+      this.selectedGenres.splice(index, 1);
+    }
+    this.applyFilters();
+  }
+
+  isSelectedGenre(genreId: number): boolean {
+    return this.selectedGenres.includes(genreId);
+  }
+
+  setReleaseDate(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement?.value) {
+      this.releaseDate = inputElement.value;
+      this.applyFilters();
+    }
   }
 
   trackById(index: number, item: { id: number | string }): number | string {
     return item.id;
+  }
+
+  isLoggedIn(): boolean {
+    return localStorage.getItem('logged_in') === 'true';
+  }
+
+  addToWatchlist(film: Films): void {
+    this.watchlistService.addToWatchlistTMDB(film);
+    this.showSuccessMessage(`Película "${film.title}" añadida a la watchlist.`);
+    console.log(`Película "${film.title}" añadida a la watchlist.`);
+  }
+
+  showSuccessMessage(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 2000);
   }
 
   getStrokeDashoffset(voteAverage: number): number {
@@ -70,47 +122,5 @@ export class FilmsListComponent implements OnInit {
     } else {
       return 'red';
     }
-  }
-
-  isLoggedIn(): boolean {
-    return localStorage.getItem('logged_in') === 'true';
-  }
-
-  toggleGenre(genreId: number | ''): void {
-    if (genreId === '') {
-      this.selectedGenres = [];
-    } else {
-      const index = this.selectedGenres.indexOf(genreId);
-      if (index === -1) {
-        this.selectedGenres.push(genreId);
-      } else {
-        this.selectedGenres.splice(index, 1);
-      }
-    }
-
-    this.filterFilms();
-  }
-
-  isSelectedGenre(genreId: number | ''): boolean {
-    if (genreId === '') {
-      return this.selectedGenres.length === 0;
-    }
-    return this.selectedGenres.includes(genreId);
-  }
-
-  filterFilms(): void {
-    this.filteredFilmList = this.filmList.filter((film) => {
-      const matchesGenres =
-        this.selectedGenres.length === 0 ||
-        this.selectedGenres.some((genreId) =>
-          film.genre_ids.includes(genreId)
-        );
-      const matchesRating =
-        film.vote_average >= this.minRating && film.vote_average <= this.maxRating;
-      const matchesReleaseDate =
-        this.releaseDate === '' || film.release_date === this.releaseDate;
-
-      return matchesGenres && matchesRating && matchesReleaseDate;
-    });
   }
 }

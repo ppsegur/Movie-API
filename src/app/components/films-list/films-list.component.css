@@ -179,3 +179,54 @@ body {
     padding: 0.5rem;
     margin-top: 0.5rem;
 }
+
+.genres-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.genre-btn {
+    background-color: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 20px;
+    color: #343a40;
+    font-size: 14px;
+    padding: 8px 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.genre-btn:hover {
+    background-color: #17a2b8;
+    color: #fff;
+    border-color: #17a2b8;
+}  
+
+.genre-btn.selected {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #0056b3;
+}
+
+.fixed-alert {
+    background-color: green;
+    color: white;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+}
+
+.fixed-alert2 {
+    background-color: rgb(155, 5, 5);
+    color: white;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: auto;
+}

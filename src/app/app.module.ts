@@ -8,7 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
 import { AppComponent } from './app.component';
 import { SeriesListComponent } from './components/series-list/series-list.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbSlide } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
@@ -20,6 +20,7 @@ import { CharacterItemComponent } from './components/character-item/character-it
 import { ApprovedComponent } from './components/approved/approved.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
 import { FormsModule } from '@angular/forms';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    NgxSliderModule
   ],
   providers: [
     provideAnimationsAsync(),

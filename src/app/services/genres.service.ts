@@ -16,7 +16,7 @@ export class GenresService {
   getGenres(): Observable<GenresListResponse> {
     return this.http.get<GenresListResponse>(`${API_BASE_URL}/genre/movie/list` ,{
       headers: {
-        Authorization: `Bearer localStorage.getItem('token')`
+        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwNWUxN2VhNjhiMGEyOWM5MmRlMjNmNzZjYzFjZmYyMiIsIm5iZiI6MTczMjczMTYzNC43OTgyNDUyLCJzdWIiOiI2NzMxYmUxZjYxNjI2YWMxMDZiZTY4NDciLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7X32wd2qwJZP4yvXdn1lEXO_U1R-L7FuDMiqVWrdCSs`
       }
     });
   }
