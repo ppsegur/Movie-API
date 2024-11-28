@@ -17,18 +17,19 @@
           <h2>Filtros</h2>
           <div class="filtros">
             <h3>Géneros</h3>
-            <div class="genres">
-              <button (click)="selectedGenre = ''; filterFilms()">Todos</button>
-              <button (click)="selectedGenre = '28'; filterFilms()">Acción</button>
-              <button (click)="selectedGenre = '35'; filterFilms()">Comedia</button>
-              <button (click)="selectedGenre = '27'; filterFilms()">Horror</button>
-              <button (click)="selectedGenre = '14'; filterFilms()">Fantasía</button>
-              <button (click)="selectedGenre = '12'; filterFilms()">Aventura</button>
-              <button (click)="selectedGenre = '80'; filterFilms()">Crimen</button>
-              <button (click)="selectedGenre = '16'; filterFilms()">Anime</button>
-              <button (click)="selectedGenre = '10749'; filterFilms()">Romance</button>
-              <button (click)="selectedGenre = '878'; filterFilms()">SCI-FI</button>
-            </div>
+            @for (genero of generos; track genero.id) {
+              <div>
+                <input 
+                  type="checkbox" 
+                  id="genero{{genero.id}}" 
+                  [value]="genero.id"
+                  (change)="toggleGenre(genero.id)"
+                  [checked]="isSelectedGenre(genero.id)"
+                />
+                <label for="genero{{genero.id}}">{{genero.name}}</label>
+              </div>
+            }
+
             <h3>Puntuación</h3>
             <div class="rating">
               <input
