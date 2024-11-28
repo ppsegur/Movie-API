@@ -20,6 +20,7 @@ import { CharacterItemComponent } from './components/character-item/character-it
 import { ApprovedComponent } from './components/approved/approved.component';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
+import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FormsModule } from '@angular/forms';
     CharacterDetailComponent,
     CharacterItemComponent,
     ApprovedComponent,
+    RatingComponent,
 
   ],
   imports: [

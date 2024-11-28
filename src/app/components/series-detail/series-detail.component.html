@@ -20,8 +20,10 @@
         <p *ngIf="series.overview == ''" style="color: red;"><strong style="color: white;">Overview:</strong>
           Descripción no disponible
         </p>
-        <p-rating [(ngModel)]="series.vote_average" [cancel]="false"></p-rating>
-
+        <hr>
+        <p><strong>Añade tu propia valoración: </strong><app-rating></app-rating></p>
+        <hr>
+        
         @for (item of getSeasons(); track $index) {
         <div class="card mb-3">
           <div class="card-header">
