@@ -10,6 +10,12 @@ import { WatchlistService } from '../../services/watch-list.service';
 })
 export class FilmsListComponent implements OnInit {
   filmList: Films[] = [];
+  filteredFilmList: Films[] = [];
+  
+  selectedGenre: string = '';
+  minRating: number = 0;
+  maxRating: number = 10;
+  releaseDate: string = '';
 
   constructor(
     private filmService: FilmsService,
@@ -23,6 +29,7 @@ export class FilmsListComponent implements OnInit {
   loadPopularFilms(): void {
     this.filmService.getPopular().subscribe((resp) => {
       this.filmList = resp.results;
+      this.filteredFilmList = [...this.filmList]; 
     });
   }
 
@@ -55,5 +62,15 @@ export class FilmsListComponent implements OnInit {
 
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true';
+  }
+
+  filterFilms(): void {
+    this.filteredFilmList = this.filmList.filter((film) => {
+      const matchesGenre = this.selectedGenre === '' || film.genre_ids.includes(parseInt(this.selectedGenre));
+      const matchesRating = film.vote_average >= this.minRating && film.vote_average <= this.maxRating;
+      const matchesReleaseDate = this.releaseDate === '' || film.release_date === this.releaseDate;
+
+      return matchesGenre && matchesRating && matchesReleaseDate;
+    });
   }
 }
