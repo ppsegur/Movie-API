@@ -29,6 +29,7 @@ export class FilmsListComponent implements OnInit {
   };
 
   successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(
     private filmService: FilmsService,
@@ -39,7 +40,13 @@ export class FilmsListComponent implements OnInit {
   ngOnInit(): void {
     this.loadPopularFilms();
     this.cargarGeneros();
+    this.loadWatchlist(); // Cargar la watchlist
   }
+  
+  loadWatchlist(): void {
+    this.watchlistService.getLocalMovieWatchlist().subscribe();
+  }
+  
 
   cargarGeneros() {
     this.genresService.getGenres().subscribe(response => {
@@ -94,11 +101,26 @@ export class FilmsListComponent implements OnInit {
   }
 
   addToWatchlist(film: Films): void {
+    if (this.watchlistService.isFilmInWatchlist(film.id)) {
+      this.showErrorMessage(`La película "${film.title}" ya está en la watchlist.`);
+      console.log(`La película "${film.title}" ya está en la watchlist.`);
+      return;
+    }
+  
     this.watchlistService.addToWatchlistTMDB(film);
     this.showSuccessMessage(`Película "${film.title}" añadida a la watchlist.`);
     console.log(`Película "${film.title}" añadida a la watchlist.`);
   }
+  
 
+  showErrorMessage(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 2000);
+  }
+  
+  
   showSuccessMessage(message: string): void {
     this.successMessage = message;
     setTimeout(() => {

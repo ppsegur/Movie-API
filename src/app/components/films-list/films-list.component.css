@@ -221,12 +221,7 @@ body {
     width: auto;
 }
 
-.fixed-alert2 {
-    background-color: rgb(155, 5, 5);
-    color: white;
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1050;
-    width: auto;
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
 }

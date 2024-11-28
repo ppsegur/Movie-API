@@ -25,14 +25,18 @@ export class WatchlistService {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     const url = `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`;
-
+  
     return this.http.get<WatchListMoviesListResponse>(url).pipe(
+      tap((response) => {
+        this.localWatchlist = response;
+      }),
       catchError((error) => {
         console.error('Error al obtener la Watchlist de películas:', error);
         return throwError(() => new Error('No se pudo cargar la Watchlist de películas. Intenta más tarde.'));
       })
     );
   }
+  
 
   getLocalSeriesWatchlist(): Observable<WatchListMoviesListResponse> {
     const sessionId = localStorage.getItem('session_id');
@@ -58,7 +62,7 @@ export class WatchlistService {
     const body = {
       media_id: film.id,
       media_type: 'movie',
-      watchlist: true
+      watchlist: true,
     };
   
     this.http.post<any>(
@@ -67,12 +71,14 @@ export class WatchlistService {
     ).subscribe(
       (response) => {
         console.log('Película añadida con éxito:', response);
+        this.getLocalMovieWatchlist().subscribe(); 
       },
       (error) => {
         console.error('Error al añadir la película:', error);
       }
     );
   }
+  
   
   addSeriesToWatchlistTMDB(series: Series): void {
     const sessionId = localStorage.getItem('session_id');
@@ -170,5 +176,11 @@ export class WatchlistService {
       })
     );
   }
+
+  isFilmInWatchlist(filmId: number): boolean {
+    // Asegúrate de que la watchlist esté cargada antes de realizar la comprobación
+    return this.localWatchlist.results.some((movie) => movie.id === filmId);
+  }
+  
   
 }
