@@ -60,6 +60,7 @@ export class FilmsListComponent implements OnInit {
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true';
   }
+  
 
 }
 

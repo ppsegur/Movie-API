@@ -42,7 +42,7 @@
                     <p class="card-text"><i class="bi bi-eye"></i> {{item.popularity | numberFormatPipe}}</p>
                 </div>
             <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>                
-            <button (click)="addToFavorites(item)">Add to favorites</button>
+            <button (click)="addToFavorites(item)"><i class="bi bi-heart"></i></button>
         </div>
     </a>
     }

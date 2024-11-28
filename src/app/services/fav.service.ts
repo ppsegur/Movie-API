@@ -27,7 +27,7 @@ export class FavService {
   getLocalMovieFav(): Observable<favoritosResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `${API_BASE_URL}/account/${accountId}/favorite/movie?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`;
 
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -108,7 +108,7 @@ export class FavService {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
   
-    const url = `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`;
   
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -129,7 +129,7 @@ export class FavService {
     const body = {
       media_id: filmId,
       media_type: 'movie',
-      watchlist: false
+      favorite: false
     };
 
     return this.http.post<any>(
@@ -157,7 +157,7 @@ export class FavService {
     const body = {
       media_id: seriesId,
       media_type: 'tv',
-      watchlist: false
+      favorite: false
     };
 
     return this.http.post<any>(

@@ -6,6 +6,7 @@ export interface FilmsListResponse {
   }
   
   export interface Films {
+    isFavorite: boolean
     adult: boolean
     backdrop_path: string
     genre_ids: number[]
@@ -20,5 +21,6 @@ export interface FilmsListResponse {
     video: boolean
     vote_average: number
     vote_count: number
+
   }
   
