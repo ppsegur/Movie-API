@@ -8,7 +8,7 @@ import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
   styleUrl: './films-list.component.css',
-  imports: [NumberFormatPipePipe]
+ 
 })
 export class FilmsListComponent implements OnInit {
 

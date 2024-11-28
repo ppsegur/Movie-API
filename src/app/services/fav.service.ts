@@ -7,7 +7,7 @@ import { Films } from '../models/films.interface';
 import { Series } from '../../models/series.model';
 
   /* Definición de la clave de la API y la URL base de la API */ 
-const API_KEY = '433d2c486572afb242c6fe7c1ddc6771';
+const API_KEY = '81819d9750b41c41923effa77112f27a';
 const API_BASE_URL = 'https://api.themoviedb.org/3';
 
 @Injectable({
@@ -27,7 +27,7 @@ export class FavService {
   getLocalMovieFav(): Observable<favoritosResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `https://api.themoviedb.org/3/account/{account_id}/favorite/movie?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${API_BASE_URL}/account/${accountId}/favorite/movie?api_key=${API_KEY}&session_id=${sessionId}`;
 
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -88,7 +88,7 @@ export class FavService {
     const body = {
       media_id: series.id,
       media_type: 'tv',
-      watchlist: true
+      favorite: true
     };
   
     this.http.post<any>(
@@ -112,7 +112,7 @@ export class FavService {
   
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
-        console.error('Error al obtener la Watchlist:', error);
+        console.error('Error al obtener la Listad de favoritos:', error);
         return throwError(() => new Error('No se pudo cargar la lista de favoritos . Intenta más tarde.'));
       })
     );

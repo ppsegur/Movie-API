@@ -25,11 +25,7 @@ export class SeriesListComponent implements OnInit {
     });
   }
   addToFavorites(series: Series): void {
-    const serietvnew = {
-      ...series,
-      genre_ids: series.genres.map(genre => genre.id)
-    };
-    this.favService.addSeriesToFavorite(serietvnew);
+    this.favService.addSeriesToFavorite(series);
   }
 
   trackById(index: number, item: { id: number | string }): number | string {
