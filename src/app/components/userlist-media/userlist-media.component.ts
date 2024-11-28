@@ -14,6 +14,7 @@ export class UserListMediaComponent implements OnInit {
   movies: any[] = [];
   listName: string = '';
   listId!: number;
+  description: string = '';
   sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; 
   movieDetails: any[] = []; 
 
@@ -36,6 +37,7 @@ export class UserListMediaComponent implements OnInit {
       next: (data) => {
         this.movies = data.items;
         this.listName = data.name;
+        this.description = data.description;
 
         this.getMovieDetails(this.movies);
       },

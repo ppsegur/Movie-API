@@ -85,11 +85,9 @@ export class FilmDetailComponent implements OnInit {
         .subscribe({
           next: () => {
             console.log(`Película añadida a la lista con ID ${this.selectedListId}`);
-            alert('Película añadida exitosamente a la lista.');
           },
           error: (err) => {
             console.error('Error añadiendo película a la lista:', err);
-            alert('Hubo un error al añadir la película a la lista.');
           },
         });
     } else {

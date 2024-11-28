@@ -34,12 +34,18 @@
       </div>
     </div>
     <br>
-    <div>
-      <h3>Añadir a una lista</h3>
-          <button *ngFor="let list of userLists" (click)="selectedListId = list.id; addToSelectedList()">
-            <span>{{ list.name }} </span>
-          </button>
+    <div class="add-to-list-container">
+      <h3 class="section-title">Añadir a una lista</h3>
+      <div class="list-buttons">
+        <button *ngFor="let list of userLists" 
+                class="btn-list" 
+                (click)="selectedListId = list.id; addToSelectedList()">
+          <span>{{ list.name }}</span>
+        </button>
+      </div>
     </div>
+    
+    
     <br>
     @if (cast.length) {
       <div>
