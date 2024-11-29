@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
+import { Films } from '../../models/films.interface';
+import { FavService } from '../../services/fav.service';
+import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
 import { WatchlistService } from '../../services/watch-list.service';
 import { GenresService } from '../../services/genres.service';
-import { Films } from '../../models/films.interface';
 import { Options } from '@angular-slider/ngx-slider';
 import { Genre } from '../../models/genres.interface';
+
 
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
   styleUrls: ['./films-list.component.css'],
 })
+
 export class FilmsListComponent implements OnInit {
   filmList: Films[] = [];
   filteredFilmList: Films[] = [];
@@ -34,7 +38,8 @@ export class FilmsListComponent implements OnInit {
   constructor(
     private filmService: FilmsService,
     private watchlistService: WatchlistService,
-    private genresService: GenresService
+    private genresService: GenresService,
+    private favService: FavService
   ) {}
 
   ngOnInit(): void {
@@ -109,10 +114,13 @@ export class FilmsListComponent implements OnInit {
   
     this.watchlistService.addToWatchlistTMDB(film);
     this.showSuccessMessage(`Película "${film.title}" añadida a la watchlist.`);
+  }  
+   
+  addToFavorites(film: Films): void {
+    this.favService.addToFav(film);
     console.log(`Película "${film.title}" añadida a la watchlist.`);
   }
   
-
   showErrorMessage(message: string): void {
     this.errorMessage = message;
     setTimeout(() => {
@@ -127,7 +135,7 @@ export class FilmsListComponent implements OnInit {
       this.successMessage = '';
     }, 2000);
   }
-
+ 
   getStrokeDashoffset(voteAverage: number): number {
     const maxDashArray = 440;
     const normalizedVote = Math.min(Math.max(voteAverage, 0), 10);

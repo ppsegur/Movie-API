@@ -9,24 +9,30 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
+import { CreateListComponent } from './components/create-list/create-list.component';
+import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
+import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
-
 
 const routes: Routes = [
   { path: 'filmList', component: FilmsListComponent },
-  { path: 'film-detail/:id', component: FilmDetailComponent },
-  { path: 'characters/character-detail/:id', component: CharacterDetailComponent },
-  { path: 'character-item/:id', component: CharacterItemComponent },
-  { path: 'characters', component: CharacterListComponent },
-  { path: 'seriesList', component: SeriesListComponent },
-  { path: 'seriesDetail/:id', component: SeriesDetailComponent },
+  { path: 'film-detail/:id', component: FilmDetailComponent }, 
+  { path: 'characters/character-detail/:id', component: CharacterDetailComponent},
+  { path: 'character-item/:id', component: CharacterItemComponent},
+  { path: 'characters', component: CharacterListComponent},
+  { path: 'seriesList', component: SeriesListComponent},
+  { path: 'seriesDetail/:id', component: SeriesDetailComponent},
+  {path: 'userList', component: ListUserlistsComponent},
+  {path: 'createList', component: CreateListComponent},
+  { path: 'mediaoflist/:id', component: UserListMediaComponent},
   { path: 'approved', component: ApprovedComponent },
-  { path: 'home', component: HomeComponent },
+  {path: 'favorite', component: FavlistComponent},
+  {path: 'home', component: HomeComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },   
   { path: 'watchlist', component: WatchListComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },  
-  { path: '**', redirectTo: '/home' }            
-];
-
+  { path: '**', redirectTo: '/home' }  
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

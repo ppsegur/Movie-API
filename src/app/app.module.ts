@@ -18,6 +18,11 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateListComponent } from './components/create-list/create-list.component';
+import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
+import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
 import { FormsModule } from '@angular/forms';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
@@ -38,6 +43,10 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     CharacterDetailComponent,
     CharacterItemComponent,
     ApprovedComponent,
+    ListUserlistsComponent,
+    UserListMediaComponent,
+    CreateListComponent,
+    FavlistComponent,
     WatchListComponent
 
   ],
@@ -46,7 +55,8 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    NgxSliderModule
+    NgxSliderModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync(),

@@ -11,6 +11,9 @@ import { environmentsKeys } from '../../environments/environments-keys';
 export class FilmsService {
   constructor(private http: HttpClient) {}
 
+  private favorites: Films[] = []; // Aquí almacenaremos las películas favoritas
+
+
   getPopular(): Observable<FilmsListResponse> {
     return this.http.get<FilmsListResponse>(`${environmentsKeys.API_URL}/movie/popular?api_key=${environmentsKeys.API_KEY}`);
   }
@@ -26,4 +29,21 @@ export class FilmsService {
   getFilmCredits(id: number): Observable<any> {
     return this.http.get<any>(`${environmentsKeys.API_URL}/movie/${id}/credits?api_key=${environmentsKeys.API_KEY}`);
   }
+
+    // Métodos para favoritos
+    addToFavorites(film: Films): void {
+   
+        this.favorites.push(film);
+      
+    }
+  
+    removeFromFavorites(film: Films): void {
+      this.favorites = this.favorites.filter(fav => fav.id !== film.id);
+    }
+
+  
+    getFavorites(): Films[] {
+      return this.favorites;
+    }
 }
+

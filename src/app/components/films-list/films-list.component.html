@@ -29,7 +29,6 @@
               </button>
             }
           </div>
-          
   
           <h3>Puntuación</h3>
           <div class="rating">
@@ -45,44 +44,46 @@
           <h2>Películas</h2>
           <hr style="height: 2px;">
         </div>
-        
-  
-        <div class="row">
-          @for(film of filteredFilmList; track film.id){
-          <div class="movie-card col-md-3 mb-4 position-relative">
-            <a [routerLink]="['/film-detail', film.id]">
-              <img [src]="'https://image.tmdb.org/t/p/w500' + film.poster_path" class="img-fluid" alt="{{ film.title }}">
-            </a>
-            <div class="mt-2 text-center">
-              <p class="text-truncate">{{ film.title }}</p>
-              <div class="card-body text-center">
-                <div class="d-flex justify-content-between">
-                  <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
-                    <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
-                    {{film.release_date}}
-                  </button>
-                  <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
-                    <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
-                    {{ film.popularity | numberFormatPipe }}
-                  </button>
+    
+          <div class="row">
+            @for(film of filmList; track film.id){
+              <div class="movie-card col-md-3 mb-4 position-relative">
+                <a [routerLink]="['/film-detail', film.id]">
+                  <img [src]="'https://image.tmdb.org/t/p/w500' + film.poster_path" class="img-fluid" alt="{{ film.title }}">
+                </a>
+                <div class="mt-2 text-center">
+                  <p class="text-truncate">{{ film.title }}</p>
+                  <div class="card-body text-center">
+                    <div class="d-flex justify-content-between">
+                      <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                        <i class="bi bi-calendar me-2" style="font-size: 1.2rem;"></i>
+                        {{film.release_date}}
+                      </button>
+                      <button type="button" class="btn custom-btn btn-sm d-flex align-items-center">
+                        <i class="bi bi-eye-fill me-2" style="font-size: 1.2rem;"></i>
+                        {{ film.popularity | numberFormatPipe }}
+                      </button>
+                    </div>
+                  </div>
+                  <div class="rating-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="60" height="60">
+                      <circle cx="60" cy="60" r="60" fill="black" />
+                      <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
+                      <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
+                          [attr.stroke-dasharray]="440" 
+                          [attr.stroke-dashoffset]="getStrokeDashoffset(film.vote_average)"
+                          [attr.stroke]="getCircleColor(film.vote_average)">
+                      </circle>
+                      <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5" class="rating-text">{{film.vote_average.toFixed(1)}}</text>
+                    </svg>        
+                  </div>
+
+                  @if (isLoggedIn()) {
+                    <div class="d-flex">
+                    <button class="bi bi-bookmark-plus btn custom-btn btn-sm d-flex align-items-center" (click)="addToWatchlist(film)"></button>
+                    <button class="bi bi-heart  btn custom-btn btn-sm d-flex align-items-center " (click)="addToFavorites(film)"></button>
                 </div>
-              </div>
-              <div class="rating-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="60" height="60">
-                  <circle cx="60" cy="60" r="60" fill="black" />
-                  <circle class="track" cx="60" cy="60" r="55" stroke-width="10" fill="none" stroke="rgba(160, 215, 231, 0.85)"/>
-                  <circle class="filled" cx="60" cy="60" r="55" stroke-width="10" fill="none"
-                      [attr.stroke-dasharray]="440" 
-                      [attr.stroke-dashoffset]="getStrokeDashoffset(film.vote_average)"
-                      [attr.stroke]="getCircleColor(film.vote_average)">
-                  </circle>
-                  <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5" class="rating-text">{{film.vote_average.toFixed(1)}}</text>
-                </svg>        
-              </div>
-              <button *ngIf="isLoggedIn()" class="bi bi-bookmark-plus btn custom-btn btn-sm d-flex align-items-center" (click)="addToWatchlist(film)"></button>
-            </div>
-          </div>
-          }
+                  }
         </div>
       </div>
     </div>

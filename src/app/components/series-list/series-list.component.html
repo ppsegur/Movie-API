@@ -32,6 +32,7 @@
 
         <!-- Listado de series -->¡
         <div class="actors-list">
+
         <div *ngFor="let item of listadoSeries; trackBy: trackById" class="actor-card">
             <a [routerLink]="['/seriesDetail', item.id]">
             <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.name">
@@ -46,9 +47,11 @@
                 <div class="d-flex">
                     <button class="bi bi-bookmark-plus card-text" (click)="addSeriesToWatchlist(item)">
                     </button>
+                    <button class="bi bi-heart card-text"  (click)="addToFavorites(item)">
+                    </button>
                 </div>
-                
             }
+
         </div>
         </div>
     </main>
