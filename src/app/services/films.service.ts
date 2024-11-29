@@ -33,9 +33,9 @@ export class FilmsService {
 
     // Métodos para favoritos
     addToFavorites(film: Films): void {
-      if (!this.isFavorite(film.id)) {
+   
         this.favorites.push(film);
-      }
+      
     }
   
     removeFromFavorites(film: Films): void {

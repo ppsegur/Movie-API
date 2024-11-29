@@ -39,7 +39,7 @@ import { FormsModule } from '@angular/forms';
     CharacterDetailComponent,
     CharacterItemComponent,
     ApprovedComponent,
-    FavlistComponent
+    FavlistComponent,
     WatchListComponent
 
 

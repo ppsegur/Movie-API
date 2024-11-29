@@ -38,15 +38,13 @@ export class SeriesListComponent implements OnInit {
 
   trackById(index: number, item: { id: number | string }): number | string {
     return item.id;
-
+  }
   addSeriesToWatchlist(series: Series): void {
     this.watchlistService.addSeriesToWatchlistTMDB(series);
 
   }
 
-  trackById(index: number, item: { id: number | string }): number | string {
-    return item.id;
-  }
+
 
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true';
