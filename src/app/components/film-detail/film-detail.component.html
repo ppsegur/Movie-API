@@ -31,11 +31,25 @@
         }
       </div>
     </div>
+    <br>
+    <div class="add-to-list-container">
+      <h3 class="section-title">Añadir a una lista</h3>
+      <div class="list-buttons">
+        <button *ngFor="let list of userLists" 
+                class="btn-list" 
+                (click)="selectedListId = list.id; addToSelectedList()">
+          <span>{{ list.name }}</span>
+        </button>
+      </div>
+    </div>
+    
+    
+    <br>
     @if (cast.length) {
       <div>
         <h3>Cast</h3>
         <div class="row">
-          @for(actor of cast; track actor.id){
+          @for(actor of cast; track actor.id) {
           <div class="col-md-3">
             <div class="card mb-3 actor-card">
               <div class="image-container">
@@ -59,7 +73,7 @@
           }
         </div>
         <div class="text-end mt-3"> 
-          <button class="show-all-cast-btn" (click)="toggleShowAllCast()">
+          <button class="show-all-cast-btn btn btn-link" (click)="toggleShowAllCast()">
             {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
           </button>
         </div>
