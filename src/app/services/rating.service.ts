@@ -31,9 +31,7 @@ export class RatingService {
     //Guardar la serie que se ha valorado en listadoSeriesValoradas
     guardarValorados(id: number) {
       this.listadoValorados.push(this.filmsService.getFilmById(id));
-      for(let i = 0; i < this.listadoValorados.length; i++) {
-        console.log(this.listadoValorados[i]);
-      }
+      console.log(this.listadoValorados);
 
     }
 }
