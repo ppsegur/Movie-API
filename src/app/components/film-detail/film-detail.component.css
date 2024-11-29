@@ -14,6 +14,8 @@
   img {
     border-radius: 8px;
     height: 600px;
+    box-shadow: inset;
+    box-shadow: #000000   ;
   }
   
   .actor-card {
@@ -59,6 +61,18 @@
   color: #ffffff;
 }
 
+.btn-light{
+  box-shadow: #000000;
+  text-shadow: #000000;
+}
+
+.btn-light:hover{
+  background-color: red;
+  color: black;
+  border: none;
+  transform: scale(1.10);  
+}
+
 /*Estilos para la parte del add to lista :) */
 
 .add-to-list-container {
@@ -79,29 +93,30 @@
 
 .list-buttons {
   display: flex;
-  flex-direction: column;
   gap: 12px;
   align-items: flex-start;
 }
 
 .btn-list {
   width: 100%;
-  max-width: 400px;
+  max-width: 300px;
   padding: 14px 20px;
   font-size: 1.1rem;
   font-weight: 500;
   color: #fff;
-  background: linear-gradient(to right, #0D2185, #03081F);
+  background-color: #000000;
   border: 2px solid transparent;
   border-radius: 50px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   cursor: pointer;
   text-align: left;
+  align-items: flex-end;
 }
 
 .btn-list:hover {
   background-color: #000000;
   transform: scale(1.05);
+  color: chocolate;
 }
 
 .btn-list span {
