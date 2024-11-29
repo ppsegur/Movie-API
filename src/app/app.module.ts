@@ -19,6 +19,9 @@ import { CharacterDetailComponent } from './components/character-detail/characte
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
 import { FavlistComponent } from './components/favlist/favlist.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -37,12 +40,15 @@ import { FavlistComponent } from './components/favlist/favlist.component';
     CharacterItemComponent,
     ApprovedComponent,
     FavlistComponent
+    WatchListComponent
+
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule
   ],
   providers: [
     provideAnimationsAsync(),

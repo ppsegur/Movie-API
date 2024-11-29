@@ -73,11 +73,15 @@
                           [attr.stroke]="getCircleColor(film.vote_average)">
                       </circle>
                       <text x="60" y="70" fill="#fff" text-anchor="middle" dy="5" class="rating-text">{{film.vote_average.toFixed(1)}}</text>
-                    </svg>
+                    </svg>        
                   </div>
-                          
-                    <button class="bi bi-heart  btn custom-btn btn-sm d-flex align-items-center " style="float: right; "(click)="addToFavorites(film)"></button>
+
+                  @if (isLoggedIn()) {
+                    <button class="bi bi-bookmark-plus btn custom-btn btn-sm d-flex align-items-center" (click)="addToWatchlist(film)"></button>
+                 <button class="bi bi-heart  btn custom-btn btn-sm d-flex align-items-center " style="float: right; "(click)="addToFavorites(film)"></button>
               
+                  }
+
                 </div>
               </div>
             }

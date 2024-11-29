@@ -3,22 +3,30 @@ import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
 import { FavService } from '../../services/fav.service';
 import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
+import { WatchlistService } from '../../services/watch-list.service';
+
 
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
-  styleUrl: './films-list.component.css',
- 
+  styleUrls: ['./films-list.component.css']
+
 })
 export class FilmsListComponent implements OnInit {
-
   filmList: Films[] = [];
 
-  constructor(private filmService: FilmsService,
-    private favService: FavService
+  constructor(
+    private filmService: FilmsService,
+    private watchlistService: WatchlistService,
+                private favService: FavService
+
   ) {}
 
   ngOnInit(): void {
+    this.loadPopularFilms();
+  }
+
+  loadPopularFilms(): void {
     this.filmService.getPopular().subscribe((resp) => {
       this.filmList = resp.results;
     });
@@ -39,23 +47,30 @@ export class FilmsListComponent implements OnInit {
   }
 
 
+  addToWatchlist(film: Films): void {
+    this.watchlistService.addToWatchlistTMDB(film);
+    console.log(`Película "${film.title}" añadida a la watchlist.`);
+  }
+
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
+  }
+
   getStrokeDashoffset(voteAverage: number): number {
-    const maxDashArray = 440; 
-    const normalizedVote = Math.min(Math.max(voteAverage, 0), 10); 
+    const maxDashArray = 440;
+    const normalizedVote = Math.min(Math.max(voteAverage, 0), 10);
     return maxDashArray - (normalizedVote / 10) * maxDashArray;
   }
 
-
   getCircleColor(voteAverage: number): string {
-    console.log('Vote Average:', voteAverage); 
     if (voteAverage > 8) {
-        return 'green';
+      return 'green';
     } else if (voteAverage >= 5 && voteAverage < 7) {
-        return 'orange'; 
+      return 'orange';
     } else if (voteAverage >= 7 && voteAverage < 8) {
-        return 'yellow'; 
+      return 'yellow';
     } else {
-        return 'red';
+      return 'red';
     }
   }
   isLoggedIn() {
@@ -65,5 +80,8 @@ export class FilmsListComponent implements OnInit {
 
     
 
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
 }
 
