@@ -40,7 +40,7 @@ export class FilmsListComponent implements OnInit {
   ngOnInit(): void {
     this.loadPopularFilms();
     this.cargarGeneros();
-    this.loadWatchlist(); // Cargar la watchlist
+    this.loadWatchlist();
   }
   
   loadWatchlist(): void {
