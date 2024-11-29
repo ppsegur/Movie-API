@@ -1,0 +1,10 @@
+<div>
+    <label for="idioma">Selecciona un idioma:</label>
+
+    <select id="idioma" (change)="cambiarIdioma($event.target.value)">
+      <option *ngFor="let idioma of idiomas" [value]="idioma.iso_639_1">
+        {{ idioma.english_name }} ({{ idioma.name || idioma.iso_639_1 }})
+      </option>
+    </select>
+  </div>
+  

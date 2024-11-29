@@ -25,6 +25,7 @@ import { UserListMediaComponent } from './components/userlist-media/userlist-med
 import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
 import { RouterModule } from '@angular/router';
+import { IdiomaSelectorComponent } from './components/idioma-selector/idioma-selector.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { RouterModule } from '@angular/router';
     UserListMediaComponent,
     CreateListComponent,
     FavlistComponent,
-    WatchListComponent
+    WatchListComponent,
+    IdiomaSelectorComponent
 
   ],
   imports: [
