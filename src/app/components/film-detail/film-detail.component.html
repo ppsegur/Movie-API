@@ -11,7 +11,7 @@
       <div class="col-md-8">
         <div class="d-flex align-items-center">
           <h2 class="me-3">{{ film.title }}</h2>
-          <button class="btn btn-light ms-auto" [routerLink]="['/filmList']"><i class="bi bi-x-lg"></i></button>
+          <button class="btn btn-light ms-auto" (click)="goBack()"><i class="bi bi-x-lg"></i></button>
         </div>
         <p><strong>Release Date:</strong> {{ film.release_date }}</p>
         <p><strong>Rating:</strong> <i class="bi bi-star-fill text-warning"></i> {{ film.vote_average }}</p>
@@ -34,11 +34,25 @@
       </div>
       <hr>
     </div>
+    <br>
+    <div class="add-to-list-container">
+      <h3 class="section-title">Añadir a una lista</h3>
+      <div class="list-buttons">
+        <button *ngFor="let list of userLists" 
+                class="btn-list" 
+                (click)="selectedListId = list.id; addToSelectedList()">
+          <span>{{ list.name }}</span>
+        </button>
+      </div>
+    </div>
+    
+    
+    <br>
     @if (cast.length) {
       <div>
         <h3>Cast</h3>
         <div class="row">
-          @for(actor of cast; track actor.id){
+          @for(actor of cast; track actor.id) {
           <div class="col-md-3">
             <div class="card mb-3 actor-card">
               <div class="image-container">
@@ -62,7 +76,7 @@
           }
         </div>
         <div class="text-end mt-3"> 
-          <button class="show-all-cast-btn" (click)="toggleShowAllCast()">
+          <button class="show-all-cast-btn btn btn-link" (click)="toggleShowAllCast()">
             {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
           </button>
         </div>

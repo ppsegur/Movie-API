@@ -123,3 +123,19 @@ a {
     font-size: 40px;
     font-weight: bold;
 }
+
+.custom-btn {
+    border-radius: 50px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to bottom, #0D2185, #03081F);
+    border: none;
+    transition: background-color 0.2s ease;
+}
+
+.custom-btn:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+}

@@ -11,4 +11,4 @@ export class NumberFormatPipePipe implements PipeTransform {
     }
     return value.toFixed(1);
   }
-}
+} 

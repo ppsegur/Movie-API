@@ -1,0 +1,16 @@
+<app-nav></app-nav>
+<body>
+  <div>
+    <h2>Mis listas</h2>
+    <button class="btn-sucsses" [routerLink]="['/createList']">
+      <b>+ Crear lista</b>
+    </button>
+    <ul>
+      <li *ngFor="let list of userLists">
+        <span>{{ list.name }} ({{ list.item_count }} items)</span>
+        <button (click)="deleteList(list.id)">Eliminar</button>
+        <button [routerLink]="['/mediaoflist', list.id]" style="background-color: blue;">Ver películas </button>
+      </li>
+    </ul>
+  </div>
+</body>
