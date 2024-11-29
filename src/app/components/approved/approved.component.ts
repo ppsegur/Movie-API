@@ -17,10 +17,12 @@ export class ApprovedComponent implements OnInit {
     this.authService.createSession().subscribe((response) => {
       localStorage.setItem('session_id', response.session_id);
       this.accountService.getAccountDetails().subscribe((response) => {
+        localStorage.setItem('account_id', response.id.toString()); // Convierte correctamente a string
         localStorage.setItem('user_name', response.name);
         localStorage.setItem('user_photo', response.avatar.tmdb.avatar_path);
+        localStorage.setItem('account_id', response.id.toString());
         localStorage.setItem('logged_in', 'true');
-
+        
         setTimeout(() => {
           window.location.href = 'http://localhost:4200/home';
         }, 2500); 

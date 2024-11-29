@@ -3,6 +3,7 @@ import { Films } from '../../models/films.interface';
 import { ActivatedRoute } from '@angular/router';
 import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-film-detail',
@@ -22,7 +23,8 @@ export class FilmDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private filmsService: FilmsService,
-    private listService: ListService
+    private listService: ListService,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -93,5 +95,9 @@ export class FilmDetailComponent implements OnInit {
     } else {
       alert('Por favor, selecciona una lista.');
     }
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

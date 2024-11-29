@@ -22,6 +22,9 @@ import { ListUserlistsComponent } from './components/list-userlists/list-userlis
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateListComponent } from './components/create-list/create-list.component';
 import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
+import { FavlistComponent } from './components/favlist/favlist.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import { UserListMediaComponent } from './components/userlist-media/userlist-med
     ListUserlistsComponent,
     UserListMediaComponent,
     CreateListComponent,
+    FavlistComponent,
+    WatchListComponent
 
   ],
   imports: [

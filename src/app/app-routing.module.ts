@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 
+
 import { SeriesListComponent } from './components/series-list/series-list.component';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
@@ -13,6 +14,8 @@ import { ApprovedComponent } from './components/approved/approved.component';
 import { ListUserlistsComponent } from './components/list-userlists/list-userlists.component';
 import { CreateListComponent } from './components/create-list/create-list.component';
 import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
+import { FavlistComponent } from './components/favlist/favlist.component';
+import { WatchListComponent } from './components/watch-list/watch-list.component';
 
 const routes: Routes = [
   { path: 'filmList', component: FilmsListComponent },
@@ -26,10 +29,11 @@ const routes: Routes = [
   {path: 'createList', component: CreateListComponent},
   { path: 'mediaoflist/:id', component: UserListMediaComponent},
   { path: 'approved', component: ApprovedComponent },
+  {path: 'favorite', component: FavlistComponent},
   {path: 'home', component: HomeComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },   
-  { path: '**', redirectTo: '/home' }            
-];
+  { path: 'watchlist', component: WatchListComponent },
+  { path: '**', redirectTo: '/home' }  
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
