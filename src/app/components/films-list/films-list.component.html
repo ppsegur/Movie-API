@@ -9,39 +9,41 @@
 
 <body>
 
-    <app-nav></app-nav>
-    
-    <div class="container-fluid">
-      <div class="row">
-        <aside class="sidebar">
-            <h2>Filtros</h2>
-            <div class="filtros">
-                <h3>Géneros</h3>
-                <div class="genres">
-                    <button>Acción</button>
-                    <button>Comedia</button>
-                    <button>Horror</button>
-                    <button>Fantasía</button>
-                    <button>Aventura</button>
-                    <button>Crimen</button>
-                    <button>Anime</button>
-                    <button>Romance</button>
-                    <button>SI-FI</button>
-                </div>
-                <h3>Puntuación</h3>
-                <div class="rating">
-                    <span>⭐️⭐️⭐️⭐️⭐️</span>
-                </div>
-                <h3>Fecha Estreno</h3>
-                <input type="date">
-            </div>
-        </aside>
-    
-        <div class="col-md-9">
-          <div class="section-title mb-4 mt-2">
-            <h2>Películas</h2>
-            <hr style="height: 2px;">
+  <app-nav></app-nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <aside class="sidebar col-md-3">
+        <h2>Filtros</h2>
+        <div class="filtros">
+          <h3>Géneros</h3>
+          <div class="genres-container">
+            @for(genero of generos; track genero.id){
+              <button
+                type="button"
+                class="genre-btn"
+                [class.selected]="isSelectedGenre(genero.id)"
+                (click)="toggleGenre(genero.id)"
+              >
+                {{ genero.name }}
+              </button>
+            }
           </div>
+  
+          <h3>Puntuación</h3>
+          <div class="rating">
+            <ngx-slider [(value)]="minRating" [(highValue)]="maxRating" [options]="ratingOptions" (valueChange)="applyFilters()" (highValueChange)="applyFilters()"></ngx-slider>
+          </div>
+          <h3>Fecha Estreno</h3>
+          <input type="date" [(ngModel)]="releaseDate" (change)="applyFilters()" />
+        </div>
+      </aside>
+  
+      <div class="col-md-9">
+        <div class="section-title mb-4 mt-2">
+          <h2>Películas</h2>
+          <hr style="height: 2px;">
+        </div>
     
           <div class="row">
             @for(film of filmList; track film.id){
@@ -82,14 +84,18 @@
                     <button class="bi bi-heart  btn custom-btn btn-sm d-flex align-items-center " (click)="addToFavorites(film)"></button>
                 </div>
                   }
-
-                </div>
-              </div>
-            }
-          </div>
         </div>
       </div>
     </div>
+  </div>
     
+  <div *ngIf="successMessage" class="alert alert-success fixed-alert" role="alert">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger fixed-alert" role="alert">
+    {{ errorMessage }}
+  </div>
+  
+
 </body>
 </html>

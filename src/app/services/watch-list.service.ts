@@ -4,9 +4,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 import { WatchListMoviesListResponse } from '../models/watchList.interface';
 import { Films } from '../models/films.interface';
 import { Series } from '../../models/series.model';
-
-const API_KEY = '81819d9750b41c41923effa77112f27a';
-const API_BASE_URL = 'https://api.themoviedb.org/3';
+import { environmentsKeys } from '../../environments/environments-keys';
 
 @Injectable({
   providedIn: 'root'
@@ -24,20 +22,24 @@ export class WatchlistService {
   getLocalMovieWatchlist(): Observable<WatchListMoviesListResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`;
-
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/watchlist/movies?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
+  
     return this.http.get<WatchListMoviesListResponse>(url).pipe(
+      tap((response) => {
+        this.localWatchlist = response;
+      }),
       catchError((error) => {
         console.error('Error al obtener la Watchlist de películas:', error);
         return throwError(() => new Error('No se pudo cargar la Watchlist de películas. Intenta más tarde.'));
       })
     );
   }
+  
 
   getLocalSeriesWatchlist(): Observable<WatchListMoviesListResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `${API_BASE_URL}/account/${accountId}/watchlist/tv?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/watchlist/tv?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
 
     return this.http.get<WatchListMoviesListResponse>(url).pipe(
       catchError((error) => {
@@ -58,21 +60,23 @@ export class WatchlistService {
     const body = {
       media_id: film.id,
       media_type: 'movie',
-      watchlist: true
+      watchlist: true,
     };
   
     this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/watchlist?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).subscribe(
       (response) => {
         console.log('Película añadida con éxito:', response);
+        this.getLocalMovieWatchlist().subscribe(); 
       },
       (error) => {
         console.error('Error al añadir la película:', error);
       }
     );
   }
+  
   
   addSeriesToWatchlistTMDB(series: Series): void {
     const sessionId = localStorage.getItem('session_id');
@@ -89,7 +93,7 @@ export class WatchlistService {
     };
   
     this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/watchlist?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).subscribe(
       (response) => {
@@ -105,7 +109,7 @@ export class WatchlistService {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
   
-    const url = `${API_BASE_URL}/account/${accountId}/watchlist/movies?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/watchlist/movies?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
   
     return this.http.get<WatchListMoviesListResponse>(url).pipe(
       catchError((error) => {
@@ -130,7 +134,7 @@ export class WatchlistService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/watchlist?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).pipe(
       tap((response) => {
@@ -158,7 +162,7 @@ export class WatchlistService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/watchlist?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/watchlist?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).pipe(
       tap((response) => {
@@ -170,5 +174,10 @@ export class WatchlistService {
       })
     );
   }
+
+  isFilmInWatchlist(filmId: number): boolean {
+    return this.localWatchlist.results.some((movie) => movie.id === filmId);
+  }
+  
   
 }

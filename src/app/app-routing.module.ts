@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-
-
 import { SeriesListComponent } from './components/series-list/series-list.component';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';

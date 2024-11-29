@@ -8,7 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { NavComponent } from './shared/nav/nav.component';
 import { AppComponent } from './app.component';
 import { SeriesListComponent } from './components/series-list/series-list.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbSlide } from '@ng-bootstrap/ng-bootstrap';
 import { NumberFormatPipePipe } from './pipes/number-format-pipe.pipe';
 import { SeriesDetailComponent } from './components/series-detail/series-detail.component';
 import { FilmsListComponent } from './components/films-list/films-list.component';
@@ -24,6 +24,8 @@ import { CreateListComponent } from './components/create-list/create-list.compon
 import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
 import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
+import { FormsModule } from '@angular/forms';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { WatchListComponent } from './components/watch-list/watch-list.component
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    NgxSliderModule,
     ReactiveFormsModule
   ],
   providers: [

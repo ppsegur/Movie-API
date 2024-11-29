@@ -44,10 +44,12 @@
             </div>
             <p class="card-text" style="width: 50%; margin: 0 auto;"><i class="bi bi-star-fill text-warning"></i> {{ item.vote_average }}</p>
             @if (isLoggedIn()) {
-                <button class="bi bi-bookmark-plus card-text" (click)="addSeriesToWatchlist(item)">
-                </button>
-                <button class="bi bi-heart card-text"  (click)="addToFavorites(item)">
-                </button>
+                <div class="d-flex">
+                    <button class="bi bi-bookmark-plus card-text" (click)="addSeriesToWatchlist(item)">
+                    </button>
+                    <button class="bi bi-heart card-text"  (click)="addToFavorites(item)">
+                    </button>
+                </div>
             }
 
         </div>
