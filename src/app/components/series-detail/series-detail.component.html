@@ -11,7 +11,7 @@
       <div class="col-md-8">
         <div class="d-flex align-items-center">
           <h2 class="me-3">{{ series.name }}</h2>
-          <button class="btn btn-light ms-auto" [routerLink]="['/']"><i class="bi bi-x-lg"></i></button>
+          <button class="btn btn-light ms-auto" [routerLink]="['/seriesList']"><i class="bi bi-x-lg"></i></button>
         </div>
         <p><strong>Fecha de estreno:</strong> {{ series.first_air_date }}</p>
         <p><strong>Valoración: </strong><i class="bi bi-star-fill text-warning"></i> {{ series.vote_average |
@@ -21,8 +21,8 @@
           Descripción no disponible
         </p>
         <hr>
-        <p><strong>Añade tu propia valoración: </strong><app-rating></app-rating></p>
-        <hr>
+        <!--<p><strong>Añade tu propia valoración: </strong><app-rating></app-rating></p>
+        <hr>-->
         
         @for (item of getSeasons(); track $index) {
         <div class="card mb-3">

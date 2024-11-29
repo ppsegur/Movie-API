@@ -55,6 +55,7 @@ body {
 }
 
 .actor-card {
+    position: relative;
     background-color: rgb(0, 0, 0);
     border-radius: 8px;
     text-align: center;
@@ -62,6 +63,7 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
     cursor: pointer;
     padding-bottom: 15px;
+    overflow: hidden;
 }
 
 .actor-card:hover {
@@ -106,4 +108,18 @@ main {
 
 a {
     text-decoration: none;
+}
+
+.rating-circle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+}
+
+.rating-text {
+    font-size: 40px;
+    font-weight: bold;
 }
