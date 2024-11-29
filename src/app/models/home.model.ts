@@ -31,6 +31,7 @@ export interface MoviesNewsListResponse {
 /*Series tv news*/ 
 export interface SeriestvnewsListResponse {
   page: number
+  id: number
   results: Serietvnew[]
   total_pages: number
   total_results: number

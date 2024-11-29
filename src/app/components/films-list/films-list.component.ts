@@ -1,19 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmsService } from '../../services/films.service';
 import { Films } from '../../models/films.interface';
+import { FavService } from '../../services/fav.service';
+import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
 import { WatchlistService } from '../../services/watch-list.service';
+
 
 @Component({
   selector: 'app-films-list',
   templateUrl: './films-list.component.html',
   styleUrls: ['./films-list.component.css']
+
 })
 export class FilmsListComponent implements OnInit {
   filmList: Films[] = [];
 
   constructor(
     private filmService: FilmsService,
-    private watchlistService: WatchlistService
+    private watchlistService: WatchlistService,
+                private favService: FavService
+
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +31,21 @@ export class FilmsListComponent implements OnInit {
       this.filmList = resp.results;
     });
   }
+  loadPopularFilms(): void {
+    this.filmService.getPopular().subscribe((resp) => {
+      this.filmList = resp.results;
+    });
+  }
+  addToFavorites(film: Films): void {
+    this.favService.addToFav(film);
+    console.log(`Película "${film.title}" añadida a la watchlist.`);
+  }
+
+
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
+  }
+
 
   addToWatchlist(film: Films): void {
     this.watchlistService.addToWatchlistTMDB(film);
@@ -52,8 +73,15 @@ export class FilmsListComponent implements OnInit {
       return 'red';
     }
   }
+  isLoggedIn() {
+    return localStorage.getItem('logged_in') === 'true';
+  }
+
+
+    
 
   isLoggedIn() {
     return localStorage.getItem('logged_in') === 'true';
   }
 }
+

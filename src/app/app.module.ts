@@ -18,8 +18,10 @@ import { CharacterListComponent } from './components/character-list/character-li
 import { CharacterDetailComponent } from './components/character-detail/character-detail.component';
 import { CharacterItemComponent } from './components/character-item/character-item.component';
 import { ApprovedComponent } from './components/approved/approved.component';
+import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
 import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { FormsModule } from '@angular/forms';
     CharacterDetailComponent,
     CharacterItemComponent,
     ApprovedComponent,
+    FavlistComponent
     WatchListComponent
+
 
   ],
   imports: [
