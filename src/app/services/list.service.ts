@@ -28,7 +28,7 @@ export class ListService {
     };
     return this.http
       .post(
-        `${environmentsKeys.API_URL}/list?api_key=${environmentsKeys.API_URL}&session_id=${sessionId}`,
+        `${environmentsKeys.API_URL}/list?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
         body
       );
   }

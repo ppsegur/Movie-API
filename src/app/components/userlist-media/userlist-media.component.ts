@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListService } from '../../services/list.service';
 import { FilmsService } from '../../services/films.service';  
-import { ListResponse } from '../../models/lists.interface';
-import { List } from '../../models/lists.interface';
 
 @Component({
   selector: 'app-userlist-media',
@@ -15,7 +13,7 @@ export class UserListMediaComponent implements OnInit {
   listName: string = '';
   listId!: number;
   description: string = '';
-  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; 
+  sessionId: string = ''; 
   movieDetails: any[] = []; 
 
   constructor(
@@ -26,20 +24,24 @@ export class UserListMediaComponent implements OnInit {
 
   ngOnInit(): void {
     const listId = this.route.snapshot.paramMap.get('id');
+    const sessionId = this.route.snapshot.paramMap.get('sessionId');
+
+    if (sessionId) {
+      this.sessionId = sessionId; 
+    }
     if (listId) {
-      this.listId = +listId; 
-      this.loadMoviesFromList(+listId);
+      this.listId = +listId;
+      this.loadMoviesFromList(this.listId, this.sessionId);
     }
   }
 
-  loadMoviesFromList(listId: number): void {
-    this.listService.getMoviesFromList(listId, this.sessionId).subscribe({
+  loadMoviesFromList(listId: number, sessionId: string): void {
+    this.listService.getMoviesFromList(listId, sessionId).subscribe({
       next: (data) => {
         this.movies = data.items;
         this.listName = data.name;
         this.description = data.description;
-
-        this.getMovieDetails(this.movies);
+        this.getMovieDetails(this.movies); 
       },
       error: (err) => console.error('Error cargando películas de la lista:', err),
     });
@@ -56,6 +58,7 @@ export class UserListMediaComponent implements OnInit {
       console.error('Error obteniendo detalles de las películas:', err);
     });
   }
+
   removeMovie(listId: number, movieId: number): void {
     console.log(`Intentando eliminar película con ID ${movieId} de la lista ${listId}`);
     this.listService.removeMovieFromList(listId, this.sessionId, movieId).subscribe({
@@ -69,5 +72,4 @@ export class UserListMediaComponent implements OnInit {
       },
     });
   }
-  
 }
