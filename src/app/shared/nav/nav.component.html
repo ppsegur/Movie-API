@@ -22,33 +22,35 @@
               <a class="dropdown-item" [routerLink]="['/userList']"> <b>My Listas</b> </a>
             </div>
           </li>
-          <li ngbDropdown class="nav-item " role="presentation">
-            <div >
-              <label for="idioma"></label>
-              <select  id="idioma"  class="form-select" (change)="onLanguageChange($event)" [(ngModel)]="selectedLanguage">
-                <option  *ngFor="let language of idiomas" [value]="language.iso_639_1">
-                    {{ language.name }} 
-                </option>
-            </select>
-          </div>
-          </li>
-        }
           <li>
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-12">
-                    @if(isLoggedIn()) {
-                        <button class="btn btn-danger btn-sm" (click)="logout()">
-                            <i class="bi bi-box-arrow-left"></i>
-                        </button>
-                        } @else {
-                            <i class="bi bi-person-circle" (click)="createRequestToken()"></i>
-                        }
+      
+          
+        }
+      </ul>  <div class="container-fluid">
+          <div class="row">
+            <div class="col-12">
+                @if(isLoggedIn()) {
+                    <button class="btn btn-danger btn-sm" (click)="logout()">
+                        <i class="bi bi-box-arrow-left"></i>
+                    </button>
+                    } @else {
+                        <i class="bi bi-person-circle" (click)="createRequestToken()"></i>
+                    }
+      <li ngbDropdown class="nav-item " role="presentation">
+        <div >
+          <label for="idioma"></label>
+          <select  id="idioma"  class="form-select bg-black" style="width: 125px; color: azure;" (change)="onLanguageChange($event)" [(ngModel)]="selectedLanguage">
+            <option  *ngFor="let language of idiomas" [value]="language.iso_639_1">
+                {{ language.name }} 
+            </option>
+        </select>
+      </div>
+      </li>
+      
+         
                 </div>
               </div>
             </div>
-          </li>
-        </ul>
+          </div>
       </div>
-    </div>
   </nav>
