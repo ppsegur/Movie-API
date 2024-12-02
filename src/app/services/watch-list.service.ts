@@ -6,8 +6,7 @@ import { Films } from '../models/films.interface';
 import { Series } from '../../models/series.model';
 import { LanguageService } from 'typescript';
 
-const API_KEY = '81819d9750b41c41923effa77112f27a';
-const API_BASE_URL = 'https://api.themoviedb.org/3';
+
 import { environmentsKeys } from '../../environments/environments-keys';
 
 @Injectable({

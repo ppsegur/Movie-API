@@ -5,6 +5,7 @@ import { MovieNew, Serietvnew } from '../models/home.model';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Films } from '../models/films.interface';
 import { Series } from '../../models/series.model';
+import { environmentsKeys } from '../environments/environments-keys';
 
   /* Definición de la clave de la API y la URL base de la API */ 
 const API_KEY = '81819d9750b41c41923effa77112f27a';
@@ -27,7 +28,7 @@ export class FavService {
   getLocalMovieFav(): Observable<favoritosResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/favorite/movies?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
 
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -40,7 +41,7 @@ export class FavService {
   getLocalSerieFav(): Observable<favoritosResponse> {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
-    const url = `${API_BASE_URL}/account/${accountId}/favorite/tv?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/favorite/tv?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
 
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -65,7 +66,7 @@ export class FavService {
     };
   
     this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/favorite?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).subscribe(
       (response) => {
@@ -92,7 +93,7 @@ export class FavService {
     };
   
     this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/favorite?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).subscribe(
       (response) => {
@@ -108,7 +109,7 @@ export class FavService {
     const sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
   
-    const url = `${API_BASE_URL}/account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${sessionId}`;
+    const url = `${environmentsKeys.API_URL}/account/${accountId}/favorite/movies?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`;
   
     return this.http.get<favoritosResponse>(url).pipe(
       catchError((error) => {
@@ -133,7 +134,7 @@ export class FavService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/favorite?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).pipe(
       tap((response) => {
@@ -161,7 +162,7 @@ export class FavService {
     };
 
     return this.http.post<any>(
-      `${API_BASE_URL}/account/${accountId}/favorite?api_key=${API_KEY}&session_id=${sessionId}`,
+      `${environmentsKeys.API_URL}/account/${accountId}/favorite?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`,
       body
     ).pipe(
       tap((response) => {
