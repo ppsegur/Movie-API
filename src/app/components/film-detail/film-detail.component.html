@@ -1,7 +1,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
+
 <body>
   <app-nav></app-nav>
+
 
   <div class="container">
     <div class="row">
@@ -35,15 +37,15 @@
     <div class="add-to-list-container">
       <h3 class="section-title">Añadir a una lista</h3>
       <div class="list-buttons">
-        <button *ngFor="let list of userLists" 
-                class="btn-list" 
+        <button *ngFor="let list of userLists"
+                class="btn-list"
                 (click)="selectedListId = list.id; addToSelectedList()">
           <span>{{ list.name }}</span>
         </button>
       </div>
     </div>
-    
-    
+   
+   
     <br>
     @if (cast.length) {
       <div>
@@ -72,12 +74,23 @@
           </div>
           }
         </div>
-        <div class="text-end mt-3"> 
+        <div class="text-end mt-3">
           <button class="show-all-cast-btn btn btn-link" (click)="toggleShowAllCast()">
             {{ showAllCast ? 'Show Less Cast' : 'Show All Cast' }}
           </button>
         </div>
       </div>
     }
+  </div>
+
+
+
+
+   <!-- Alerts -->
+   <div *ngIf="successMessage" class="alert alert-success fixed-alert" role="alert">
+    {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger fixed-alert" role="alert">
+    {{ errorMessage }}
   </div>
 </body>

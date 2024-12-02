@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Movies de una lista del user</title>
-  <!-- Agrega Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <app-nav></app-nav>
@@ -15,12 +14,12 @@
       <h2 class="list-title">{{ listName }}</h2>
       <h6 class="list-description">{{ description }}</h6>
     </div>
-    
+   
     <div class="section-title text-center text-white mb-4">
       <h2>Películas</h2>
       <hr class="custom-hr">
     </div>
-    
+   
     <div class="row">
       @for(movie of movies; track movie.id){
         <div class="movie-card col-sm-6 col-md-4 col-lg-3 mb-4 position-relative">
@@ -37,8 +36,16 @@
       }
     </div>
 
+
     <button [routerLink]="['/userList']" class="btn-custom">Volver</button>
   </div>
+
+
+     <!-- Alerts -->
+     <div *ngIf="successMessage" class="alert alert-success fixed-alert" role="alert">
+      {{ successMessage }}
+    </div>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 </body>

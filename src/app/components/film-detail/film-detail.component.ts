@@ -5,6 +5,7 @@ import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -22,6 +23,7 @@ export class FilmDetailComponent implements OnInit {
   errorMessage: string = '';
   successMessage: string = '';
 
+
   constructor(
     private route: ActivatedRoute,
     private filmsService: FilmsService,
@@ -29,26 +31,32 @@ export class FilmDetailComponent implements OnInit {
     private location: Location
   ) {}
 
+
   ngOnInit(): void {
     this.sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     this.accountId = accountId ? +accountId : null;
 
+
     if (!this.sessionId || !this.accountId) {
-      this.errorMessage =
-        'No se pudo obtener la sesión o el ID de la cuenta. Por favor, inicia sesión nuevamente.';
+      this.showErrorMessage(
+        'No se pudo obtener la sesión o el ID de la cuenta. Por favor, inicia sesión nuevamente.'
+      );
       return;
     }
+
 
     const filmId = this.route.snapshot.paramMap.get('id');
     if (filmId) {
       this.loadFilmDetails(+filmId);
     } else {
-      this.errorMessage = 'No se encontró el ID de la película.';
+      this.showErrorMessage('No se encontró el ID de la película.');
     }
+
 
     this.loadUserLists();
   }
+
 
   loadFilmDetails(filmId: number): void {
     this.filmsService.getFilmById(filmId).subscribe({
@@ -56,29 +64,70 @@ export class FilmDetailComponent implements OnInit {
         this.film = data;
         this.getFilmVideo(filmId);
         this.getFilmCredits(filmId);
-        this.successMessage = 'Detalles de la película cargados correctamente.';
       },
       error: (err) => {
-        this.errorMessage = 'Error cargando los detalles de la película.';
+        this.showErrorMessage('Error cargando los detalles de la película.');
         console.error(err);
       },
     });
   }
+
 
   loadUserLists(): void {
     if (this.sessionId && this.accountId) {
       this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
         next: (response) => {
           this.userLists = response.results;
-          this.successMessage = 'Listas de usuario cargadas correctamente.';
         },
         error: (err) => {
-          this.errorMessage = 'Error obteniendo listas de usuario.';
+          this.showErrorMessage('Error obteniendo listas de usuario.');
           console.error(err);
         },
       });
     }
   }
+
+
+  addToSelectedList(): void {
+    if (this.selectedListId && this.film?.id && this.sessionId) {
+      this.listService
+        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
+        .subscribe({
+          next: () => {
+            this.showSuccessMessage(`Película "${this.film.title}" añadida a la lista`);
+          },
+          error: (err) => {
+            this.showErrorMessage('La peícula ya pertenece a esta lista');
+            console.error(err);
+          },
+        });
+    } else {
+      this.showErrorMessage('Por favor, selecciona una lista.');
+    }
+  }
+
+
+  showErrorMessage(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 2000);
+  }
+
+
+  showSuccessMessage(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 2000);
+  }
+
+
+  toggleShowAllCast(): void {
+    this.showAllCast = !this.showAllCast;
+    if (this.film) this.getFilmCredits(this.film.id);
+  }
+
 
   getFilmVideo(filmId: number): void {
     this.filmsService.getFilmVideos(filmId).subscribe({
@@ -91,11 +140,12 @@ export class FilmDetailComponent implements OnInit {
           : null;
       },
       error: (err) => {
-        this.errorMessage = 'Error obteniendo el video de la película.';
+        this.showErrorMessage('Error obteniendo el video de la película.');
         console.error(err);
       },
     });
   }
+
 
   getFilmCredits(filmId: number): void {
     this.filmsService.getFilmCredits(filmId).subscribe({
@@ -103,36 +153,16 @@ export class FilmDetailComponent implements OnInit {
         this.cast = this.showAllCast ? data.cast : data.cast.slice(0, 8);
       },
       error: (err) => {
-        this.errorMessage = 'Error obteniendo los créditos de la película.';
+        this.showErrorMessage('Error obteniendo los créditos de la película.');
         console.error(err);
       },
     });
   }
 
-  toggleShowAllCast(): void {
-    this.showAllCast = !this.showAllCast;
-    if (this.film) this.getFilmCredits(this.film.id);
-  }
-
-  addToSelectedList(): void {
-    if (this.selectedListId && this.film?.id && this.sessionId) {
-      this.listService
-        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
-        .subscribe({
-          next: () => {
-            this.successMessage = `Película añadida a la lista con ID ${this.selectedListId}.`;
-          },
-          error: (err) => {
-            this.errorMessage = 'Error añadiendo la película a la lista.';
-            console.error(err);
-          },
-        });
-    } else {
-      this.errorMessage = 'Por favor, selecciona una lista.';
-    }
-  }
 
   goBack(): void {
     this.location.back();
   }
 }
+
+
