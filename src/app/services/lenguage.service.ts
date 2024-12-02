@@ -9,8 +9,6 @@ import { environmentsKeys } from '../environments/environments-keys';
 })
 export class LenguageService {
   
-  private selectedLanguageSubject = new BehaviorSubject<string>('en-US');
-  selectedLanguage$ = this.selectedLanguageSubject.asObservable();
   constructor(private http: HttpClient) { }
 
   getLanguages(): Observable<LanguageSelectedResponse> {
@@ -22,12 +20,10 @@ export class LenguageService {
   
   setSelectedLanguage(language: string): void {
     localStorage.setItem('selectedLanguage', language);
-
-    this.selectedLanguageSubject.next(language);
   }
 
   getSelectedLanguage(): string {
-    return this.selectedLanguageSubject.value;
+    return localStorage.getItem('selectedLanguage') ?? 'es';
   }
 }
 

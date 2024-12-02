@@ -29,9 +29,7 @@ export class NavComponent implements OnInit {
         this.idiomas = response;
       });
   
-      this.idiomaService.selectedLanguage$.subscribe(language => {
-        this.selectedLanguage = language;
-      });
+      this.selectedLanguage = this.idiomaService.getSelectedLanguage();
 
   }
 

@@ -26,8 +26,8 @@
             <div>
               <label for="idioma">Selecciona un idioma:</label>
           
-              <select class="form-select" (change)="onLanguageChange($event)" [(ngModel)]="selectedLanguage">
-                <option *ngFor="let language of idiomas" [value]="language.iso_639_1">
+              <select  id="idioma"  class="form-select" (change)="onLanguageChange($event)" [(ngModel)]="selectedLanguage">
+                <option  *ngFor="let language of idiomas" [value]="language.iso_639_1">
                     {{ language.name }} 
                 </option>
             </select>

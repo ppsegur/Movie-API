@@ -25,10 +25,7 @@ private idiomaService: LenguageService
   ) {}
 
   ngOnInit(): void {
-    this.loadPopularFilms();
-    this.idiomaService.selectedLanguage$.subscribe(() => {
       this.loadPopularFilms();
-    });
   }
 
   loadPopularFilms(): void {
