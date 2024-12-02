@@ -18,7 +18,6 @@ export class ListService {
     const idioma = this.idiomaService.getSelectedLanguage();
 
     return this.http.get<ListResponse>(
-      `${API_BASE_URL}/account/${accountId}/lists?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
       `${environmentsKeys.API_URL}/account/${accountId}/lists?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`
     );
   }
@@ -66,8 +65,6 @@ export class ListService {
     const idioma = this.idiomaService.getSelectedLanguage();
 
     return this.http.get(
-      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
-
       `${environmentsKeys.API_URL}/list/${listId}?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`
     );
   }

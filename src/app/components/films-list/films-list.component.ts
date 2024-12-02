@@ -40,14 +40,9 @@ export class FilmsListComponent implements OnInit {
     private filmService: FilmsService,
     private watchlistService: WatchlistService,
     private favService: FavService,
+    private genresService: GenresService,
 private idiomaService: LenguageService
 
-  ) {}
-
-  ngOnInit(): void {
-      this.loadPopularFilms();
-    private genresService: GenresService,
-    private favService: FavService
   ) {}
 
   ngOnInit(): void {
