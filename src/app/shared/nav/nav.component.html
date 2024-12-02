@@ -22,11 +22,12 @@
               <a class="dropdown-item" [routerLink]="['/userList']"> <b>My Listas</b> </a>
             </div>
           </li>
-          <li>
+ 
       
           
-        }
-      </ul>  <div class="container-fluid">
+          }
+        </ul>
+     <div class="container-fluid">
           <div class="row">
             <div class="col-12">
                 @if(isLoggedIn()) {
@@ -36,7 +37,7 @@
                     } @else {
                         <i class="bi bi-person-circle" (click)="createRequestToken()"></i>
                     }
-      <li ngbDropdown class="nav-item " role="presentation">
+     
         <div >
           <label for="idioma"></label>
           <select  id="idioma"  class="form-select bg-black" style="width: 125px; color: azure;" (change)="onLanguageChange($event)" [(ngModel)]="selectedLanguage">
@@ -45,8 +46,8 @@
             </option>
         </select>
       </div>
-      </li>
-      
+
+
          
                 </div>
               </div>
