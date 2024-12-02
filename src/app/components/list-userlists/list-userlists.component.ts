@@ -9,9 +9,11 @@ import { ListService } from '../../services/list.service';
 })
 export class ListUserlistsComponent implements OnInit {
   userLists: any[] = [];
-  accountId: number = 21623249;
-  sessionId: string | null = '511bab00d81359719d0cdc043166fcc2c268aad8';
+  accountId: number | null = null;
+  sessionId: string | null = null;
   listForm: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
 
   constructor(
     private listService: ListService,
@@ -24,16 +26,29 @@ export class ListUserlistsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    this.accountId = accountId ? +accountId : null;
+
+    if (!this.sessionId || !this.accountId) {
+      this.errorMessage = 'No se pudo obtener la sesión o el ID de la cuenta. Por favor, inicia sesión nuevamente.';
+      return;
+    }
+
     this.loadUserLists();
   }
 
   loadUserLists() {
-    if (this.sessionId) {
+    if (this.sessionId && this.accountId) {
       this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
         next: (response) => {
           this.userLists = response.results;
+          this.successMessage = 'Listas de usuario cargadas correctamente.';
         },
-        error: (err) => console.error(err),
+        error: (err) => {
+          this.errorMessage = 'Error al cargar las listas de usuario.';
+          console.error(err);
+        },
       });
     }
   }
@@ -41,17 +56,33 @@ export class ListUserlistsComponent implements OnInit {
   createList() {
     if (this.sessionId && this.listForm.valid) {
       const { name, description } = this.listForm.value;
-      this.listService.createList(this.sessionId, name, description).subscribe(() => {
-        this.loadUserLists();
-        this.listForm.reset(); 
+      this.listService.createList(this.sessionId, name, description).subscribe({
+        next: () => {
+          this.successMessage = 'Lista creada con éxito.';
+          this.loadUserLists();
+          this.listForm.reset();
+        },
+        error: (err) => {
+          this.errorMessage = 'Error al crear la lista. Inténtalo nuevamente.';
+          console.error(err);
+        }
       });
+    } else {
+      this.errorMessage = 'Por favor, completa los campos requeridos.';
     }
   }
 
   deleteList(listId: number) {
     if (this.sessionId) {
-      this.listService.deleteList(listId, this.sessionId).subscribe(() => {
-        this.loadUserLists(); 
+      this.listService.deleteList(listId, this.sessionId).subscribe({
+        next: () => {
+          this.successMessage = 'Lista eliminada correctamente.';
+          this.loadUserLists();
+        },
+        error: (err) => {
+          this.errorMessage = 'Error al eliminar la lista.';
+          console.error(err);
+        }
       });
     }
   }

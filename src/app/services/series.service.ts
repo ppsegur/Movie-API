@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Series, SeriesResponse } from '../../models/series.model';
 import { WatchlistService } from './watch-list.service';
 import { LenguageService } from './lenguage.service';
+import { environmentsKeys } from '../../environments/environments-keys';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,14 @@ export class SeriesService {
   getSeriesById(id: number): Observable<Series> {
     const idioma = this.idiomaService.getSelectedLanguage();
     return this.http.get<Series>(`${this.API_URL_ID}${id}?api_key=${this.API_KEY}&language=${idioma}`);
+  constructor(private http: HttpClient, private watchlistService: WatchlistService) { }
+
+  getSeries(): Observable<SeriesResponse> {
+    return this.http.get<SeriesResponse>(`${environmentsKeys.API_URL}/tv/popular?api_key=${environmentsKeys.API_KEY}`);
+  }
+
+  getSeriesById(id: number): Observable<Series> {
+    return this.http.get<Series>(`${environmentsKeys.API_URL}/tv/${id}?api_key=${environmentsKeys.API_KEY}`);
     
   }
   

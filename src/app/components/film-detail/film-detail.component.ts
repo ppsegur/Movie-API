@@ -5,6 +5,7 @@ import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
 import { Location } from '@angular/common';
 
+
 @Component({
   selector: 'app-film-detail',
   templateUrl: './film-detail.component.html',
@@ -16,9 +17,12 @@ export class FilmDetailComponent implements OnInit {
   cast: any[] = [];
   showAllCast: boolean = false;
   userLists: any[] = [];
-  selectedListId!: number; 
-  accountId: number = 21623249; 
-  sessionId: string = 'b65a3cfcfa444c674e7b0a6bd82d54197a435693'; 
+  selectedListId!: number;
+  accountId: number | null = null;
+  sessionId: string | null = null;
+  errorMessage: string = '';
+  successMessage: string = '';
+
 
   constructor(
     private route: ActivatedRoute,
@@ -27,14 +31,32 @@ export class FilmDetailComponent implements OnInit {
     private location: Location
   ) {}
 
+
   ngOnInit(): void {
+    this.sessionId = localStorage.getItem('session_id');
+    const accountId = localStorage.getItem('account_id');
+    this.accountId = accountId ? +accountId : null;
+
+
+    if (!this.sessionId || !this.accountId) {
+      this.showErrorMessage(
+        'No se pudo obtener la sesión o el ID de la cuenta. Por favor, inicia sesión nuevamente.'
+      );
+      return;
+    }
+
+
     const filmId = this.route.snapshot.paramMap.get('id');
     if (filmId) {
       this.loadFilmDetails(+filmId);
+    } else {
+      this.showErrorMessage('No se encontró el ID de la película.');
     }
+
 
     this.loadUserLists();
   }
+
 
   loadFilmDetails(filmId: number): void {
     this.filmsService.getFilmById(filmId).subscribe({
@@ -43,61 +65,104 @@ export class FilmDetailComponent implements OnInit {
         this.getFilmVideo(filmId);
         this.getFilmCredits(filmId);
       },
-      error: (err) => console.error('Error cargando película:', err),
+      error: (err) => {
+        this.showErrorMessage('Error cargando los detalles de la película.');
+        console.error(err);
+      },
     });
   }
+
 
   loadUserLists(): void {
-    this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
-      next: (response) => {
-        this.userLists = response.results;
-        console.log('Listas del usuario:', this.userLists); 
-      },
-      error: (err) => console.error('Error obteniendo listas:', err),
-    });
+    if (this.sessionId && this.accountId) {
+      this.listService.getUserLists(this.accountId, this.sessionId).subscribe({
+        next: (response) => {
+          this.userLists = response.results;
+        },
+        error: (err) => {
+          this.showErrorMessage('Error obteniendo listas de usuario.');
+          console.error(err);
+        },
+      });
+    }
   }
 
-  getFilmVideo(id: number): void {
-    this.filmsService.getFilmVideos(id).subscribe((data) => {
-      const trailer = data.results.find(
-        (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
-      );
-      if (trailer) {
-        this.videoUrl = `https://www.youtube.com/embed/${trailer.key}`;
-      }
-    });
+
+  addToSelectedList(): void {
+    if (this.selectedListId && this.film?.id && this.sessionId) {
+      this.listService
+        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
+        .subscribe({
+          next: () => {
+            this.showSuccessMessage(`Película "${this.film.title}" añadida a la lista`);
+          },
+          error: (err) => {
+            this.showErrorMessage('La peícula ya pertenece a esta lista');
+            console.error(err);
+          },
+        });
+    } else {
+      this.showErrorMessage('Por favor, selecciona una lista.');
+    }
   }
 
-  getFilmCredits(id: number): void {
-    this.filmsService.getFilmCredits(id).subscribe((data) => {
-      this.cast = this.showAllCast ? data.cast : data.cast.slice(0, 8);
-    });
+
+  showErrorMessage(message: string): void {
+    this.errorMessage = message;
+    setTimeout(() => {
+      this.errorMessage = '';
+    }, 2000);
   }
+
+
+  showSuccessMessage(message: string): void {
+    this.successMessage = message;
+    setTimeout(() => {
+      this.successMessage = '';
+    }, 2000);
+  }
+
 
   toggleShowAllCast(): void {
     this.showAllCast = !this.showAllCast;
     if (this.film) this.getFilmCredits(this.film.id);
   }
 
-  // Método para añadir una película a una lista
-  addToSelectedList(): void {
-    if (this.selectedListId && this.film.id) {
-      this.listService
-        .addMovieToList(this.selectedListId, this.sessionId, this.film.id)
-        .subscribe({
-          next: () => {
-            console.log(`Película añadida a la lista con ID ${this.selectedListId}`);
-          },
-          error: (err) => {
-            console.error('Error añadiendo película a la lista:', err);
-          },
-        });
-    } else {
-      alert('Por favor, selecciona una lista.');
-    }
+
+  getFilmVideo(filmId: number): void {
+    this.filmsService.getFilmVideos(filmId).subscribe({
+      next: (data) => {
+        const trailer = data.results.find(
+          (video: any) => video.type === 'Trailer' && video.site === 'YouTube'
+        );
+        this.videoUrl = trailer
+          ? `https://www.youtube.com/embed/${trailer.key}`
+          : null;
+      },
+      error: (err) => {
+        this.showErrorMessage('Error obteniendo el video de la película.');
+        console.error(err);
+      },
+    });
   }
+
+
+  getFilmCredits(filmId: number): void {
+    this.filmsService.getFilmCredits(filmId).subscribe({
+      next: (data) => {
+        this.cast = this.showAllCast ? data.cast : data.cast.slice(0, 8);
+      },
+      error: (err) => {
+        this.showErrorMessage('Error obteniendo los créditos de la película.');
+        console.error(err);
+      },
+    });
+  }
+
 
   goBack(): void {
     this.location.back();
   }
 }
+
+
