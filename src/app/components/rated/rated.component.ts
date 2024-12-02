@@ -18,9 +18,21 @@ export class RatedComponent implements OnInit{
 
   ngOnInit(): void {
     //this.listadoValorados = this.ratedService.getValorados();
-    for(let i = 0; i < this.ratedService.listadoValorados.length; i++) {
+    /*for(let i = 0; i < this.ratedService.listadoValorados.length; i++) {
       this.listadoValorados.push(this.ratedService.getValorados()[i]);
-    }
+    }*/
+
+    this.loadValorados();
+  }
+
+  loadValorados(): void {
+    this.ratedService.getValoradosV2().subscribe((data) => {
+      this.listadoValorados = data.results;
+    });
+  }
+
+  trackById(index: number, item: { id: number | string }): number | string {
+    return item.id;
   }
 
   

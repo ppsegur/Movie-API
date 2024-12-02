@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RatingService } from '../../services/rating.service';
 
@@ -10,20 +10,20 @@ import { RatingService } from '../../services/rating.service';
 })
 export class RatingComponent {
 
-  id: number = localStorage.getItem('movieId') ? Number(localStorage.getItem('movieId')) : 0;
+  @Input() movieId: number = 0;
 
   constructor(config: NgbRatingConfig, private ratingService: RatingService) {
 		// customize default values of ratings used by this component tree
 		config.max = 5;
 		config.readonly = false;
-    config.resettable = true;
+    //config.resettable = true;
 	}
 
-  rateSeries(id: number, rate: number) {
+  rateSeries(rate: number) {
     console.log(rate);
-    this.ratingService.rateSeries(id, rate);
-
-
+    this.ratingService.rateSeries(this.movieId, rate).subscribe(resp => {
+      console.log(resp); 
+    });
   }
 
 

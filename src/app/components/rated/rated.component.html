@@ -16,20 +16,19 @@
 
     <!--<div class="row movie-grid">
       <div *ngFor="let item of listadoValorados; trackBy: trackById" class="movie-card col">
-        <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" 
-            [alt]="item.title || item.name">
+        <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" [alt]="item.title">
         <div class="movie-card-content">
-          <h3>{{ item.title || item.name }}</h3>
+          <h3>{{ item.title}}</h3>
           <p>{{ item.release_date }}</p>
           <button class="remove-button btn btn-danger btn-sm" (click)="removeFromMovieWatchlist(item)">
             <i class="bi bi-trash"></i> Eliminar
           </button>
         </div>
       </div>
-    </div>-->
+    </div>--->
 
     <div class="row movie-grid">
-        @for (item of listadoValorados; track $index) {
+        @for (item of listadoValorados; track trackById) {
           <img [src]="item.poster_path ? 'https://image.tmdb.org/t/p/w500' + item.poster_path : 'https://via.placeholder.com/150'" [alt]="item.title">
           <div class="movie-card-content">
             <h3>{{ item.title}}</h3>

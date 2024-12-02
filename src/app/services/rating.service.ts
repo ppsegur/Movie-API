@@ -4,7 +4,9 @@ import { FilmsService } from './films.service';
 import { Observable } from 'rxjs';
 import { Series } from '../../models/series.model';
 import { SeriesListComponent } from '../components/series-list/series-list.component';
-import { Films } from '../models/films.interface';
+import { Films, FilmsListResponse } from '../models/films.interface';
+import { environmentsKeys } from '../environments/environments-keys';
+import { AddRatingResponse } from '../models/add-rating.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -16,27 +18,27 @@ export class RatingService {
 
   listadoValorados: Observable<Films>[] = [];
   listadoValoradosV2: Films[] = [];
+  accountId = localStorage.getItem('account_id');
 
   constructor(private http: HttpClient, private filmsService: FilmsService) { }
 
-    rateSeries(id:number, rating: number): Observable<any> {
-      const url = `${this.API_URL}/movie/${id}/rating?api_key=${this.API_KEY}&session_id=${localStorage.getItem('session_id')}`;
+    rateSeries(id:number, rating: number): Observable<AddRatingResponse> {
+      const url = `${this.API_URL}/movie/${id}/rating?session_id=${localStorage.getItem('session_id')}`;
 
-      //Guardar la serie que se ha valorado en listadoSeriesValoradas
-      this.guardarValorados(id);
-
-      return this.http.post(url, {value: rating});
-
+      //this.guardarValorados(id);
+      return this.http.post<AddRatingResponse>(url, {value: rating}, {headers: {
+        'Content-Type': 'application/json',
+        'Authorization': ` Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NmJhMjZjNGU5N2NiYTAyODVjMjQ3OWFmNDU3ZGM3NiIsIm5iZiI6MTczMTMxMzYyMS4zMzQsInN1YiI6IjY3MzFiZmQ1NzY1ZDZkYjE3OGFiMTM5YyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.kjtH7hyqfZF2M-Yp3H4oSv-5xdiZ5eHFBa8QFDvIv88`}});
     }
 
     //Guardar la serie que se ha valorado en listadoSeriesValoradas
-    guardarValorados(id: number) {
+    /*guardarValorados(id: number) {
       this.listadoValorados.push(this.filmsService.getFilmById(id));
       console.log(this.listadoValorados);
 
-    }
+    }*/
 
-    getValorados(): Films[] {
+    /*getValorados(): Films[] {
       let listadoValoradosV2: Films[] = [];
 
       for(let i = 0; i < this.listadoValorados.length; i++) {
@@ -46,5 +48,10 @@ export class RatingService {
       }
 
       return listadoValoradosV2;
+    }*/
+
+    getValoradosV2(): Observable<FilmsListResponse> {
+      console.log(this.accountId);
+      return this.http.get<FilmsListResponse>(`${environmentsKeys.API_URL}/account/${this.accountId}/rated/movies?api_key=${environmentsKeys.API_KEY}&session_id=${localStorage.getItem('session_id')}`);
     }
 }

@@ -25,7 +25,11 @@ export class AuthService {
       `${environmentsKeys.API_URL}/authentication/session/new?api_key=${environmentsKeys.API_KEY}`,
       {
         request_token: localStorage.getItem('token'),
-      }
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }},
     );
   }
 }

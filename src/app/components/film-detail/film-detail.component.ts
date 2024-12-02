@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FilmsService } from '../../services/films.service';
 import { ListService } from '../../services/list.service';
 import { Location } from '@angular/common';
+import { RatingService } from '../../services/rating.service';
 
 @Component({
   selector: 'app-film-detail',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./film-detail.component.css'],
 })
 export class FilmDetailComponent implements OnInit {
+
   film!: Films;
   videoUrl: string | null = null;
   cast: any[] = [];
@@ -26,7 +28,8 @@ export class FilmDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private filmsService: FilmsService,
     private listService: ListService,
-    private location: Location
+    private location: Location,
+    private ratingService: RatingService
   ) {}
 
   ngOnInit(): void {
@@ -135,4 +138,12 @@ export class FilmDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  /*saveRating(id: number, star:number) {
+    this.ratingService.rateSeries(id, star);
+  }
+
+  deleteRating() {
+    throw new Error('Method not implemented.');
+    }*/
 }
