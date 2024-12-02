@@ -4,7 +4,8 @@
     color: white;
     justify-content: center;
     display: flex;
-    font-size:xx-large
+    font-size:xx-large;
+    align-items: center ;
 }
 
 .nav-item{

@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {List, ListResponse } from '../models/lists.interface';
+import { LanguageService } from 'typescript';
+import { LenguageService } from './lenguage.service';
 import { environmentsKeys } from '../../environments/environments-keys';
 
 
@@ -9,11 +11,14 @@ import { environmentsKeys } from '../../environments/environments-keys';
   providedIn: 'root',
 })
 export class ListService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private idiomaService: LenguageService) {}
 
   // Obtener todas las listas del usuario
   getUserLists(accountId: number, sessionId: string): Observable<ListResponse> {
+    const idioma = this.idiomaService.getSelectedLanguage();
+
     return this.http.get<ListResponse>(
+      `${API_BASE_URL}/account/${accountId}/lists?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
       `${environmentsKeys.API_URL}/account/${accountId}/lists?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`
     );
   }
@@ -58,7 +63,11 @@ export class ListService {
 
   // Obtener películas de una lista específica
   getMoviesFromList(listId: number, sessionId: string): Observable<any> {
+    const idioma = this.idiomaService.getSelectedLanguage();
+
     return this.http.get(
+      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
+
       `${environmentsKeys.API_URL}/list/${listId}?api_key=${environmentsKeys.API_KEY}&session_id=${sessionId}`
     );
   }

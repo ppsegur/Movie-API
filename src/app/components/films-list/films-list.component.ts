@@ -4,6 +4,7 @@ import { Films } from '../../models/films.interface';
 import { FavService } from '../../services/fav.service';
 import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
 import { WatchlistService } from '../../services/watch-list.service';
+import { LenguageService } from '../../services/lenguage.service';
 import { GenresService } from '../../services/genres.service';
 import { Options } from '@angular-slider/ngx-slider';
 import { Genre } from '../../models/genres.interface';
@@ -38,6 +39,13 @@ export class FilmsListComponent implements OnInit {
   constructor(
     private filmService: FilmsService,
     private watchlistService: WatchlistService,
+    private favService: FavService,
+private idiomaService: LenguageService
+
+  ) {}
+
+  ngOnInit(): void {
+      this.loadPopularFilms();
     private genresService: GenresService,
     private favService: FavService
   ) {}
