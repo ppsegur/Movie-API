@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Actor, ActorResponse, KnownFor } from '../models/actor.models';
+import { LenguageService } from './lenguage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,11 @@ export class CharacterService {
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private idiomaService: LenguageService) { }
 
   getActors(): Observable<ActorResponse> {
-    return this.http.get<ActorResponse>(`${this.apiUrl}?api_key=${this.apiKey}`);
+    const idioma = this.idiomaService.getSelectedLanguage();
+    return this.http.get<ActorResponse>(`${this.apiUrl}?api_key=${this.apiKey}&language=${idioma}`);
   }
   // Para el detalle del actor
   getOneActor(id: number): Observable<Actor> {

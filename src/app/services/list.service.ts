@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {List, ListResponse } from '../models/lists.interface';
+import { LanguageService } from 'typescript';
+import { LenguageService } from './lenguage.service';
 
 const API_KEY = '81819d9750b41c41923effa77112f27a';
 const API_BASE_URL = 'https://api.themoviedb.org/3';
@@ -12,12 +14,14 @@ const account_id = '21623249';
   providedIn: 'root',
 })
 export class ListService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private idiomaService: LenguageService) {}
 
   // Obtener todas las listas del usuario
   getUserLists(accountId: number, sessionId: string): Observable<ListResponse> {
+    const idioma = this.idiomaService.getSelectedLanguage();
+
     return this.http.get<ListResponse>(
-      `${API_BASE_URL}/account/${accountId}/lists?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/account/${accountId}/lists?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
     );
   }
   
@@ -61,8 +65,10 @@ export class ListService {
 
   // Obtener películas de una lista específica
   getMoviesFromList(listId: number, sessionId: string): Observable<any> {
+    const idioma = this.idiomaService.getSelectedLanguage();
+
     return this.http.get(
-      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}`
+      `${API_BASE_URL}/list/${listId}?api_key=${API_KEY}&session_id=${sessionId}&language=${idioma}`
     );
   }
 
