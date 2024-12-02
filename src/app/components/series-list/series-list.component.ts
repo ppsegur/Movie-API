@@ -53,11 +53,11 @@ export class SeriesListComponent implements OnInit {
 
   getCircleColor(voteAverage: number): string {
     console.log('Vote Average:', voteAverage); 
-    if (voteAverage > 8) {
+    if (voteAverage >= 8.0) {
         return 'green';
-    } else if (voteAverage >= 5 && voteAverage < 7) {
+    } else if (voteAverage >= 5.0 && voteAverage < 7.0) {
         return 'orange'; 
-    } else if (voteAverage >= 7 && voteAverage < 8) {
+    } else if (voteAverage >= 7.0 && voteAverage < 8.0) {
         return 'yellow'; 
     } else {
         return 'red';
