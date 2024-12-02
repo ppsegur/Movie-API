@@ -17,7 +17,8 @@ export class FilmsService {
 
 
   getPopular(): Observable<FilmsListResponse> {
-    return this.http.get<FilmsListResponse>(`${API_URL}/movie/popular?api_key=${API_KEY}`);
+    const idioma = this.idiomaService.getSelectedLanguage();
+    return this.http.get<FilmsListResponse>(`${API_URL}/movie/popular?api_key=${API_KEY}&language=${idioma}`);
   }
 
   getFilmById(id: number): Observable<Films> {
@@ -47,7 +48,7 @@ export class FilmsService {
   }
   //Métodos para el idioma 
   obtenerPeliculas() {
-    const idioma = this.idiomaService.idiomaSeleccionado;
+    const idioma = this.idiomaService.getSelectedLanguage();
     return this.http.get(`https://api.themoviedb.org/3/configuration/languages?api_key=${API_KEY}&language=${idioma}`);
   }
 

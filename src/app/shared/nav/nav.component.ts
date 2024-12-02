@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { LenguageService } from '../../services/lenguage.service';
+import { Language } from '../../models/languages.interface';
 
 @Component({
   selector: 'app-nav',
@@ -10,15 +12,27 @@ import { AuthService } from '../../services/auth.service';
 export class NavComponent implements OnInit {
   userName = '';
   userPhoto = '';
-  constructor(private authService: AuthService) {}
+  idiomas: Language[]  = [];
+  selectedLanguage: string = ''; 
+
+  constructor(private authService: AuthService, private idiomaService: LenguageService) {}
 
   ngOnInit(): void {
-    this.userName = localStorage.getItem('user_name') ?? '';
-    this.userPhoto = localStorage.getItem('user_photo')
-      ? `https://image.tmdb.org/t/p/original${localStorage.getItem(
+    
+      this.userName = localStorage.getItem('user_name') ?? '';
+      this.userPhoto = localStorage.getItem('user_photo')
+        ? `https://image.tmdb.org/t/p/original${localStorage.getItem(
           'user_photo'
         )}`
-      : '';
+        : '';
+      this.idiomaService.getLanguages().subscribe(response => {
+        this.idiomas = response;
+      });
+  
+      this.idiomaService.selectedLanguage$.subscribe(language => {
+        this.selectedLanguage = language;
+      });
+
   }
 
   createRequestToken() {
@@ -37,5 +51,13 @@ export class NavComponent implements OnInit {
   logout() {
     localStorage.clear();
     window.location.href = 'http://localhost:4200';
+  }
+
+  onLanguageChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const language = selectElement.value;
+    this.idiomaService.setSelectedLanguage(language);
+    console.log('Selected language:', this.selectedLanguage);
+    window.location.reload();
   }
 }

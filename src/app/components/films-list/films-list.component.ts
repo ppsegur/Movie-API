@@ -4,6 +4,7 @@ import { Films } from '../../models/films.interface';
 import { FavService } from '../../services/fav.service';
 import { NumberFormatPipePipe } from "../../pipes/number-format-pipe.pipe";
 import { WatchlistService } from '../../services/watch-list.service';
+import { LenguageService } from '../../services/lenguage.service';
 
 
 @Component({
@@ -18,12 +19,16 @@ export class FilmsListComponent implements OnInit {
   constructor(
     private filmService: FilmsService,
     private watchlistService: WatchlistService,
-    private favService: FavService
+    private favService: FavService,
+private idiomaService: LenguageService
 
   ) {}
 
   ngOnInit(): void {
     this.loadPopularFilms();
+    this.idiomaService.selectedLanguage$.subscribe(() => {
+      this.loadPopularFilms();
+    });
   }
 
   loadPopularFilms(): void {
