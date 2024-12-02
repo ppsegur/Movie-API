@@ -15,6 +15,7 @@ export class RatingService {
   API_URL = 'https://api.themoviedb.org/3';
 
   listadoValorados: Observable<Films>[] = [];
+  listadoValoradosV2: Films[] = [];
 
   constructor(private http: HttpClient, private filmsService: FilmsService) { }
 
@@ -33,5 +34,17 @@ export class RatingService {
       this.listadoValorados.push(this.filmsService.getFilmById(id));
       console.log(this.listadoValorados);
 
+    }
+
+    getValorados(): Films[] {
+      let listadoValoradosV2: Films[] = [];
+
+      for(let i = 0; i < this.listadoValorados.length; i++) {
+        this.listadoValorados[i].subscribe((data) => {
+          this.listadoValoradosV2.push(data);
+        });
+      }
+
+      return listadoValoradosV2;
     }
 }

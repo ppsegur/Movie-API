@@ -27,6 +27,7 @@ import { WatchListComponent } from './components/watch-list/watch-list.component
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { RatingModule } from 'primeng/rating';
 import { RatingComponent } from './components/rating/rating.component';
+import { RatedComponent } from './components/rated/rated.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { RatingComponent } from './components/rating/rating.component';
     WatchListComponent,
     ApprovedComponent,
     RatingComponent,
+    RatedComponent,
 
   ],
   imports: [

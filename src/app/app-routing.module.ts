@@ -14,6 +14,7 @@ import { CreateListComponent } from './components/create-list/create-list.compon
 import { UserListMediaComponent } from './components/userlist-media/userlist-media.component';
 import { FavlistComponent } from './components/favlist/favlist.component';
 import { WatchListComponent } from './components/watch-list/watch-list.component';
+import { RatedComponent } from './components/rated/rated.component';
 
 const routes: Routes = [
   { path: 'filmList', component: FilmsListComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'approved', component: ApprovedComponent },
   {path: 'favorite', component: FavlistComponent},
   {path: 'home', component: HomeComponent},
+  { path: 'rated', component: RatedComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },   
   { path: 'watchlist', component: WatchListComponent },
   { path: '**', redirectTo: '/home' }  
