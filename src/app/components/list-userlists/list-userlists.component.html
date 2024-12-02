@@ -1,15 +1,19 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <app-nav></app-nav>
 <body>
   <div>
-    <h2>Mis listas</h2>
+    <h1 style="text-align: center;">Mis listas</h1>
+  
     <button class="btn-sucsses" [routerLink]="['/createList']">
       <b>+ Crear lista</b>
     </button>
     <ul>
       <li *ngFor="let list of userLists">
-        <span>{{ list.name }} ({{ list.item_count }} items)</span>
-        <button (click)="deleteList(list.id)">Eliminar</button>
-        <button [routerLink]="['/mediaoflist', list.id]" style="background-color: blue;">Ver películas </button>
+        <span>{{ list.name }} ({{ list.item_count }} películas)</span>
+        <p style="margin:auto">Ver películas de la lista</p>
+        <button [routerLink]="['/mediaoflist', list.id]" style="background-color: blue;"><i class="bi bi-camera-reels-fill"></i> </button>
+        <p style="margin:auto">Eliminar Películas</p>
+        <button (click)="deleteList(list.id)"><i class="bi bi-trash-fill"></i></button>
       </li>
     </ul>
   </div>

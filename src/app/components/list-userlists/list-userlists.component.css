@@ -4,13 +4,14 @@ body {
   height: max-content;
   color: #f8f9fa;
   font-family: Arial, sans-serif;
-  margin: 0; /* Eliminar márgenes predeterminados */
-  padding: 0; /* Eliminar padding predeterminado */
+  margin: 0; 
+  padding: 0; 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la ventana */
+  min-height: 100vh; 
+  overflow: hidden;
 }
 
 /* Estilos generales */
@@ -34,9 +35,9 @@ h2 {
   background-color: #28a745;
   color: white;
   border: none;
+  border-radius: 40px;
   padding: 10px 20px;
   font-size: 1.2rem;
-  border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
@@ -63,7 +64,7 @@ li {
   padding: 15px;
   margin: 10px 0;
   background-color: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 40px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
   gap: 12px;
@@ -105,7 +106,7 @@ button {
   border: none;
   padding: 8px 16px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 40px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   
@@ -113,6 +114,7 @@ button {
 
 button:hover {
   background-color: #c82333;
+  transform: scale(1.10);
 }
 
 /* Mensaje cuando no hay imagen */

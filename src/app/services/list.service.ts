@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {List, ListResponse } from '../models/lists.interface';
-import { environmentsKeys } from '../environments/environments-keys';
+import { environmentsKeys } from '../../environments/environments-keys';
 
 
 @Injectable({

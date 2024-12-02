@@ -2,14 +2,15 @@
     color: rgb(255, 255, 255);
     padding: 20px;
   }
-  
+ 
   body {
     background: linear-gradient(to bottom, #0D2185, #03081F);
     font-family: Arial, sans-serif;
     margin: 0;
-    height: auto; 
-    background-attachment: fixed; 
+    height: auto;
+    background-attachment: fixed;
 }
+
 
   img {
     border-radius: 8px;
@@ -17,19 +18,22 @@
     box-shadow: inset;
     box-shadow: #000000   ;
   }
-  
+ 
   .actor-card {
     height: 480px;
 }
 
+
 .actor-img {
-    height: 350px; 
-    object-fit: cover; 
+    height: 350px;
+    object-fit: cover;
 }
+
 
 .image-container {
   position: relative;
 }
+
 
 .image-overlay {
   position: absolute;
@@ -46,6 +50,7 @@
   border-radius: 8px;
 }
 
+
 .show-all-cast-btn {
   background-color: #ffffff;
   color: #000000;
@@ -56,15 +61,18 @@
   transition: background-color 0.3s ease;
 }
 
+
 .show-all-cast-btn:hover {
   background-color: #000000;
   color: #ffffff;
 }
 
+
 .btn-light{
   box-shadow: #000000;
   text-shadow: #000000;
 }
+
 
 .btn-light:hover{
   background-color: red;
@@ -73,16 +81,19 @@
   transform: scale(1.10);  
 }
 
+
 /*Estilos para la parte del add to lista :) */
+
 
 .add-to-list-container {
   max-width: 600px;
-  margin: 20px 0; 
+  margin: 20px 0;
   border-radius: 10px;
   padding: 20px;
   color: #fff;
   margin-left: 0;
 }
+
 
 .section-title {
   font-size: 2rem;
@@ -91,11 +102,14 @@
 }
 
 
+
+
 .list-buttons {
   display: flex;
   gap: 12px;
   align-items: flex-start;
 }
+
 
 .btn-list {
   width: 100%;
@@ -113,21 +127,25 @@
   align-items: flex-end;
 }
 
+
 .btn-list:hover {
   background-color: #000000;
   transform: scale(1.05);
   color: chocolate;
 }
 
+
 .btn-list span {
   padding-left: 15px;
   width: 100%;
 }
 
+
 .btn-list:focus {
   outline: none;
   border-color: #f8f9fa;
 }
+
 
 body {
   margin: 0;
@@ -135,3 +153,21 @@ body {
   background: linear-gradient(to bottom, #0D2185, #03081F);
   font-family: Arial, sans-serif;
 }
+
+
+.fixed-alert {
+  background-color: green;
+  color: white;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  width: auto;
+}
+
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+

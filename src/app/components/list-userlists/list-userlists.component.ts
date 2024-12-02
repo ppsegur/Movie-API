@@ -26,7 +26,6 @@ export class ListUserlistsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Recuperar sessionId y accountId del almacenamiento local
     this.sessionId = localStorage.getItem('session_id');
     const accountId = localStorage.getItem('account_id');
     this.accountId = accountId ? +accountId : null;
